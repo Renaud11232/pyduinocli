@@ -4,11 +4,22 @@ import json
 
 class Arduino:
 
+    KWARG_FLAVOUR = 'flavour'
+    KWARG_TIMEOUT = 'timeout'
+
+    FLAG_FORMAT = '--format'
+    FLAG_FLAVOUR = '--flavour'
+    FLAG_TIMEOUT = '--timeout'
+
+    COMMAND_BOARD = 'board'
+    COMMAND_ATTACH = 'attach'
+    COMMAND_VERSION = 'version'
+
     def __init__(self, cli_path):
         self.cli_path = cli_path
 
     def __exec(self, *args):
-        command = [self.cli_path, '--format', 'json']
+        command = [self.cli_path, Arduino.FLAG_FORMAT, 'json']
         command.extend(args)
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
@@ -16,8 +27,17 @@ class Arduino:
             raise RuntimeError(stderr)
         return stdout
 
-    def board_attach(self):
-        pass
+    def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
+        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
+        if sketch_path is not None:
+            args.append(sketch_path)
+        if Arduino.KWARG_FLAVOUR in kwargs:
+            args.append(Arduino.FLAG_FLAVOUR)
+            args.append(kwargs.get(Arduino.KWARG_FLAVOUR))
+        if Arduino.KWARG_TIMEOUT in kwargs:
+            args.append(Arduino.FLAG_TIMEOUT)
+            args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
+        return json.loads(self.__exec(args))
 
     def board_details(self):
         pass
@@ -86,4 +106,4 @@ class Arduino:
         pass
 
     def version(self):
-        return json.loads(self.__exec("version"))
+        return json.loads(self.__exec(Arduino.COMMAND_VERSION))
