@@ -31,7 +31,7 @@ class Arduino:
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
         if p.returncode != 0:
-            raise RuntimeError(stderr)
+            raise RuntimeError('stderr : %s, stdout: %s' % (stderr, stdout))
         return json.loads(stdout)
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
