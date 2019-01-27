@@ -15,6 +15,7 @@ class Arduino:
     COMMAND_ATTACH = 'attach'
     COMMAND_DETAILS = 'details'
     COMMAND_LIST = 'list'
+    COMMAND_LISTALL = 'listall'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path):
@@ -52,8 +53,11 @@ class Arduino:
             args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
         return self.__exec(args)
 
-    def board_listall(self):
-        pass
+    def board_listall(self, boardname=None):
+        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_LISTALL]
+        if boardname is not None:
+            args.append(boardname)
+        return self.__exec(args)
 
     def compile(self):
         pass
