@@ -8,6 +8,7 @@ class Arduino:
     KWARG_TIMEOUT = 'timeout'
 
     FLAG_FORMAT = '--format'
+    FLAG_CONFIG_FILE = '--config-file'
     FLAG_FLAVOUR = '--flavour'
     FLAG_TIMEOUT = '--timeout'
 
@@ -18,11 +19,14 @@ class Arduino:
     COMMAND_LISTALL = 'listall'
     COMMAND_VERSION = 'version'
 
-    def __init__(self, cli_path):
-        self.cli_path = cli_path
+    def __init__(self, cli_path, config_file=None):
+        self.__command_base = [cli_path, Arduino.FLAG_FORMAT, 'json']
+        if config_file is not None:
+            self.__command_base.append(Arduino.FLAG_CONFIG_FILE)
+            self.__command_base.append(config_file)
 
     def __exec(self, *args):
-        command = [self.cli_path, Arduino.FLAG_FORMAT, 'json']
+        command = self.__command_base
         command.extend(args)
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
