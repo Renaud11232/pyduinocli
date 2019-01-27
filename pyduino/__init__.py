@@ -13,6 +13,7 @@ class Arduino:
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
+    COMMAND_DETAILS = 'details'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path):
@@ -39,8 +40,9 @@ class Arduino:
             args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
         return json.loads(self.__exec(args))
 
-    def board_details(self):
-        pass
+    def board_details(self, fqbn):
+        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_DETAILS, fqbn]
+        return json.loads(self.__exec(args))
 
     def board_list(self):
         pass
