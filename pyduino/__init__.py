@@ -14,6 +14,7 @@ class Arduino:
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
     COMMAND_DETAILS = 'details'
+    COMMAND_LIST = 'list'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path):
@@ -26,7 +27,7 @@ class Arduino:
         stdout, stderr = p.communicate()
         if p.returncode != 0:
             raise RuntimeError(stderr)
-        return stdout
+        return json.loads(stdout)
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
@@ -38,14 +39,18 @@ class Arduino:
         if Arduino.KWARG_TIMEOUT in kwargs:
             args.append(Arduino.FLAG_TIMEOUT)
             args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
-        return json.loads(self.__exec(args))
+        return self.__exec(args)
 
     def board_details(self, fqbn):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_DETAILS, fqbn]
-        return json.loads(self.__exec(args))
+        return self.__exec(args)
 
-    def board_list(self):
-        pass
+    def board_list(self, **kwargs):
+        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_LIST]
+        if Arduino.KWARG_TIMEOUT in kwargs:
+            args.append(Arduino.FLAG_TIMEOUT)
+            args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
+        return self.__exec(args)
 
     def board_listall(self):
         pass
@@ -108,4 +113,4 @@ class Arduino:
         pass
 
     def version(self):
-        return json.loads(self.__exec(Arduino.COMMAND_VERSION))
+        return self.__exec(Arduino.COMMAND_VERSION)
