@@ -15,6 +15,9 @@ class Arduino:
     KWARG_SHOW_PROPERTIES = 'show_properties'
     KWARG_VID_PID = 'vid_pid'
     KWARG_WARNINGS = 'warnings'
+    KWARG_VERIFY = 'verify'
+    KWARG_INPUT = 'input'
+    KWARG_PORT = 'port'
 
     FORMAT_JSON = 'json'
 
@@ -33,6 +36,9 @@ class Arduino:
     FLAG_WARNINGS = '--warnings'
     FLAG_DEFAULT = '--default'
     FLAG_SAVE_AS = '--save-as'
+    FLAG_VERIFY = '--verify'
+    FLAG_INPUT = '--input'
+    FLAG_PORT = '--port'
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
@@ -51,6 +57,9 @@ class Arduino:
     COMMAND_UPDATE_INDEX = 'update-index'
     COMMAND_UPGRADE = 'upgrade'
     COMMAND_VERSION = 'version'
+    COMMAND_SKETCH = 'sketch'
+    COMMAND_UPLOAD = 'upload'
+    COMMAND_NEW = 'new'
 
     def __init__(self, cli_path, config_file=None):
         self.__command_base = [cli_path, Arduino.FLAG_FORMAT, Arduino.FORMAT_JSON]
@@ -188,11 +197,21 @@ class Arduino:
     def lib_upgrade(self):
         pass
 
-    def sketch_new(self):
-        pass
+    def sketch_new(self, name):
+        return self.__exec([Arduino.COMMAND_SKETCH, Arduino.COMMAND_NEW, name])
 
-    def upload(self):
-        pass
+    def upload(self, sketch, **kwargs):
+        args = [Arduino.COMMAND_UPLOAD]
+        if Arduino.KWARG_FQBN in kwargs:
+            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.FLAG_FQBN)])
+        if Arduino.KWARG_INPUT in kwargs:
+            args.extend([Arduino.FLAG_INPUT, kwargs.get(Arduino.KWARG_INPUT)])
+        if Arduino.KWARG_PORT in kwargs:
+            args.extend([Arduino.FLAG_PORT, kwargs.get(Arduino.KWARG_PORT)])
+        if Arduino.KWARG_VERIFY in kwargs and kwargs.get(Arduino.KWARG_VERIFY) is True:
+            args.append(Arduino.FLAG_VERIFY)
+        args.append(sketch)
+        return self.__exec(args)
 
     def version(self):
         return self.__exec([Arduino.COMMAND_VERSION])
