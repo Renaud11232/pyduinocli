@@ -5,10 +5,6 @@ stages:
   - build
   - deploy
 
-cache:
-  paths:
-    - dist/
-
 build_package:
   stage: build
   before_script:
@@ -24,6 +20,9 @@ upload_package:
     - python3 -m pip install --user --upgrade twine
   script:
     - python3 -m twine upload -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
+  artifacts:
+    paths:
+      - dist/
 
 upload_package_test:
   stage: deploy
