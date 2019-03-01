@@ -53,17 +53,14 @@ class Arduino:
             raise RuntimeError('stderr : %s, stdout: %s' % (stderr, stdout))
         return json.loads(stdout)
 
-    # TODO append -> extend
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
         if sketch_path is not None:
             args.append(sketch_path)
         if Arduino.KWARG_FLAVOUR in kwargs:
-            args.append(Arduino.FLAG_FLAVOUR)
-            args.append(kwargs.get(Arduino.KWARG_FLAVOUR))
+            args.extend([Arduino.FLAG_FLAVOUR, kwargs.get(Arduino.KWARG_FLAVOUR)])
         if Arduino.KWARG_TIMEOUT in kwargs:
-            args.append(Arduino.FLAG_TIMEOUT)
-            args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
+            args.extend([Arduino.FLAG_TIMEOUT, Arduino.KWARG_TIMEOUT])
         return self.__exec(args)
 
     def board_details(self, fqbn):
@@ -73,8 +70,7 @@ class Arduino:
     def board_list(self, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_LIST]
         if Arduino.KWARG_TIMEOUT in kwargs:
-            args.append(Arduino.FLAG_TIMEOUT)
-            args.append(kwargs.get(Arduino.KWARG_TIMEOUT))
+            args.extend([Arduino.FLAG_TIMEOUT, Arduino.KWARG_TIMEOUT])
         return self.__exec(args)
 
     def board_listall(self, boardname=None):
