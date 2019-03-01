@@ -11,6 +11,9 @@ build_package:
     - python3 -m pip install --user --upgrade setuptools wheel
   script:
     - python3 setup.py sdist bdist_wheel
+  artifacts:
+    paths:
+      - dist/
 
 upload_package:
   stage: deploy
@@ -20,9 +23,8 @@ upload_package:
     - python3 -m pip install --user --upgrade twine
   script:
     - python3 -m twine upload -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
-  artifacts:
-    paths:
-      - dist/
+  dependencies:
+    - build_package
 
 upload_package_test:
   stage: deploy
@@ -32,3 +34,5 @@ upload_package_test:
     - python3 -m pip install --user --upgrade twine
   script:
     - python3 -m twine upload --repository-url https://test.pypi.org/legacy/ -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
+  dependencies:
+    - build_package
