@@ -56,15 +56,25 @@ class Arduino:
         if config_file is not None:
             self.__command_base.extend([Arduino.FLAG_CONFIG_FILE, config_file])
 
-    # TODO better error handling
+    @staticmethod
+    def __decode_output(data):
+        if len(data) == 0:
+            return None
+        try:
+            return json.loads(data)
+        except json.JSONDecodeError:
+            return data.decode("utf-8")
+
     def __exec(self, args):
         command = list(self.__command_base)
         command.extend(args)
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
+        stdout = Arduino.__decode_output(stdout)
+        stderr = Arduino.__decode_output(stderr)
         if p.returncode != 0:
             raise RuntimeError('stderr : %s, stdout: %s' % (stderr, stdout))
-        return json.loads(stdout)
+        return stdout
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
