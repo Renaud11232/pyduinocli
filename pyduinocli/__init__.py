@@ -6,17 +6,36 @@ class Arduino:
 
     KWARG_FLAVOUR = 'flavour'
     KWARG_TIMEOUT = 'timeout'
+    KWARG_BUILD_CACHE_PATH = 'build_cache_path'
+    KWARG_BUILD_PATH = 'build_path'
+    KWARG_BUILD_PROPERTIES = 'build_properties'
+    KWARG_FQBN = 'fqbn'
+    KWARG_OUTPUT = 'output'
+    KWARG_PREPROCESS = 'preprocess'
+    KWARG_SHOW_PROPERTIES = 'show_properties'
+    KWARG_VID_PID = 'vid_pid'
+    KWARG_WARNINGS = 'warnings'
 
     FLAG_FORMAT = '--format'
     FLAG_CONFIG_FILE = '--config-file'
     FLAG_FLAVOUR = '--flavour'
     FLAG_TIMEOUT = '--timeout'
+    FLAG_BUILD_CACHE_PATH = '--build-cache-path'
+    FLAG_BUILD_PATH = '--build-path'
+    FLAG_BUILD_PROPERTIES = '--build-properties'
+    FLAG_FQBN = '--fqbn'
+    FLAG_OUTPUT = '--ouput'
+    FLAG_PREPROCESS = '--preprocess'
+    FLAG_SHOW_PROPERTIES = '--show-properties'
+    FLAG_VID_PID = '--vid-pid'
+    FLAG_WARNINGS = '--warnings'
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
     COMMAND_DETAILS = 'details'
     COMMAND_LIST = 'list'
     COMMAND_LISTALL = 'listall'
+    COMMAND_COMPILE = 'compile'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
@@ -34,6 +53,7 @@ class Arduino:
             raise RuntimeError('stderr : %s, stdout: %s' % (stderr, stdout))
         return json.loads(stdout)
 
+    # TODO append -> extend
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
         if sketch_path is not None:
@@ -63,8 +83,28 @@ class Arduino:
             args.append(boardname)
         return self.__exec(args)
 
-    def compile(self):
-        pass
+    def compile(self, sketch, **kwargs):
+        args = [Arduino.COMMAND_COMPILE]
+        if Arduino.KWARG_BUILD_CACHE_PATH in kwargs:
+            args.extend([Arduino.FLAG_BUILD_CACHE_PATH, kwargs.get(Arduino.KWARG_BUILD_CACHE_PATH)])
+        if Arduino.KWARG_BUILD_PATH in kwargs:
+            args.extend([Arduino.FLAG_BUILD_PATH, kwargs.get(Arduino.KWARG_BUILD_PATH)])
+        if Arduino.KWARG_BUILD_PROPERTIES in kwargs:
+            args.extend([Arduino.FLAG_BUILD_PROPERTIES, kwargs.get(Arduino.KWARG_BUILD_PROPERTIES)])
+        if Arduino.KWARG_FQBN in kwargs:
+            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.KWARG_FQBN)])
+        if Arduino.KWARG_OUTPUT in kwargs:
+            args.extend([Arduino.FLAG_OUTPUT, kwargs.get(Arduino.KWARG_OUTPUT)])
+        if Arduino.KWARG_PREPROCESS in kwargs and kwargs.get(Arduino.KWARG_PREPROCESS) is True:
+            args.append(Arduino.FLAG_PREPROCESS)
+        if Arduino.KWARG_SHOW_PROPERTIES in kwargs and kwargs.get(Arduino.KWARG_SHOW_PROPERTIES) is True:
+            args.append(Arduino.FLAG_SHOW_PROPERTIES)
+        if Arduino.KWARG_VID_PID in kwargs:
+            args.extend([Arduino.FLAG_VID_PID, kwargs.get(Arduino.KWARG_VID_PID)])
+        if Arduino.KWARG_WARNINGS in kwargs:
+            args.extend([Arduino.FLAG_WARNINGS, kwargs.get(Arduino.KWARG_WARNINGS)])
+        args.append(sketch)
+        return self.__exec(args)
 
     def config_dump(self):
         pass
