@@ -29,6 +29,8 @@ class Arduino:
     FLAG_SHOW_PROPERTIES = '--show-properties'
     FLAG_VID_PID = '--vid-pid'
     FLAG_WARNINGS = '--warnings'
+    FLAG_DEFAULT = '--default'
+    FLAG_SAVE_AS = '--save-as'
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
@@ -38,6 +40,7 @@ class Arduino:
     COMMAND_COMPILE = 'compile'
     COMMAND_CONFIG = 'config'
     COMMAND_DUMP = 'dump'
+    COMMAND_INIT = 'init'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
@@ -108,8 +111,11 @@ class Arduino:
         args = [Arduino.COMMAND_CONFIG, Arduino.COMMAND_DUMP]
         return self.__exec(args)
 
-    def config_init(self):
-        pass
+    def config_init(self, save_as=None):
+        args = [Arduino.COMMAND_CONFIG, Arduino.COMMAND_INIT, Arduino.FLAG_DEFAULT]
+        if save_as is not None:
+            args.extend([Arduino.FLAG_SAVE_AS, save_as])
+        return self.__exec(args)
 
     def core_download(self):
         pass
