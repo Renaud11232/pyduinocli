@@ -45,13 +45,14 @@ class Arduino:
     COMMAND_DOWNLOAD = 'download'
     COMMAND_INSTALL = 'install'
     COMMAND_SEARCH = 'search'
+    COMMAND_UNINSTALL = 'uninstall'
+    COMMAND_UPDATE_INDEX = 'update-index'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
         self.__command_base = [cli_path, Arduino.FLAG_FORMAT, 'json']
         if config_file is not None:
-            self.__command_base.append(Arduino.FLAG_CONFIG_FILE)
-            self.__command_base.append(config_file)
+            self.__command_base.extend([Arduino.FLAG_CONFIG_FILE, config_file])
 
     # TODO better error handling
     def __exec(self, *args):
@@ -133,16 +134,17 @@ class Arduino:
         return self.__exec(args)
 
     def core_list(self):
-        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_LIST]
-        return self.__exec(args)
+        return self.__exec(Arduino.COMMAND_CORE, Arduino.COMMAND_LIST)
 
     def core_search(self, *keywords):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
         args.extend(keywords)
         return self.__exec(args)
 
-    def core_uninstall(self):
-        pass
+    def core_uninstall(self, *installs):
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_UNINSTALL]
+        args.extend(installs)
+        return self.__exec(args)
 
     def core_update_index(self):
         pass
