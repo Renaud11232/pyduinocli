@@ -14,7 +14,7 @@ setuptools.setup(
     description="Wrapper library around arduino-cli",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
-    url="https://gitlab.com/Renaud11232/pyduino_cli",
+    url="https://gitlab.com/Renaud11232/pyduinocli",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 2",
