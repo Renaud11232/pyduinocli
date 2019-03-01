@@ -52,6 +52,7 @@ class Arduino:
             self.__command_base.append(Arduino.FLAG_CONFIG_FILE)
             self.__command_base.append(config_file)
 
+    # TODO better error handling
     def __exec(self, *args):
         command = self.__command_base
         command.extend(args)
@@ -131,7 +132,8 @@ class Arduino:
         return self.__exec(args)
 
     def core_list(self):
-        pass
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_LIST]
+        return self.__exec(args)
 
     def core_search(self):
         pass
