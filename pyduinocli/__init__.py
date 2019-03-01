@@ -36,6 +36,8 @@ class Arduino:
     COMMAND_LIST = 'list'
     COMMAND_LISTALL = 'listall'
     COMMAND_COMPILE = 'compile'
+    COMMAND_CONFIG = 'config'
+    COMMAND_DUMP = 'dump'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
@@ -103,7 +105,8 @@ class Arduino:
         return self.__exec(args)
 
     def config_dump(self):
-        pass
+        args = [Arduino.COMMAND_CONFIG, Arduino.COMMAND_DUMP]
+        return self.__exec(args)
 
     def config_init(self):
         pass
