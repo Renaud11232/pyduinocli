@@ -56,10 +56,11 @@ class Arduino:
     COMMAND_UNINSTALL = 'uninstall'
     COMMAND_UPDATE_INDEX = 'update-index'
     COMMAND_UPGRADE = 'upgrade'
-    COMMAND_VERSION = 'version'
+    COMMAND_LIB = 'lib'
     COMMAND_SKETCH = 'sketch'
-    COMMAND_UPLOAD = 'upload'
     COMMAND_NEW = 'new'
+    COMMAND_UPLOAD = 'upload'
+    COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
         self.__command_base = [cli_path, Arduino.FLAG_FORMAT, Arduino.FORMAT_JSON]
@@ -192,7 +193,7 @@ class Arduino:
         pass
 
     def lib_update_index(self):
-        pass
+        return self.__exec([Arduino.COMMAND_LIB, Arduino.COMMAND_UPDATE_INDEX])
 
     def lib_upgrade(self):
         pass
