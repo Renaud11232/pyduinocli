@@ -16,6 +16,8 @@ class Arduino:
     KWARG_VID_PID = 'vid_pid'
     KWARG_WARNINGS = 'warnings'
 
+    FORMAT_JSON = 'json'
+
     FLAG_FORMAT = '--format'
     FLAG_CONFIG_FILE = '--config-file'
     FLAG_FLAVOUR = '--flavour'
@@ -50,13 +52,13 @@ class Arduino:
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
-        self.__command_base = [cli_path, Arduino.FLAG_FORMAT, 'json']
+        self.__command_base = [cli_path, Arduino.FLAG_FORMAT, Arduino.FORMAT_JSON]
         if config_file is not None:
             self.__command_base.extend([Arduino.FLAG_CONFIG_FILE, config_file])
 
     # TODO better error handling
-    def __exec(self, *args):
-        command = self.__command_base
+    def __exec(self, args):
+        command = list(self.__command_base)
         command.extend(args)
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
@@ -114,8 +116,7 @@ class Arduino:
         return self.__exec(args)
 
     def config_dump(self):
-        args = [Arduino.COMMAND_CONFIG, Arduino.COMMAND_DUMP]
-        return self.__exec(args)
+        return self.__exec([Arduino.COMMAND_CONFIG, Arduino.COMMAND_DUMP])
 
     def config_init(self, save_as=None):
         args = [Arduino.COMMAND_CONFIG, Arduino.COMMAND_INIT, Arduino.FLAG_DEFAULT]
@@ -134,7 +135,7 @@ class Arduino:
         return self.__exec(args)
 
     def core_list(self):
-        return self.__exec(Arduino.COMMAND_CORE, Arduino.COMMAND_LIST)
+        return self.__exec([Arduino.COMMAND_CORE, Arduino.COMMAND_LIST])
 
     def core_search(self, *keywords):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
@@ -180,4 +181,4 @@ class Arduino:
         pass
 
     def version(self):
-        return self.__exec(Arduino.COMMAND_VERSION)
+        return self.__exec([Arduino.COMMAND_VERSION])
