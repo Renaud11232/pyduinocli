@@ -44,6 +44,7 @@ class Arduino:
     COMMAND_CORE = 'core'
     COMMAND_DOWNLOAD = 'download'
     COMMAND_INSTALL = 'install'
+    COMMAND_SEARCH = 'search'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
@@ -135,8 +136,10 @@ class Arduino:
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_LIST]
         return self.__exec(args)
 
-    def core_search(self):
-        pass
+    def core_search(self, *keywords):
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
+        args.extend(keywords)
+        return self.__exec(args)
 
     def core_uninstall(self):
         pass
