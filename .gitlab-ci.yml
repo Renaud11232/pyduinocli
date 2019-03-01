@@ -28,8 +28,8 @@ upload_package:
 
 upload_package_test:
   stage: deploy
-  except:
-    - master
+  only:
+    - prerelease
   before_script:
     - python3 -m pip install --user --upgrade twine
   script:
