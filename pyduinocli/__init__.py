@@ -43,6 +43,7 @@ class Arduino:
     COMMAND_INIT = 'init'
     COMMAND_CORE = 'core'
     COMMAND_DOWNLOAD = 'download'
+    COMMAND_INSTALL = 'install'
     COMMAND_VERSION = 'version'
 
     def __init__(self, cli_path, config_file=None):
@@ -119,16 +120,15 @@ class Arduino:
             args.extend([Arduino.FLAG_SAVE_AS, save_as])
         return self.__exec(args)
 
-    def core_download(self, packager, arch, version=None):
+    def core_download(self, *downloads):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_DOWNLOAD]
-        if version is None:
-            args.append('%s:%s' % (packager, arch))
-        else:
-            args.append('%s:%s=%s' % (packager, arch, version))
+        args.extend(downloads)
         return self.__exec(args)
 
-    def core_install(self):
-        pass
+    def core_install(self, *installs):
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_INSTALL]
+        args.extend(installs)
+        return self.__exec(args)
 
     def core_list(self):
         pass
