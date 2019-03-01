@@ -7,14 +7,14 @@ def get_long_description():
 
 
 setuptools.setup(
-    name="pyduino",
+    name="pyduinocli",
     version="0.0.1",
     author="Renaud Gaspard",
     author_email="gaspardrenaud@hotmail.com",
     description="Wrapper library around arduino-cli",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
-    url="https://gitlab.com/Renaud11232/pyduino",
+    url="https://gitlab.com/Renaud11232/pyduino_cli",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 2",
