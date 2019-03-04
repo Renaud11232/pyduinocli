@@ -7,7 +7,6 @@ pyduinocli is a wrapper library around arduino-cli to make the arduino-cli calls
 * Provide a clear and easy way to use arduino through a python program
 * Give the ability to programmatically flash arduino-like boards
 * Update 3D printer firmwares automatically
-* ...
 
 ## How to use
 
