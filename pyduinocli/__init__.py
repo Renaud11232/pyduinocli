@@ -18,6 +18,8 @@ class Arduino:
     KWARG_VERIFY = 'verify'
     KWARG_INPUT = 'input'
     KWARG_PORT = 'port'
+    KWARG_UPDATABLE = 'updatable'
+    KWARG_NAMES = 'names'
 
     FORMAT_JSON = 'json'
 
@@ -39,6 +41,8 @@ class Arduino:
     FLAG_VERIFY = '--verify'
     FLAG_INPUT = '--input'
     FLAG_PORT = '--port'
+    FLAG_UPDATABLE = '--updatable'
+    FLAG_NAMES = '--names'
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
@@ -145,7 +149,6 @@ class Arduino:
             args.extend([Arduino.FLAG_SAVE_AS, save_as])
         return self.__exec(args)
 
-    # TODO pass version as tuple...
     def core_download(self, *downloads):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_DOWNLOAD]
         args.extend(downloads)
@@ -156,8 +159,11 @@ class Arduino:
         args.extend(installs)
         return self.__exec(args)
 
-    def core_list(self):
-        return self.__exec([Arduino.COMMAND_CORE, Arduino.COMMAND_LIST])
+    def core_list(self, **kwargs):
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_LIST]
+        if Arduino.KWARG_UPDATABLE in kwargs and kwargs.get(Arduino.KWARG_UPDATABLE) is True:
+            args.append(Arduino.FLAG_UPDATABLE)
+        return self.__exec(args)
 
     def core_search(self, *keywords):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
@@ -177,26 +183,38 @@ class Arduino:
         args.extend(upgrades)
         return self.__exec(args)
 
-    def lib_download(self):
-        pass
+    def lib_download(self, *downloads):
+        args = [Arduino.COMMAND_LIB, Arduino.COMMAND_DOWNLOAD]
+        args.extend(downloads)
+        return self.__exec(args)
 
-    def lib_install(self):
-        pass
+    def lib_install(self, *installs):
+        args = [Arduino.COMMAND_LIB, Arduino.COMMAND_INSTALL]
+        args.extend(installs)
+        return self.__exec(args)
 
-    def lib_list(self):
-        pass
+    def lib_list(self, **kwargs):
+        args = [Arduino.COMMAND_LIB, Arduino.COMMAND_LIST]
+        if Arduino.KWARG_UPDATABLE in kwargs and kwargs.get(Arduino.KWARG_UPDATABLE) is True:
+            args.append(Arduino.FLAG_UPDATABLE)
+        return self.__exec(args)
 
-    def lib_search(self):
-        pass
+    def lib_search(self, **kwargs):
+        args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
+        if Arduino.KWARG_NAMES in kwargs and kwargs.get(Arduino.KWARG_NAMES) is True:
+            args.append(Arduino.FLAG_NAMES)
+        return self.__exec(args)
 
-    def lib_uninstall(self):
-        pass
+    def lib_uninstall(self, *uninstalls):
+        args = [Arduino.COMMAND_LIB, Arduino.COMMAND_UNINSTALL]
+        args.extend(uninstalls)
+        return self.__exec(args)
 
     def lib_update_index(self):
         return self.__exec([Arduino.COMMAND_LIB, Arduino.COMMAND_UPDATE_INDEX])
 
     def lib_upgrade(self):
-        pass
+        return self.__exec([Arduino.COMMAND_LIB, Arduino.COMMAND_UPGRADE])
 
     def sketch_new(self, name):
         return self.__exec([Arduino.COMMAND_SKETCH, Arduino.COMMAND_NEW, name])
