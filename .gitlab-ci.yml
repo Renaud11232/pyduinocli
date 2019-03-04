@@ -5,16 +5,6 @@ stages:
   - build
   - deploy
 
-unittest:
-  stage: test
-  before_script:
-    - wget https://downloads.arduino.cc/arduino-cli/arduino-cli-latest-linux64.tar.bz2
-    - ARDUINO_CLI=$(tar -xvjf arduino-cli-latest-linux64.tar.bz2)
-    - rm arduino-cli-latest-linux64.tar.bz2
-    - mv $ARDUINO_CLI arduino-cli
-  script:
-    - python -m unittest discover -s tests
-
 build_package:
   stage: build
   before_script:
