@@ -88,20 +88,21 @@ class Arduino:
             return json.loads(data)
         except ValueError:
             return dict(
-                message=data.decode("utf-8")
+                Message=data
             )
 
     def __exec(self, args):
         command = list(self.__command_base)
         command.extend(args)
-        p = Popen(command, stdout=PIPE, stderr=PIPE)
-        stdout, stderr = p.communicate()
-        if p.returncode != 0:
-            if stderr:
-                raise ArduinoError(self.__decode_output(stderr))
-            else:
-                raise ArduinoError(self.__decode_output(stdout))
-        return self.__decode_output(stdout)
+        try:
+            p = Popen(command, stdout=PIPE)
+            stdout, ignored = p.communicate()
+            decoded_out = self.__decode_output(stdout)
+            if p.returncode != 0:
+                raise ArduinoError(decoded_out)
+            return decoded_out
+        except OSError as e:
+            raise ArduinoError(self.__decode_output(e.message))
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
