@@ -77,7 +77,7 @@ class Arduino:
             return None
         try:
             return json.loads(data)
-        except json.JSONDecodeError:
+        except ValueError:
             return data.decode("utf-8")
 
     def __exec(self, args):
