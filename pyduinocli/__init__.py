@@ -103,7 +103,7 @@ class Arduino:
             return decoded_out
         except OSError as e:
             raise ArduinoError(dict(
-                Message=e.message
+                Message=e.strerror
             ))
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
