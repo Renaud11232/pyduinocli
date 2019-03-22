@@ -199,10 +199,11 @@ class Arduino:
             args.append(Arduino.FLAG_UPDATABLE)
         return self.__exec(args)
 
-    def lib_search(self, **kwargs):
+    def lib_search(self, *name, **kwargs):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_SEARCH]
         if Arduino.KWARG_NAMES in kwargs and kwargs.get(Arduino.KWARG_NAMES) is True:
             args.append(Arduino.FLAG_NAMES)
+        args.extend(name)
         return self.__exec(args)
 
     def lib_uninstall(self, *uninstalls):
