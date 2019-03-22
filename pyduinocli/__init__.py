@@ -101,9 +101,9 @@ class Arduino:
             if p.returncode != 0:
                 raise ArduinoError(decoded_out)
             return decoded_out
-        except OSError as e:
+        except OSError:
             raise ArduinoError(dict(
-                Message=e.strerror
+                Message="'%s' does not exist or is not an executable" % self.__command_base[0]
             ))
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
