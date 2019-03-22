@@ -2,6 +2,15 @@ from subprocess import Popen, PIPE
 import json
 
 
+class ArduinoError(Exception):
+
+    def __init__(self, error_info):
+        self.error_info = error_info
+
+    def __str__(self):
+        return repr(self.error_info)
+
+
 class Arduino:
 
     KWARG_FLAVOUR = 'flavour'
@@ -73,23 +82,26 @@ class Arduino:
 
     @staticmethod
     def __decode_output(data):
-        if len(data) == 0:
-            return None
+        if not data:
+            return dict()
         try:
             return json.loads(data)
         except ValueError:
-            return data.decode("utf-8")
+            return dict(
+                message=data.decode("utf-8")
+            )
 
     def __exec(self, args):
         command = list(self.__command_base)
         command.extend(args)
         p = Popen(command, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
-        stdout = Arduino.__decode_output(stdout)
-        stderr = Arduino.__decode_output(stderr)
         if p.returncode != 0:
-            raise RuntimeError('stderr : %s, stdout: %s' % (stderr, stdout))
-        return stdout
+            if stderr:
+                raise ArduinoError(self.__decode_output(stderr))
+            else:
+                raise ArduinoError(self.__decode_output(stdout))
+        return self.__decode_output(stdout)
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
