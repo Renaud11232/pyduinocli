@@ -82,13 +82,13 @@ class Arduino:
 
     @staticmethod
     def __decode_output(data):
-        if not data:
+        if len(data) == 0:
             return dict()
         try:
             return json.loads(data)
         except ValueError:
             return dict(
-                Message=data
+                Message=data.decode("utf-8")
             )
 
     def __exec(self, args):
@@ -102,7 +102,9 @@ class Arduino:
                 raise ArduinoError(decoded_out)
             return decoded_out
         except OSError as e:
-            raise ArduinoError(self.__decode_output(e.message))
+            raise ArduinoError(dict(
+                Message=e.message
+            ))
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
