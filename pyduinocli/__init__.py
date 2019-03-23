@@ -238,7 +238,7 @@ class Arduino:
     def upload(self, sketch, **kwargs):
         args = [Arduino.COMMAND_UPLOAD]
         if Arduino.KWARG_FQBN in kwargs:
-            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.FLAG_FQBN)])
+            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.KWARG_FQBN)])
         if Arduino.KWARG_INPUT in kwargs:
             args.extend([Arduino.FLAG_INPUT, kwargs.get(Arduino.KWARG_INPUT)])
         if Arduino.KWARG_PORT in kwargs:
