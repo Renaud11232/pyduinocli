@@ -98,7 +98,9 @@ class Arduino:
             stdout, stderr = p.communicate()
             decoded_out = self.__decode_output(stdout)
             if p.returncode != 0:
-                raise ArduinoError(decoded_out[Arduino.ERROR_MESSAGE], decoded_out[Arduino.ERROR_CAUSE], stderr)
+                if type(decoded_out) is dict:
+                    raise ArduinoError(decoded_out[Arduino.ERROR_MESSAGE], decoded_out[Arduino.ERROR_CAUSE], stderr)
+                raise ArduinoError(decoded_out)
             return decoded_out
         except OSError:
             raise ArduinoError(Arduino.ERROR_OSERROR % self.__command_base[0])
