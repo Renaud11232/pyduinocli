@@ -95,8 +95,8 @@ class Arduino:
         command = list(self.__command_base)
         command.extend(args)
         try:
-            p = Popen(command, stdout=PIPE)
-            stdout, ignored = p.communicate()
+            p = Popen(command, stdout=PIPE, stderr=PIPE)
+            stdout, stderr = p.communicate()
             decoded_out = self.__decode_output(stdout)
             if p.returncode != 0:
                 raise ArduinoError(decoded_out)
