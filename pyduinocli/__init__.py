@@ -4,11 +4,10 @@ import json
 
 class ArduinoError(Exception):
 
-    def __init__(self, error_info):
-        self.error_info = error_info
-
-    def __str__(self):
-        return repr(self.error_info)
+    def __init__(self, message, cause=None, stderr=None):
+        self.message = message
+        self.cause = cause
+        self.stderr = stderr
 
 
 class Arduino:
@@ -75,6 +74,10 @@ class Arduino:
     COMMAND_UPLOAD = 'upload'
     COMMAND_VERSION = 'version'
 
+    ERROR_MESSAGE = "Message"
+    ERROR_CAUSE = "Cause"
+    ERROR_OSERROR = "'%s' does not exist or is not an executable"
+
     def __init__(self, cli_path, config_file=None):
         self.__command_base = [cli_path, Arduino.FLAG_FORMAT, Arduino.FORMAT_JSON]
         if config_file is not None:
@@ -82,14 +85,10 @@ class Arduino:
 
     @staticmethod
     def __decode_output(data):
-        if len(data) == 0:
-            return dict()
         try:
             return json.loads(data)
         except ValueError:
-            return dict(
-                Message=data.decode("utf-8")
-            )
+            return data.decode("utf-8")
 
     def __exec(self, args):
         command = list(self.__command_base)
@@ -99,12 +98,10 @@ class Arduino:
             stdout, stderr = p.communicate()
             decoded_out = self.__decode_output(stdout)
             if p.returncode != 0:
-                raise ArduinoError(decoded_out)
+                raise ArduinoError(decoded_out[Arduino.ERROR_MESSAGE], decoded_out[Arduino.ERROR_CAUSE], stderr)
             return decoded_out
         except OSError:
-            raise ArduinoError(dict(
-                Message="'%s' does not exist or is not an executable" % self.__command_base[0]
-            ))
+            raise ArduinoError(Arduino.ERROR_OSERROR % self.__command_base[0])
 
     def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
