@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE
 import json
+import regex
 
 
 class ArduinoError(Exception):
@@ -84,11 +85,13 @@ class Arduino:
             self.__command_base.extend([Arduino.FLAG_CONFIG_FILE, config_file])
 
     @staticmethod
-    def __decode_output(data):
-        try:
-            return json.loads(data)
-        except ValueError:
-            return data.decode("utf-8")
+    def __parse_output(data):
+        pattern = regex.compile(r"\{(?:[^{}]|(?R))*\}")
+        match = pattern.search(data)
+        if match is None:
+            return data
+        else:
+            return json.loads(match.group())
 
     def __exec(self, args):
         command = list(self.__command_base)
@@ -96,11 +99,16 @@ class Arduino:
         try:
             p = Popen(command, stdout=PIPE, stderr=PIPE)
             stdout, stderr = p.communicate()
-            decoded_out = self.__decode_output(stdout)
+            decoded_out = self.__parse_output(stdout.decode("utf-8"))
+            decoded_err = stderr.decode("utf-8")
             if p.returncode != 0:
                 if type(decoded_out) is dict:
-                    raise ArduinoError(decoded_out[Arduino.ERROR_MESSAGE], decoded_out[Arduino.ERROR_CAUSE], stderr)
-                raise ArduinoError(decoded_out)
+                    raise ArduinoError(decoded_out[Arduino.ERROR_MESSAGE],
+                                       decoded_out[Arduino.ERROR_CAUSE],
+                                       decoded_err)
+                raise ArduinoError(decoded_out,
+                                   None,
+                                   decoded_err)
             return decoded_out
         except OSError:
             raise ArduinoError(Arduino.ERROR_OSERROR % self.__command_base[0])
