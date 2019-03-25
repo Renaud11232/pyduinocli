@@ -13,23 +13,6 @@ class ArduinoError(Exception):
 
 class Arduino:
 
-    KWARG_FLAVOUR = 'flavour'
-    KWARG_TIMEOUT = 'timeout'
-    KWARG_BUILD_CACHE_PATH = 'build_cache_path'
-    KWARG_BUILD_PATH = 'build_path'
-    KWARG_BUILD_PROPERTIES = 'build_properties'
-    KWARG_FQBN = 'fqbn'
-    KWARG_OUTPUT = 'output'
-    KWARG_PREPROCESS = 'preprocess'
-    KWARG_SHOW_PROPERTIES = 'show_properties'
-    KWARG_VID_PID = 'vid_pid'
-    KWARG_WARNINGS = 'warnings'
-    KWARG_VERIFY = 'verify'
-    KWARG_INPUT = 'input'
-    KWARG_PORT = 'port'
-    KWARG_UPDATABLE = 'updatable'
-    KWARG_NAMES = 'names'
-
     FORMAT_JSON = 'json'
 
     FLAG_FORMAT = '--format'
@@ -52,6 +35,7 @@ class Arduino:
     FLAG_PORT = '--port'
     FLAG_UPDATABLE = '--updatable'
     FLAG_NAMES = '--names'
+    FLAG_ALL = '--all'
 
     COMMAND_BOARD = 'board'
     COMMAND_ATTACH = 'attach'
@@ -113,24 +97,32 @@ class Arduino:
         except OSError:
             raise ArduinoError(Arduino.ERROR_OSERROR % self.__command_base[0])
 
-    def board_attach(self, port_fqbn, sketch_path=None, **kwargs):
-        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH, port_fqbn]
+    def board_attach(self, port=None, fqbn=None, sketch_path=None, flavour=None, timeout=None):
+        args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_ATTACH]
+        if port is not None and fqbn is not None:
+            raise ArduinoError("port and fqbn cannot both be set")
+        if port is None and fqbn is None:
+            raise ArduinoError("port or fqbn must be set")
+        if port is not None:
+            args.append(port)
+        if fqbn is not None:
+            args.append(fqbn)
         if sketch_path is not None:
             args.append(sketch_path)
-        if Arduino.KWARG_FLAVOUR in kwargs:
-            args.extend([Arduino.FLAG_FLAVOUR, kwargs.get(Arduino.KWARG_FLAVOUR)])
-        if Arduino.KWARG_TIMEOUT in kwargs:
-            args.extend([Arduino.FLAG_TIMEOUT, Arduino.KWARG_TIMEOUT])
+        if flavour is not None:
+            args.extend([Arduino.FLAG_FLAVOUR, flavour])
+        if timeout is not None:
+            args.extend([Arduino.FLAG_TIMEOUT, timeout])
         return self.__exec(args)
 
     def board_details(self, fqbn):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_DETAILS, fqbn]
         return self.__exec(args)
 
-    def board_list(self, **kwargs):
+    def board_list(self, timeout=None):
         args = [Arduino.COMMAND_BOARD, Arduino.COMMAND_LIST]
-        if Arduino.KWARG_TIMEOUT in kwargs:
-            args.extend([Arduino.FLAG_TIMEOUT, Arduino.KWARG_TIMEOUT])
+        if timeout is not None:
+            args.extend([Arduino.FLAG_TIMEOUT, timeout])
         return self.__exec(args)
 
     def board_listall(self, boardname=None):
@@ -139,26 +131,28 @@ class Arduino:
             args.append(boardname)
         return self.__exec(args)
 
-    def compile(self, sketch, **kwargs):
+    def compile(self,
+                sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
+                preprocess=None, show_properties=None, vid_pid=None, warnings=None):
         args = [Arduino.COMMAND_COMPILE]
-        if Arduino.KWARG_BUILD_CACHE_PATH in kwargs:
-            args.extend([Arduino.FLAG_BUILD_CACHE_PATH, kwargs.get(Arduino.KWARG_BUILD_CACHE_PATH)])
-        if Arduino.KWARG_BUILD_PATH in kwargs:
-            args.extend([Arduino.FLAG_BUILD_PATH, kwargs.get(Arduino.KWARG_BUILD_PATH)])
-        if Arduino.KWARG_BUILD_PROPERTIES in kwargs:
-            args.extend([Arduino.FLAG_BUILD_PROPERTIES, kwargs.get(Arduino.KWARG_BUILD_PROPERTIES)])
-        if Arduino.KWARG_FQBN in kwargs:
-            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.KWARG_FQBN)])
-        if Arduino.KWARG_OUTPUT in kwargs:
-            args.extend([Arduino.FLAG_OUTPUT, kwargs.get(Arduino.KWARG_OUTPUT)])
-        if Arduino.KWARG_PREPROCESS in kwargs and kwargs.get(Arduino.KWARG_PREPROCESS) is True:
+        if build_cache_path is not None:
+            args.extend([Arduino.FLAG_BUILD_CACHE_PATH, build_cache_path])
+        if build_path is not None:
+            args.extend([Arduino.FLAG_BUILD_PATH, build_path])
+        if build_properties is not None:
+            args.extend([Arduino.FLAG_BUILD_PROPERTIES, build_properties])
+        if fqbn is not None:
+            args.extend([Arduino.FLAG_FQBN, fqbn])
+        if output is not None:
+            args.extend([Arduino.FLAG_OUTPUT, output])
+        if preprocess is not None and preprocess is True:
             args.append(Arduino.FLAG_PREPROCESS)
-        if Arduino.KWARG_SHOW_PROPERTIES in kwargs and kwargs.get(Arduino.KWARG_SHOW_PROPERTIES) is True:
+        if show_properties is not None and show_properties is True:
             args.append(Arduino.FLAG_SHOW_PROPERTIES)
-        if Arduino.KWARG_VID_PID in kwargs:
-            args.extend([Arduino.FLAG_VID_PID, kwargs.get(Arduino.KWARG_VID_PID)])
-        if Arduino.KWARG_WARNINGS in kwargs:
-            args.extend([Arduino.FLAG_WARNINGS, kwargs.get(Arduino.KWARG_WARNINGS)])
+        if vid_pid is not None:
+            args.extend([Arduino.FLAG_VID_PID, vid_pid])
+        if warnings is not None:
+            args.extend([Arduino.FLAG_WARNINGS, warnings])
         args.append(sketch)
         return self.__exec(args)
 
@@ -181,9 +175,9 @@ class Arduino:
         args.extend(installs)
         return self.__exec(args)
 
-    def core_list(self, **kwargs):
+    def core_list(self, updatable=None):
         args = [Arduino.COMMAND_CORE, Arduino.COMMAND_LIST]
-        if Arduino.KWARG_UPDATABLE in kwargs and kwargs.get(Arduino.KWARG_UPDATABLE) is True:
+        if updatable is not None and updatable is True:
             args.append(Arduino.FLAG_UPDATABLE)
         return self.__exec(args)
 
@@ -215,16 +209,16 @@ class Arduino:
         args.extend(installs)
         return self.__exec(args)
 
-    def lib_list(self, **kwargs):
+    def lib_list(self, all=None, updatable=None):
         args = [Arduino.COMMAND_LIB, Arduino.COMMAND_LIST]
-        if Arduino.KWARG_UPDATABLE in kwargs and kwargs.get(Arduino.KWARG_UPDATABLE) is True:
+        if all is not None and all is True:
+            args.append(Arduino.FLAG_ALL)
+        if updatable is not None and updatable is True:
             args.append(Arduino.FLAG_UPDATABLE)
         return self.__exec(args)
 
-    def lib_search(self, *name, **kwargs):
+    def lib_search(self, *name):
         args = [Arduino.COMMAND_LIB, Arduino.COMMAND_SEARCH]
-        if Arduino.KWARG_NAMES in kwargs and kwargs.get(Arduino.KWARG_NAMES) is True:
-            args.append(Arduino.FLAG_NAMES)
         args.extend(name)
         return self.__exec(args)
 
@@ -242,15 +236,15 @@ class Arduino:
     def sketch_new(self, name):
         return self.__exec([Arduino.COMMAND_SKETCH, Arduino.COMMAND_NEW, name])
 
-    def upload(self, sketch, **kwargs):
+    def upload(self, sketch, fqbn=None, input=None, port=None, verify=None):
         args = [Arduino.COMMAND_UPLOAD]
-        if Arduino.KWARG_FQBN in kwargs:
-            args.extend([Arduino.FLAG_FQBN, kwargs.get(Arduino.KWARG_FQBN)])
-        if Arduino.KWARG_INPUT in kwargs:
-            args.extend([Arduino.FLAG_INPUT, kwargs.get(Arduino.KWARG_INPUT)])
-        if Arduino.KWARG_PORT in kwargs:
-            args.extend([Arduino.FLAG_PORT, kwargs.get(Arduino.KWARG_PORT)])
-        if Arduino.KWARG_VERIFY in kwargs and kwargs.get(Arduino.KWARG_VERIFY) is True:
+        if fqbn is not None:
+            args.extend([Arduino.FLAG_FQBN, fqbn])
+        if input is not None:
+            args.extend([Arduino.FLAG_INPUT, input])
+        if port is not None:
+            args.extend([Arduino.FLAG_PORT, port])
+        if verify is not None and verify is True:
             args.append(Arduino.FLAG_VERIFY)
         args.append(sketch)
         return self.__exec(args)
