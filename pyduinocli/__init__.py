@@ -168,12 +168,12 @@ class Arduino:
             args.extend([Arduino.__FLAG_SAVE_AS, save_as])
         return self.__exec(args)
 
-    def core_download(self, *downloads):
+    def core_download(self, downloads):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_DOWNLOAD]
         args.extend(downloads)
         return self.__exec(args)
 
-    def core_install(self, *installs):
+    def core_install(self, installs):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_INSTALL]
         args.extend(installs)
         return self.__exec(args)
@@ -184,12 +184,12 @@ class Arduino:
             args.append(Arduino.__FLAG_UPDATABLE)
         return self.__exec(args)
 
-    def core_search(self, *keywords):
+    def core_search(self, keywords):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_SEARCH]
         args.extend(keywords)
         return self.__exec(args)
 
-    def core_uninstall(self, *installs):
+    def core_uninstall(self, installs):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UNINSTALL]
         args.extend(installs)
         return self.__exec(args)
@@ -197,17 +197,17 @@ class Arduino:
     def core_update_index(self):
         return self.__exec([Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPDATE_INDEX])
 
-    def core_upgrade(self, *upgrades):
+    def core_upgrade(self, upgrades):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPGRADE]
         args.extend(upgrades)
         return self.__exec(args)
 
-    def lib_download(self, *downloads):
+    def lib_download(self, downloads):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_DOWNLOAD]
         args.extend(downloads)
         return self.__exec(args)
 
-    def lib_install(self, *installs):
+    def lib_install(self, installs):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_INSTALL]
         args.extend(installs)
         return self.__exec(args)
@@ -220,12 +220,12 @@ class Arduino:
             args.append(Arduino.__FLAG_UPDATABLE)
         return self.__exec(args)
 
-    def lib_search(self, *name):
+    def lib_search(self, name):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_SEARCH]
         args.extend(name)
         return self.__exec(args)
 
-    def lib_uninstall(self, *uninstalls):
+    def lib_uninstall(self, uninstalls):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_UNINSTALL]
         args.extend(uninstalls)
         return self.__exec(args)
