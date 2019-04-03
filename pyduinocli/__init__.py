@@ -59,8 +59,6 @@ class Arduino:
     __COMMAND_UPLOAD = 'upload'
     __COMMAND_VERSION = 'version'
 
-    __OUTPUT_ENCODING = 'utf-8'
-
     __REGEX_JSON = r'\{(?:[^{}]|(?R))*\}'
 
     __ERROR_MESSAGE = "Message"
@@ -87,18 +85,17 @@ class Arduino:
         command = list(self.__command_base)
         command.extend(args)
         try:
-            p = Popen(command, stdout=PIPE, stderr=PIPE)
+            p = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
             stdout, stderr = p.communicate()
-            decoded_out = self.__parse_output(stdout.decode(Arduino.__OUTPUT_ENCODING))
-            decoded_err = stderr.decode(Arduino.__OUTPUT_ENCODING)
+            decoded_out = self.__parse_output(stdout)
             if p.returncode != 0:
                 if type(decoded_out) is dict:
                     raise ArduinoError(decoded_out[Arduino.__ERROR_MESSAGE],
                                        decoded_out[Arduino.__ERROR_CAUSE],
-                                       decoded_err)
+                                       stderr)
                 raise ArduinoError(decoded_out,
                                    None,
-                                   decoded_err)
+                                   stderr)
             return decoded_out
         except OSError:
             raise ArduinoError(Arduino.__ERROR_OSERROR % self.__command_base[0])
@@ -242,7 +239,7 @@ class Arduino:
     def sketch_new(self, name):
         return self.__exec([Arduino.__COMMAND_SKETCH, Arduino.__COMMAND_NEW, name])
 
-    def upload(self, sketch, fqbn=None, input=None, port=None, verify=None):
+    def upload(self, sketch=None, fqbn=None, input=None, port=None, verify=None):
         args = [Arduino.__COMMAND_UPLOAD]
         if fqbn is not None:
             args.extend([Arduino.__FLAG_FQBN, fqbn])
@@ -252,7 +249,8 @@ class Arduino:
             args.extend([Arduino.__FLAG_PORT, port])
         if verify is not None and verify is True:
             args.append(Arduino.__FLAG_VERIFY)
-        args.append(sketch)
+        if sketch is not None:
+            args.append(sketch)
         return self.__exec(args)
 
     def version(self):
