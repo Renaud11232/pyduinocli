@@ -1,0 +1,14 @@
+language: python
+python:
+- '2.7'
+- '3.7'
+install:
+- pip install regex
+deploy:
+  provider: pypi
+  user: Renaud11232
+  password:
+    secure: vPUMSwxl5wsInkP8vTPbR8JXKO51h2TuYX7ISseg12PhkxmAMjNRwMB8EwS9APfbHPBQ71K+5ag0M5worZnszfCqBqzNl2roqz3txiMhGww5ACwY/wszTfobfS1BdxLheGjW9+T1sn8+Ab9DpsBN64lvGqkpHOHC8I/1JVjIcGw5/G55xbBL+eck+OevjwYwl20R4pC6LEHr/d2gYbfvH+YCyyGB+QX0eszk4bZX5s8VtBvXBw5Fqeo1NnVIM3x1w+gOUlKM6KsVnSDsgGwHjXL1nVkp41hQnJHG4g7aI9MAMphzitZRwcBlOqz5FJWVx93Wek/qJ3++XbI/aOOm7bDTyu0WIyUwgTzUQnuwNtR6JH8flIAprqkMzTXmUbP6WsIJnvXYWiEgZnzlUibrBrXyinzN47nfi+3kxjH6gP4hZJwENNawsQ8CO8VjFoJcJ8MXSW/rEGtC1PmHQt7KEs1RA5WdJG3rbsyWKBTlc2/u0rsXyYe+mFbSSh4Wtwk81DSJ1Vuw3JxQD6FQwMN0gwstNJ8SZemNBfMXxZNA2gFGuam8J8VtAZISH8f9XnEFakWO/rybtPZRxzpLIQbepcWXuLOMywGuJcr4tao0nczVXCw8p10hgDaNj0FfwSf0csD6Txtd7dhN4eHG7f4zNK2rxyCIM8mxmCS/Df/fxr0=
+  skip_existing: true
+  on:
+    branch: master
