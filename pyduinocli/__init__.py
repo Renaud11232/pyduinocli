@@ -64,6 +64,7 @@ class Arduino:
 
     __ERROR_MESSAGE = "Message"
     __ERROR_CAUSE = "Cause"
+    __ERROR_NO_SEARCH_KEYWORDS = "No search keywords were entered"
     __ERROR_OSERROR = "'%s' does not exist or is not an executable"
     __ERROR_PORT_FQBN_SET = 'port and fqbn cannot both be set'
     __ERROR_PORT_FQBN_NOT_SET = 'port or fqbn must be set'
@@ -187,6 +188,8 @@ class Arduino:
 
     def core_search(self, keywords):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_SEARCH]
+        if not keywords:
+            raise ArduinoError(Arduino.__ERROR_NO_SEARCH_KEYWORDS)
         args.extend(keywords)
         return self.__exec(args)
 
