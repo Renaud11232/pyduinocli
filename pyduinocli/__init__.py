@@ -1,6 +1,6 @@
 from subprocess import Popen, PIPE
 import json
-import regex
+import re
 
 
 class ArduinoError(Exception):
@@ -60,7 +60,7 @@ class Arduino:
     __COMMAND_UPLOAD = 'upload'
     __COMMAND_VERSION = 'version'
 
-    __REGEX_JSON = r'\{(?:[^{}]|(?R))*\}'
+    __REGEX_JSON = r'(\{|\[)'
 
     __ERROR_MESSAGE = "Message"
     __ERROR_CAUSE = "Cause"
@@ -78,12 +78,14 @@ class Arduino:
 
     @staticmethod
     def __parse_output(data):
-        pattern = regex.compile(Arduino.__REGEX_JSON)
-        match = pattern.search(data)
-        if match is None:
-            return data
-        else:
-            return json.loads(match.group())
+        pattern = re.compile(Arduino.__REGEX_JSON)
+        for match in pattern.finditer(data):
+            candidate = data[match.start():]
+            try:
+                return json.loads(candidate)
+            except ValueError:
+                continue
+        return data
 
     def __exec(self, args):
         command = list(self.__command_base)

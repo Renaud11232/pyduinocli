@@ -17,7 +17,6 @@ setuptools.setup(
     url="https://github.com/Renaud11232/pyduinocli",
     packages=setuptools.find_packages(),
     install_requires=[
-        "regex"
     ],
     classifiers=[
         "Programming Language :: Python :: 2",
