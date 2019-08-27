@@ -18,7 +18,6 @@ class Arduino:
     __FLAG_ADDITIONAL_URLS = '--additional-urls'
     __FLAG_CONFIG_FILE = '--config-file'
     __FLAG_FORMAT = '--format'
-    __FLAG_FLAVOUR = '--flavour'
     __FLAG_TIMEOUT = '--timeout'
     __FLAG_BUILD_CACHE_PATH = '--build-cache-path'
     __FLAG_BUILD_PATH = '--build-path'
@@ -103,7 +102,7 @@ class Arduino:
         except OSError:
             raise ArduinoError(Arduino.__ERROR_OSERROR % self.__command_base[0])
 
-    def board_attach(self, port=None, fqbn=None, sketch_path=None, flavour=None, timeout=None):
+    def board_attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
         args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_ATTACH]
         if port is not None and fqbn is not None:
             raise ArduinoError(Arduino.__ERROR_PORT_FQBN_SET)
@@ -115,8 +114,6 @@ class Arduino:
             args.append(fqbn)
         if sketch_path is not None:
             args.append(sketch_path)
-        if flavour is not None:
-            args.extend([Arduino.__FLAG_FLAVOUR, flavour])
         if timeout is not None:
             args.extend([Arduino.__FLAG_TIMEOUT, timeout])
         return self.__exec(args)
