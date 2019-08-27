@@ -69,6 +69,8 @@ class Arduino:
     __ERROR_PORT_FQBN_NOT_SET = 'port or fqbn must be set'
 
     def __init__(self, cli_path, config_file=None, additional_urls=None):
+        if not cli_path:
+            raise ArduinoError("Could not create an Arduino instance", "cli_path is missing")
         self.__command_base = [cli_path, Arduino.__FLAG_FORMAT, Arduino.__FORMAT_JSON]
         if config_file is not None:
             self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, config_file])
