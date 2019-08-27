@@ -73,7 +73,7 @@ class Arduino:
         if config_file is not None:
             self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, config_file])
         if additional_urls is not None:
-            self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, additional_urls.join(",")])
+            self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, ",".join(additional_urls)])
 
     @staticmethod
     def __parse_output(data):
