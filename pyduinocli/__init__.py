@@ -15,8 +15,9 @@ class Arduino:
 
     __FORMAT_JSON = 'json'
 
-    __FLAG_FORMAT = '--format'
+    __FLAG_ADDITIONAL_URLS = '--additional-urls'
     __FLAG_CONFIG_FILE = '--config-file'
+    __FLAG_FORMAT = '--format'
     __FLAG_FLAVOUR = '--flavour'
     __FLAG_TIMEOUT = '--timeout'
     __FLAG_BUILD_CACHE_PATH = '--build-cache-path'
@@ -67,10 +68,12 @@ class Arduino:
     __ERROR_PORT_FQBN_SET = 'port and fqbn cannot both be set'
     __ERROR_PORT_FQBN_NOT_SET = 'port or fqbn must be set'
 
-    def __init__(self, cli_path, config_file=None):
+    def __init__(self, cli_path, config_file=None, additional_urls=None):
         self.__command_base = [cli_path, Arduino.__FLAG_FORMAT, Arduino.__FORMAT_JSON]
         if config_file is not None:
             self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, config_file])
+        if additional_urls is not None:
+            self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, additional_urls.join(",")])
 
     @staticmethod
     def __parse_output(data):
