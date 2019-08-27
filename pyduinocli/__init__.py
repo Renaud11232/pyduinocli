@@ -53,6 +53,7 @@ class Arduino:
     __COMMAND_UNINSTALL = 'uninstall'
     __COMMAND_UPDATE_INDEX = 'update-index'
     __COMMAND_UPGRADE = 'upgrade'
+    __COMMAND_DAEMON = 'daemon'
     __COMMAND_LIB = 'lib'
     __COMMAND_SKETCH = 'sketch'
     __COMMAND_NEW = 'new'
@@ -200,6 +201,10 @@ class Arduino:
     def core_upgrade(self, upgrades):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPGRADE]
         args.extend(upgrades)
+        return self.__exec(args)
+
+    def daemon(self):
+        args = [Arduino.__COMMAND_DAEMON]
         return self.__exec(args)
 
     def lib_download(self, downloads):
