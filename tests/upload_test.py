@@ -1,5 +1,5 @@
 from . import TestBase
 
 
-class TestBoard(TestBase):
+class TestUpload(TestBase):
     pass

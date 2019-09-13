@@ -1,5 +1,5 @@
 from . import TestBase
 
 
-class TestBoard(TestBase):
+class TestDaemon(TestBase):
     pass
