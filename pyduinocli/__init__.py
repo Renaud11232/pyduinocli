@@ -18,12 +18,16 @@ class Arduino:
     __FLAG_ADDITIONAL_URLS = '--additional-urls'
     __FLAG_CONFIG_FILE = '--config-file'
     __FLAG_FORMAT = '--format'
+    __FLAG_LOG_FILE = '--log-file'
+    __FLAG_LOG_FORMAT = '--log-format'
+    __FLAG_LOG_LEVEL = '--log-level'
     __FLAG_TIMEOUT = '--timeout'
     __FLAG_BUILD_CACHE_PATH = '--build-cache-path'
     __FLAG_BUILD_PATH = '--build-path'
     __FLAG_BUILD_PROPERTIES = '--build-properties'
     __FLAG_FQBN = '--fqbn'
     __FLAG_OUTPUT = '--ouput'
+    __FLAG_UPLOAD = '--upload'
     __FLAG_PREPROCESS = '--preprocess'
     __FLAG_SHOW_PROPERTIES = '--show-properties'
     __FLAG_VID_PID = '--vid-pid'
@@ -70,7 +74,7 @@ class Arduino:
     __ERROR_PORT_FQBN_SET = 'port and fqbn cannot both be set'
     __ERROR_PORT_FQBN_NOT_SET = 'port or fqbn must be set'
 
-    def __init__(self, cli_path, config_file=None, additional_urls=None):
+    def __init__(self, cli_path, config_file=None, additional_urls=None, log_file=None, log_format=None, log_level=None):
         if not cli_path:
             raise ArduinoError(Arduino.__ERROR_ARDUINO_INSTANCE, Arduino.__ERROR_ARDUINO_PATH)
         self.__command_base = [cli_path, Arduino.__FLAG_FORMAT, Arduino.__FORMAT_JSON]
@@ -78,6 +82,12 @@ class Arduino:
             self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, config_file])
         if additional_urls is not None:
             self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, ",".join(additional_urls)])
+        if log_file is not None:
+            self.__command_base.extend([Arduino.__FLAG_LOG_FILE, log_file])
+        if log_format is not None:
+            self.__command_base.extend([Arduino.__FLAG_LOG_FORMAT, log_format])
+        if log_level is not None:
+            self.__command_base.extend([Arduino.__FLAG_LOG_LEVEL, log_level])
 
     @staticmethod
     def __parse_output(data):
@@ -143,7 +153,7 @@ class Arduino:
 
     def compile(self,
                 sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
-                preprocess=None, show_properties=None, vid_pid=None, warnings=None):
+                port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None, warnings=None):
         args = [Arduino.__COMMAND_COMPILE]
         if build_cache_path is not None:
             args.extend([Arduino.__FLAG_BUILD_CACHE_PATH, build_cache_path])
@@ -155,10 +165,16 @@ class Arduino:
             args.extend([Arduino.__FLAG_FQBN, fqbn])
         if output is not None:
             args.extend([Arduino.__FLAG_OUTPUT, output])
+        if port is not None:
+            args.extend([Arduino.__FLAG_PORT, port])
         if preprocess is not None and preprocess is True:
             args.append(Arduino.__FLAG_PREPROCESS)
         if show_properties is not None and show_properties is True:
             args.append(Arduino.__FLAG_SHOW_PROPERTIES)
+        if upload is not None and upload is True:
+            args.append(Arduino.__FLAG_UPLOAD)
+        if verify is not None and verify is True:
+            args.append(Arduino.__FLAG_VERIFY)
         if vid_pid is not None:
             args.extend([Arduino.__FLAG_VID_PID, vid_pid])
         if warnings is not None:
@@ -204,7 +220,9 @@ class Arduino:
     def core_update_index(self):
         return self.__exec([Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPDATE_INDEX])
 
-    def core_upgrade(self, upgrades):
+    def core_upgrade(self, upgrades=None):
+        if upgrades is None:
+            upgrades = []
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPGRADE]
         args.extend(upgrades)
         return self.__exec(args)
@@ -231,8 +249,10 @@ class Arduino:
             args.append(Arduino.__FLAG_UPDATABLE)
         return self.__exec(args)
 
-    def lib_search(self, name):
+    def lib_search(self, name, names=None):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_SEARCH]
+        if names is not None and names is True:
+            args.append(Arduino.__FLAG_NAMES)
         args.extend(name)
         return self.__exec(args)
 
@@ -244,8 +264,12 @@ class Arduino:
     def lib_update_index(self):
         return self.__exec([Arduino.__COMMAND_LIB, Arduino.__COMMAND_UPDATE_INDEX])
 
-    def lib_upgrade(self):
-        return self.__exec([Arduino.__COMMAND_LIB, Arduino.__COMMAND_UPGRADE])
+    def lib_upgrade(self, upgrades=None):
+        if upgrades is None:
+            upgrades = []
+        args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_UPGRADE]
+        args.extend(upgrades)
+        return self.__exec(args)
 
     def sketch_new(self, name):
         return self.__exec([Arduino.__COMMAND_SKETCH, Arduino.__COMMAND_NEW, name])
