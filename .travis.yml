@@ -6,7 +6,9 @@ python:
   - '3.7'
 
 install:
-  - pip install regex
+  - wget https://github.com/arduino/arduino-cli/releases/download/0.5.0/arduino-cli_0.5.0_Linux_64bit.tar.gz
+  - tar xzf arduino-cli_0.5.0_Linux_64bit.tar.gz
+  - rm arduino-cli_0.5.0_Linux_64bit.tar.gz
 
 script:
   - python setup.py test
