@@ -79,15 +79,26 @@ class Arduino:
             raise ArduinoError(Arduino.__ERROR_ARDUINO_INSTANCE, Arduino.__ERROR_ARDUINO_PATH)
         self.__command_base = [cli_path, Arduino.__FLAG_FORMAT, Arduino.__FORMAT_JSON]
         if config_file is not None:
-            self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, config_file])
+            self.__command_base.extend([Arduino.__FLAG_CONFIG_FILE, Arduino.__strip_arg(config_file)])
         if additional_urls is not None:
-            self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, ",".join(additional_urls)])
+            self.__command_base.extend([Arduino.__FLAG_ADDITIONAL_URLS, ",".join(Arduino.__strip_args(additional_urls))])
         if log_file is not None:
-            self.__command_base.extend([Arduino.__FLAG_LOG_FILE, log_file])
+            self.__command_base.extend([Arduino.__FLAG_LOG_FILE, Arduino.__strip_arg(log_file)])
         if log_format is not None:
-            self.__command_base.extend([Arduino.__FLAG_LOG_FORMAT, log_format])
+            self.__command_base.extend([Arduino.__FLAG_LOG_FORMAT, Arduino.__strip_arg(log_format)])
         if log_level is not None:
-            self.__command_base.extend([Arduino.__FLAG_LOG_LEVEL, log_level])
+            self.__command_base.extend([Arduino.__FLAG_LOG_LEVEL, Arduino.__strip_arg(log_level)])
+
+    @staticmethod
+    def __strip_arg(arg):
+        return arg.lstrip("-")
+
+    @staticmethod
+    def __strip_args(args):
+        out = list()
+        for arg in args:
+            out.append(Arduino.__strip_arg(arg))
+        return out
 
     @staticmethod
     def __parse_output(data):
@@ -126,29 +137,29 @@ class Arduino:
         if port is None and fqbn is None:
             raise ArduinoError(Arduino.__ERROR_PORT_FQBN_NOT_SET)
         if port is not None:
-            args.append(port)
+            args.append(Arduino.__strip_arg(port))
         if fqbn is not None:
-            args.append(fqbn)
+            args.append(Arduino.__strip_arg(fqbn))
         if sketch_path is not None:
-            args.append(sketch_path)
+            args.append(Arduino.__strip_arg(sketch_path))
         if timeout is not None:
-            args.extend([Arduino.__FLAG_TIMEOUT, timeout])
+            args.extend([Arduino.__FLAG_TIMEOUT, Arduino.__strip_arg(timeout)])
         return self.__exec(args)
 
     def board_details(self, fqbn):
-        args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_DETAILS, fqbn]
+        args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_DETAILS, Arduino.__strip_arg(fqbn)]
         return self.__exec(args)
 
     def board_list(self, timeout=None):
         args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_LIST]
         if timeout is not None:
-            args.extend([Arduino.__FLAG_TIMEOUT, timeout])
+            args.extend([Arduino.__FLAG_TIMEOUT, Arduino.__strip_arg(timeout)])
         return self.__exec(args)
 
     def board_listall(self, boardname=None):
         args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_LISTALL]
         if boardname is not None:
-            args.append(boardname)
+            args.append(Arduino.__strip_arg(boardname))
         return self.__exec(args)
 
     def compile(self,
@@ -156,30 +167,30 @@ class Arduino:
                 port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None, warnings=None):
         args = [Arduino.__COMMAND_COMPILE]
         if build_cache_path is not None:
-            args.extend([Arduino.__FLAG_BUILD_CACHE_PATH, build_cache_path])
+            args.extend([Arduino.__FLAG_BUILD_CACHE_PATH, Arduino.__strip_arg(build_cache_path)])
         if build_path is not None:
-            args.extend([Arduino.__FLAG_BUILD_PATH, build_path])
+            args.extend([Arduino.__FLAG_BUILD_PATH, Arduino.__strip_arg(build_path)])
         if build_properties is not None:
-            args.extend([Arduino.__FLAG_BUILD_PROPERTIES, build_properties])
+            args.extend([Arduino.__FLAG_BUILD_PROPERTIES, Arduino.__strip_arg(build_properties)])
         if fqbn is not None:
-            args.extend([Arduino.__FLAG_FQBN, fqbn])
+            args.extend([Arduino.__FLAG_FQBN, Arduino.__strip_arg(fqbn)])
         if output is not None:
-            args.extend([Arduino.__FLAG_OUTPUT, output])
+            args.extend([Arduino.__FLAG_OUTPUT, Arduino.__strip_arg(output)])
         if port is not None:
-            args.extend([Arduino.__FLAG_PORT, port])
-        if preprocess is not None and preprocess is True:
+            args.extend([Arduino.__FLAG_PORT, Arduino.__strip_arg(port)])
+        if preprocess is True:
             args.append(Arduino.__FLAG_PREPROCESS)
-        if show_properties is not None and show_properties is True:
+        if show_properties is True:
             args.append(Arduino.__FLAG_SHOW_PROPERTIES)
-        if upload is not None and upload is True:
+        if upload is True:
             args.append(Arduino.__FLAG_UPLOAD)
-        if verify is not None and verify is True:
+        if verify is True:
             args.append(Arduino.__FLAG_VERIFY)
         if vid_pid is not None:
-            args.extend([Arduino.__FLAG_VID_PID, vid_pid])
+            args.extend([Arduino.__FLAG_VID_PID, Arduino.__strip_arg(vid_pid)])
         if warnings is not None:
-            args.extend([Arduino.__FLAG_WARNINGS, warnings])
-        args.append(sketch)
+            args.extend([Arduino.__FLAG_WARNINGS, Arduino.__strip_arg(warnings)])
+        args.append(Arduino.__strip_arg(sketch))
         return self.__exec(args)
 
     def config_dump(self):
@@ -188,33 +199,33 @@ class Arduino:
     def config_init(self, save_as=None):
         args = [Arduino.__COMMAND_CONFIG, Arduino.__COMMAND_INIT, Arduino.__FLAG_DEFAULT]
         if save_as is not None:
-            args.extend([Arduino.__FLAG_SAVE_AS, save_as])
+            args.extend([Arduino.__FLAG_SAVE_AS, Arduino.__strip_arg(save_as)])
         return self.__exec(args)
 
     def core_download(self, downloads):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_DOWNLOAD]
-        args.extend(downloads)
+        args.extend(Arduino.__strip_args(downloads))
         return self.__exec(args)
 
     def core_install(self, installs):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_INSTALL]
-        args.extend(installs)
+        args.extend(Arduino.__strip_args(installs))
         return self.__exec(args)
 
     def core_list(self, updatable=None):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_LIST]
-        if updatable is not None and updatable is True:
+        if updatable is True:
             args.append(Arduino.__FLAG_UPDATABLE)
         return self.__exec(args)
 
     def core_search(self, keywords):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_SEARCH]
-        args.extend(keywords)
+        args.extend(Arduino.__strip_args(keywords))
         return self.__exec(args)
 
     def core_uninstall(self, installs):
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UNINSTALL]
-        args.extend(installs)
+        args.extend(Arduino.__strip_args(installs))
         return self.__exec(args)
 
     def core_update_index(self):
@@ -224,7 +235,7 @@ class Arduino:
         if upgrades is None:
             upgrades = []
         args = [Arduino.__COMMAND_CORE, Arduino.__COMMAND_UPGRADE]
-        args.extend(upgrades)
+        args.extend(Arduino.__strip_args(upgrades))
         return self.__exec(args)
 
     def daemon(self):
@@ -233,32 +244,32 @@ class Arduino:
 
     def lib_download(self, downloads):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_DOWNLOAD]
-        args.extend(downloads)
+        args.extend(Arduino.__strip_args(downloads))
         return self.__exec(args)
 
     def lib_install(self, installs):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_INSTALL]
-        args.extend(installs)
+        args.extend(Arduino.__strip_args(installs))
         return self.__exec(args)
 
     def lib_list(self, all=None, updatable=None):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_LIST]
-        if all is not None and all is True:
+        if all is True:
             args.append(Arduino.__FLAG_ALL)
-        if updatable is not None and updatable is True:
+        if updatable is True:
             args.append(Arduino.__FLAG_UPDATABLE)
         return self.__exec(args)
 
     def lib_search(self, name, names=None):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_SEARCH]
-        if names is not None and names is True:
+        if names is True:
             args.append(Arduino.__FLAG_NAMES)
-        args.extend(name)
+        args.extend(Arduino.__strip_args(name))
         return self.__exec(args)
 
     def lib_uninstall(self, uninstalls):
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_UNINSTALL]
-        args.extend(uninstalls)
+        args.extend(Arduino.__strip_args(uninstalls))
         return self.__exec(args)
 
     def lib_update_index(self):
@@ -268,24 +279,24 @@ class Arduino:
         if upgrades is None:
             upgrades = []
         args = [Arduino.__COMMAND_LIB, Arduino.__COMMAND_UPGRADE]
-        args.extend(upgrades)
+        args.extend(Arduino.__strip_args(upgrades))
         return self.__exec(args)
 
     def sketch_new(self, name):
-        return self.__exec([Arduino.__COMMAND_SKETCH, Arduino.__COMMAND_NEW, name])
+        return self.__exec([Arduino.__COMMAND_SKETCH, Arduino.__COMMAND_NEW, Arduino.__strip_arg(name)])
 
     def upload(self, sketch=None, fqbn=None, input=None, port=None, verify=None):
         args = [Arduino.__COMMAND_UPLOAD]
         if fqbn is not None:
-            args.extend([Arduino.__FLAG_FQBN, fqbn])
+            args.extend([Arduino.__FLAG_FQBN, Arduino.__strip_arg(fqbn)])
         if input is not None:
-            args.extend([Arduino.__FLAG_INPUT, input])
+            args.extend([Arduino.__FLAG_INPUT, Arduino.__strip_arg(input)])
         if port is not None:
-            args.extend([Arduino.__FLAG_PORT, port])
-        if verify is not None and verify is True:
+            args.extend([Arduino.__FLAG_PORT, Arduino.__strip_arg(port)])
+        if verify is True:
             args.append(Arduino.__FLAG_VERIFY)
         if sketch is not None:
-            args.append(sketch)
+            args.append(Arduino.__strip_arg(sketch))
         return self.__exec(args)
 
     def version(self):
