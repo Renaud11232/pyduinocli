@@ -16,7 +16,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Renaud11232/pyduinocli",
     packages=setuptools.find_packages(),
-    test_suite="tests",
     install_requires=[
     ],
     classifiers=[
