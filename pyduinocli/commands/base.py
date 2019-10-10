@@ -1,3 +1,6 @@
+import re
+import json
+from subprocess import Popen, PIPE
 from pyduinocli.errors import ArduinoError
 from pyduinocli.constants import messages
 
@@ -24,12 +27,10 @@ class CommandBase:
 
     @staticmethod
     def __parse_output(data):
-        import re
         pattern = re.compile(CommandBase.__REGEX_JSON)
         for match in pattern.finditer(data):
             candidate = data[match.start():]
             try:
-                import json
                 return json.loads(candidate)
             except ValueError:
                 continue
@@ -39,7 +40,6 @@ class CommandBase:
         command = list(self._base_args)
         command.extend(args)
         try:
-            from subprocess import Popen, PIPE
             p = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
             stdout, stderr = p.communicate()
             decoded_out = self.__parse_output(stdout)
