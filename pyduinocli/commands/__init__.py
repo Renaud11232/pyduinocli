@@ -1,3 +1,6 @@
+import pyduinocli
+
+
 class CommandBase:
     __ERROR_MESSAGE = "Message"
     __ERROR_CAUSE = "Cause"
@@ -11,14 +14,14 @@ class CommandBase:
         self.__command_base.append(command_name)
 
     @staticmethod
-    def __strip_arg(arg):
+    def _strip_arg(arg):
         return arg.lstrip("-")
 
     @staticmethod
-    def __strip_args(args):
+    def _strip_args(args):
         out = list()
         for arg in args:
-            out.append(CommandBase.__strip_arg(arg))
+            out.append(CommandBase._strip_arg(arg))
         return out
 
     @staticmethod
@@ -34,10 +37,9 @@ class CommandBase:
                 continue
         return data
 
-    def __exec(self, args):
+    def _exec(self, args):
         command = list(self.__command_base)
         command.extend(args)
-        from pyduinocli.errors import ArduinoError
         try:
             from subprocess import Popen, PIPE
             p = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
@@ -45,13 +47,12 @@ class CommandBase:
             decoded_out = self.__parse_output(stdout)
             if p.returncode != 0:
                 if type(decoded_out) is dict:
-                    raise ArduinoError(decoded_out[CommandBase.__ERROR_MESSAGE],
-                                       decoded_out[CommandBase.__ERROR_CAUSE],
-                                       stderr)
-                raise ArduinoError(decoded_out,
-                                   None,
-                                   stderr)
+                    raise pyduinocli.errors.ArduinoError(decoded_out[CommandBase.__ERROR_MESSAGE],
+                                                         decoded_out[CommandBase.__ERROR_CAUSE],
+                                                         stderr)
+                raise pyduinocli.errors.ArduinoError(decoded_out,
+                                                     None,
+                                                     stderr)
             return decoded_out
         except OSError:
-            from pyduinocli.constants.messages import ERROR_OSERROR
-            raise ArduinoError(ERROR_OSERROR % self.__command_base[0])
+            raise pyduinocli.errors.ArduinoError(pyduinocli.constants.messages.ERROR_OSERROR % self.__command_base[0])
