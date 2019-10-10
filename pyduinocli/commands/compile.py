@@ -13,7 +13,7 @@ class CompileCommand(CommandBase):
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
                  warnings=None):
-        args = [commands.COMPILE]
+        args = []
         if build_cache_path is not None:
             args.extend([flags.BUILD_CACHE_PATH, CommandBase._strip_arg(build_cache_path)])
         if build_path is not None:

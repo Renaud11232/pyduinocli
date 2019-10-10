@@ -5,8 +5,7 @@ class ArduinoOld(pyduinocli.commands.Command):
 
 
 
-    def sketch_new(self, name):
-        return self.__exec([pyduinocli.constants.commands.SKETCH, pyduinocli.constants.commands.NEW, Arduino.__strip_arg(name)])
+
 
     def upload(self, sketch=None, fqbn=None, input=None, port=None, verify=None):
         args = [pyduinocli.constants.commands.UPLOAD]
