@@ -4,41 +4,7 @@ from pyduinocli.errors import ArduinoError
 class ArduinoOld(pyduinocli.commands.Command):
 
 
-    def core_download(self, downloads):
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.DOWNLOAD]
-        args.extend(Arduino.__strip_args(downloads))
-        return self.__exec(args)
 
-    def core_install(self, installs):
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.INSTALL]
-        args.extend(Arduino.__strip_args(installs))
-        return self.__exec(args)
-
-    def core_list(self, updatable=None):
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.LIST]
-        if updatable is True:
-            args.append(pyduinocli.constants.flags.UPDATABLE)
-        return self.__exec(args)
-
-    def core_search(self, keywords):
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.SEARCH]
-        args.extend(Arduino.__strip_args(keywords))
-        return self.__exec(args)
-
-    def core_uninstall(self, installs):
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.UNINSTALL]
-        args.extend(Arduino.__strip_args(installs))
-        return self.__exec(args)
-
-    def core_update_index(self):
-        return self.__exec([pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.UPDATE_INDEX])
-
-    def core_upgrade(self, upgrades=None):
-        if upgrades is None:
-            upgrades = []
-        args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.UPGRADE]
-        args.extend(Arduino.__strip_args(upgrades))
-        return self.__exec(args)
 
     def daemon(self):
         args = [pyduinocli.constants.commands.DAEMON]
