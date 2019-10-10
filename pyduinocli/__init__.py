@@ -1,24 +1,7 @@
-import pyduinocli.commands
-import pyduinocli.constants
-import pyduinocli.errors
+from pyduinocli.commands.arduino import ArduinoCliCommand as Arduino
+from pyduinocli.errors import ArduinoError
 
-
-class Arduino:
-
-    def __init__(self, cli_path, config_file=None, additional_urls=None, log_file=None, log_format=None, log_level=None):
-        if not cli_path:
-            raise pyduinocli.errors.ArduinoError(pyduinocli.constants.messages.ERROR_ARDUINO_INSTANCE, pyduinocli.constants.messages.ERROR_ARDUINO_PATH)
-        self.__command_base = [cli_path, pyduinocli.constants.flags.FORMAT, Arduino.__FORMAT_JSON]
-        if config_file is not None:
-            self.__command_base.extend([pyduinocli.constants.flags.CONFIG_FILE, Arduino.__strip_arg(config_file)])
-        if additional_urls is not None:
-            self.__command_base.extend([pyduinocli.constants.flags.ADDITIONAL_URLS, ",".join(Arduino.__strip_args(additional_urls))])
-        if log_file is not None:
-            self.__command_base.extend([pyduinocli.constants.flags.LOG_FILE, Arduino.__strip_arg(log_file)])
-        if log_format is not None:
-            self.__command_base.extend([pyduinocli.constants.flags.LOG_FORMAT, Arduino.__strip_arg(log_format)])
-        if log_level is not None:
-            self.__command_base.extend([pyduinocli.constants.flags.LOG_LEVEL, Arduino.__strip_arg(log_level)])
+class ArduinoOld(pyduinocli.commands.Command):
 
     def board_attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
         args = [pyduinocli.constants.commands.BOARD, pyduinocli.constants.commands.ATTACH]

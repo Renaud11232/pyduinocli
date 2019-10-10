@@ -1,0 +1,26 @@
+from pyduinocli.errors import ArduinoError
+from pyduinocli.commands.base import CommandBase
+from pyduinocli.constants import messages
+from pyduinocli.constants import flags
+
+
+class ArduinoCliCommand(CommandBase):
+
+    __FORMAT_JSON = 'json'
+
+    def __init__(self, cli_path, config_file=None, additional_urls=None, log_file=None, log_format=None,
+                 log_level=None):
+        if not cli_path:
+            raise ArduinoError(messages.ERROR_ARDUINO_INSTANCE, messages.ERROR_ARDUINO_PATH)
+        base_args = [cli_path, flags.FORMAT, ArduinoCliCommand.__FORMAT_JSON]
+        if config_file is not None:
+            base_args.extend([flags.CONFIG_FILE, CommandBase._strip_arg(config_file)])
+        if additional_urls is not None:
+            base_args.extend([flags.ADDITIONAL_URLS, ",".join(CommandBase._strip_args(additional_urls))])
+        if log_file is not None:
+            base_args.extend([flags.LOG_FILE, CommandBase._strip_arg(log_file)])
+        if log_format is not None:
+            base_args.extend([flags.LOG_FORMAT, CommandBase._strip_arg(log_format)])
+        if log_level is not None:
+            base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
+        CommandBase.__init__(self, base_args)
