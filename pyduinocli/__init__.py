@@ -3,45 +3,7 @@ from pyduinocli.errors import ArduinoError
 
 class ArduinoOld(pyduinocli.commands.Command):
 
-    def lib_download(self, downloads):
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.DOWNLOAD]
-        args.extend(Arduino.__strip_args(downloads))
-        return self.__exec(args)
 
-    def lib_install(self, installs):
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.INSTALL]
-        args.extend(Arduino.__strip_args(installs))
-        return self.__exec(args)
-
-    def lib_list(self, all=None, updatable=None):
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.LIST]
-        if all is True:
-            args.append(pyduinocli.constants.flags.ALL)
-        if updatable is True:
-            args.append(pyduinocli.constants.flags.UPDATABLE)
-        return self.__exec(args)
-
-    def lib_search(self, name, names=None):
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.SEARCH]
-        if names is True:
-            args.append(pyduinocli.constants.flags.NAMES)
-        args.extend(Arduino.__strip_args(name))
-        return self.__exec(args)
-
-    def lib_uninstall(self, uninstalls):
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.UNINSTALL]
-        args.extend(Arduino.__strip_args(uninstalls))
-        return self.__exec(args)
-
-    def lib_update_index(self):
-        return self.__exec([pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.UPDATE_INDEX])
-
-    def lib_upgrade(self, upgrades=None):
-        if upgrades is None:
-            upgrades = []
-        args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.UPGRADE]
-        args.extend(Arduino.__strip_args(upgrades))
-        return self.__exec(args)
 
     def sketch_new(self, name):
         return self.__exec([pyduinocli.constants.commands.SKETCH, pyduinocli.constants.commands.NEW, Arduino.__strip_arg(name)])
