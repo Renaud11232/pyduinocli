@@ -8,6 +8,7 @@ from pyduinocli.commands.daemon import DaemonCommand
 from pyduinocli.commands.lib import LibCommand
 from pyduinocli.commands.sketch import SketchCommand
 from pyduinocli.commands.upload import UploadCommand
+from pyduinocli.commands.version import VersionCommand
 from pyduinocli.constants import messages
 from pyduinocli.constants import flags
 
@@ -40,3 +41,4 @@ class ArduinoCliCommand(CommandBase):
         self.lib = LibCommand(self._base_args)
         self.sketch = SketchCommand(self._base_args)
         self.upload = UploadCommand(self._base_args)
+        self.version = VersionCommand(self._base_args)
