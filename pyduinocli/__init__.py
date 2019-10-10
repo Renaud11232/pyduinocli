@@ -3,13 +3,6 @@ from pyduinocli.errors import ArduinoError
 
 class ArduinoOld(pyduinocli.commands.Command):
 
-
-
-
-    def daemon(self):
-        args = [pyduinocli.constants.commands.DAEMON]
-        return self.__exec(args)
-
     def lib_download(self, downloads):
         args = [pyduinocli.constants.commands.LIB, pyduinocli.constants.commands.DOWNLOAD]
         args.extend(Arduino.__strip_args(downloads))

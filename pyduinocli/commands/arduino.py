@@ -4,6 +4,7 @@ from pyduinocli.commands.board import BoardCommand
 from pyduinocli.commands.compile import CompileCommand
 from pyduinocli.commands.config import ConfigCommand
 from pyduinocli.commands.core import CoreCommand
+from pyduinocli.commands.daemon import DaemonCommand
 from pyduinocli.constants import messages
 from pyduinocli.constants import flags
 
@@ -32,3 +33,4 @@ class ArduinoCliCommand(CommandBase):
         self.compile = CompileCommand(self._base_args)
         self.config = ConfigCommand(self._base_args)
         self.core = CoreCommand(self._base_args)
+        self.daemon = DaemonCommand(self._base_args)
