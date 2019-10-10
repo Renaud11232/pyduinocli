@@ -1,5 +1,6 @@
 from pyduinocli.errors import ArduinoError
 from pyduinocli.commands.base import CommandBase
+from pyduinocli.commands.board import BoardCommand
 from pyduinocli.constants import messages
 from pyduinocli.constants import flags
 
@@ -24,3 +25,4 @@ class ArduinoCliCommand(CommandBase):
         if log_level is not None:
             base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
         CommandBase.__init__(self, base_args)
+        self.board = BoardCommand(self._base_args)

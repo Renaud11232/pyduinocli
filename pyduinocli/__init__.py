@@ -3,37 +3,7 @@ from pyduinocli.errors import ArduinoError
 
 class ArduinoOld(pyduinocli.commands.Command):
 
-    def board_attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
-        args = [pyduinocli.constants.commands.BOARD, pyduinocli.constants.commands.ATTACH]
-        if port is not None and fqbn is not None:
-            raise pyduinocli.errors.ArduinoError(pyduinocli.constants.messages.ERROR_PORT_FQBN_SET)
-        if port is None and fqbn is None:
-            raise pyduinocli.errors.ArduinoError(pyduinocli.constants.messages.ERROR_PORT_FQBN_NOT_SET)
-        if port is not None:
-            args.append(Arduino.__strip_arg(port))
-        if fqbn is not None:
-            args.append(Arduino.__strip_arg(fqbn))
-        if sketch_path is not None:
-            args.append(Arduino.__strip_arg(sketch_path))
-        if timeout is not None:
-            args.extend([pyduinocli.constants.flags.TIMEOUT, Arduino.__strip_arg(timeout)])
-        return self.__exec(args)
 
-    def board_details(self, fqbn):
-        args = [pyduinocli.constants.commands.BOARD, pyduinocli.constants.commands.DETAILS, Arduino.__strip_arg(fqbn)]
-        return self.__exec(args)
-
-    def board_list(self, timeout=None):
-        args = [pyduinocli.constants.commands.BOARD, pyduinocli.constants.commands.LIST]
-        if timeout is not None:
-            args.extend([pyduinocli.constants.flags.TIMEOUT, Arduino.__strip_arg(timeout)])
-        return self.__exec(args)
-
-    def board_listall(self, boardname=None):
-        args = [pyduinocli.constants.commands.BOARD, pyduinocli.constants.commands.LISTALL]
-        if boardname is not None:
-            args.append(Arduino.__strip_arg(boardname))
-        return self.__exec(args)
 
     def compile(self,
                 sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
