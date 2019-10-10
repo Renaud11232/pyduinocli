@@ -8,7 +8,6 @@ class TestVersionCommand(TestBase):
         version = self._arduino.version()
         self.assertIsInstance(version, dict)
         self.assertIn("VersionString", version)
-        self.assertEqual(version["VersionString"], "0.5.0")
 
 
 if __name__ == '__main__':
