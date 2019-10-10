@@ -1,81 +1,8 @@
-from subprocess import Popen, PIPE
-import json
-import re
-
-
-class ArduinoError(Exception):
-
-    def __init__(self, message, cause=None, stderr=None):
-        self.message = message
-        self.cause = cause
-        self.stderr = stderr
-
-
 class Arduino:
-
-    __FORMAT_JSON = 'json'
-
-    __FLAG_ADDITIONAL_URLS = '--additional-urls'
-    __FLAG_CONFIG_FILE = '--config-file'
-    __FLAG_FORMAT = '--format'
-    __FLAG_LOG_FILE = '--log-file'
-    __FLAG_LOG_FORMAT = '--log-format'
-    __FLAG_LOG_LEVEL = '--log-level'
-    __FLAG_TIMEOUT = '--timeout'
-    __FLAG_BUILD_CACHE_PATH = '--build-cache-path'
-    __FLAG_BUILD_PATH = '--build-path'
-    __FLAG_BUILD_PROPERTIES = '--build-properties'
-    __FLAG_FQBN = '--fqbn'
-    __FLAG_OUTPUT = '--ouput'
-    __FLAG_UPLOAD = '--upload'
-    __FLAG_PREPROCESS = '--preprocess'
-    __FLAG_SHOW_PROPERTIES = '--show-properties'
-    __FLAG_VID_PID = '--vid-pid'
-    __FLAG_WARNINGS = '--warnings'
-    __FLAG_DEFAULT = '--default'
-    __FLAG_SAVE_AS = '--save-as'
-    __FLAG_VERIFY = '--verify'
-    __FLAG_INPUT = '--input'
-    __FLAG_PORT = '--port'
-    __FLAG_UPDATABLE = '--updatable'
-    __FLAG_NAMES = '--names'
-    __FLAG_ALL = '--all'
-
-    __COMMAND_BOARD = 'board'
-    __COMMAND_ATTACH = 'attach'
-    __COMMAND_DETAILS = 'details'
-    __COMMAND_LIST = 'list'
-    __COMMAND_LISTALL = 'listall'
-    __COMMAND_COMPILE = 'compile'
-    __COMMAND_CONFIG = 'config'
-    __COMMAND_DUMP = 'dump'
-    __COMMAND_INIT = 'init'
-    __COMMAND_CORE = 'core'
-    __COMMAND_DOWNLOAD = 'download'
-    __COMMAND_INSTALL = 'install'
-    __COMMAND_SEARCH = 'search'
-    __COMMAND_UNINSTALL = 'uninstall'
-    __COMMAND_UPDATE_INDEX = 'update-index'
-    __COMMAND_UPGRADE = 'upgrade'
-    __COMMAND_DAEMON = 'daemon'
-    __COMMAND_LIB = 'lib'
-    __COMMAND_SKETCH = 'sketch'
-    __COMMAND_NEW = 'new'
-    __COMMAND_UPLOAD = 'upload'
-    __COMMAND_VERSION = 'version'
-
-    __REGEX_JSON = r'(\{|\[)'
-
-    __ERROR_MESSAGE = "Message"
-    __ERROR_CAUSE = "Cause"
-    __ERROR_OSERROR = "'%s' does not exist or is not an executable"
-    __ERROR_ARDUINO_INSTANCE = "Could not create an Arduino instance"
-    __ERROR_ARDUINO_PATH = "Arduino path is missing"
-    __ERROR_PORT_FQBN_SET = 'port and fqbn cannot both be set'
-    __ERROR_PORT_FQBN_NOT_SET = 'port or fqbn must be set'
 
     def __init__(self, cli_path, config_file=None, additional_urls=None, log_file=None, log_format=None, log_level=None):
         if not cli_path:
+            from pyduinocli.errors import ArduinoError
             raise ArduinoError(Arduino.__ERROR_ARDUINO_INSTANCE, Arduino.__ERROR_ARDUINO_PATH)
         self.__command_base = [cli_path, Arduino.__FLAG_FORMAT, Arduino.__FORMAT_JSON]
         if config_file is not None:
@@ -88,47 +15,6 @@ class Arduino:
             self.__command_base.extend([Arduino.__FLAG_LOG_FORMAT, Arduino.__strip_arg(log_format)])
         if log_level is not None:
             self.__command_base.extend([Arduino.__FLAG_LOG_LEVEL, Arduino.__strip_arg(log_level)])
-
-    @staticmethod
-    def __strip_arg(arg):
-        return arg.lstrip("-")
-
-    @staticmethod
-    def __strip_args(args):
-        out = list()
-        for arg in args:
-            out.append(Arduino.__strip_arg(arg))
-        return out
-
-    @staticmethod
-    def __parse_output(data):
-        pattern = re.compile(Arduino.__REGEX_JSON)
-        for match in pattern.finditer(data):
-            candidate = data[match.start():]
-            try:
-                return json.loads(candidate)
-            except ValueError:
-                continue
-        return data
-
-    def __exec(self, args):
-        command = list(self.__command_base)
-        command.extend(args)
-        try:
-            p = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-            stdout, stderr = p.communicate()
-            decoded_out = self.__parse_output(stdout)
-            if p.returncode != 0:
-                if type(decoded_out) is dict:
-                    raise ArduinoError(decoded_out[Arduino.__ERROR_MESSAGE],
-                                       decoded_out[Arduino.__ERROR_CAUSE],
-                                       stderr)
-                raise ArduinoError(decoded_out,
-                                   None,
-                                   stderr)
-            return decoded_out
-        except OSError:
-            raise ArduinoError(Arduino.__ERROR_OSERROR % self.__command_base[0])
 
     def board_attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
         args = [Arduino.__COMMAND_BOARD, Arduino.__COMMAND_ATTACH]
