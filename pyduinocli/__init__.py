@@ -4,15 +4,6 @@ from pyduinocli.errors import ArduinoError
 class ArduinoOld(pyduinocli.commands.Command):
 
 
-    def config_dump(self):
-        return self.__exec([pyduinocli.constants.commands.CONFIG, pyduinocli.constants.commands.DUMP])
-
-    def config_init(self, save_as=None):
-        args = [pyduinocli.constants.commands.CONFIG, pyduinocli.constants.commands.INIT, pyduinocli.constants.flags.DEFAULT]
-        if save_as is not None:
-            args.extend([pyduinocli.constants.flags.SAVE_AS, Arduino.__strip_arg(save_as)])
-        return self.__exec(args)
-
     def core_download(self, downloads):
         args = [pyduinocli.constants.commands.CORE, pyduinocli.constants.commands.DOWNLOAD]
         args.extend(Arduino.__strip_args(downloads))
