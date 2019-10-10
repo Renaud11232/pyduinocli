@@ -4,38 +4,6 @@ from pyduinocli.errors import ArduinoError
 class ArduinoOld(pyduinocli.commands.Command):
 
 
-
-    def compile(self,
-                sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
-                port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None, warnings=None):
-        args = [pyduinocli.constants.commands.COMPILE]
-        if build_cache_path is not None:
-            args.extend([pyduinocli.constants.flags.BUILD_CACHE_PATH, Arduino.__strip_arg(build_cache_path)])
-        if build_path is not None:
-            args.extend([pyduinocli.constants.flags.BUILD_PATH, Arduino.__strip_arg(build_path)])
-        if build_properties is not None:
-            args.extend([pyduinocli.constants.flags.BUILD_PROPERTIES, Arduino.__strip_arg(build_properties)])
-        if fqbn is not None:
-            args.extend([pyduinocli.constants.flags.FQBN, Arduino.__strip_arg(fqbn)])
-        if output is not None:
-            args.extend([pyduinocli.constants.flags.OUTPUT, Arduino.__strip_arg(output)])
-        if port is not None:
-            args.extend([pyduinocli.constants.flags.PORT, Arduino.__strip_arg(port)])
-        if preprocess is True:
-            args.append(pyduinocli.constants.flags.PREPROCESS)
-        if show_properties is True:
-            args.append(pyduinocli.constants.flags.SHOW_PROPERTIES)
-        if upload is True:
-            args.append(pyduinocli.constants.flags.UPLOAD)
-        if verify is True:
-            args.append(pyduinocli.constants.flags.VERIFY)
-        if vid_pid is not None:
-            args.extend([pyduinocli.constants.flags.VID_PID, Arduino.__strip_arg(vid_pid)])
-        if warnings is not None:
-            args.extend([pyduinocli.constants.flags.WARNINGS, Arduino.__strip_arg(warnings)])
-        args.append(Arduino.__strip_arg(sketch))
-        return self.__exec(args)
-
     def config_dump(self):
         return self.__exec([pyduinocli.constants.commands.CONFIG, pyduinocli.constants.commands.DUMP])
 
