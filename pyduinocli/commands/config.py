@@ -14,6 +14,6 @@ class ConfigCommand(CommandBase):
 
     def init(self, save_as=None):
         args = [commands.INIT, flags.DEFAULT]
-        if save_as is not None:
+        if save_as:
             args.extend([flags.SAVE_AS, CommandBase._strip_arg(save_as)])
         return self._exec(args)

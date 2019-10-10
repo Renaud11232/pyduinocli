@@ -22,15 +22,15 @@ class ArduinoCliCommand(CommandBase):
         if not cli_path:
             raise ArduinoError(messages.ERROR_ARDUINO_INSTANCE, messages.ERROR_ARDUINO_PATH)
         base_args = [cli_path, flags.FORMAT, ArduinoCliCommand.__FORMAT_JSON]
-        if config_file is not None:
+        if config_file:
             base_args.extend([flags.CONFIG_FILE, CommandBase._strip_arg(config_file)])
-        if additional_urls is not None:
+        if additional_urls:
             base_args.extend([flags.ADDITIONAL_URLS, ",".join(CommandBase._strip_args(additional_urls))])
-        if log_file is not None:
+        if log_file:
             base_args.extend([flags.LOG_FILE, CommandBase._strip_arg(log_file)])
-        if log_format is not None:
+        if log_format:
             base_args.extend([flags.LOG_FORMAT, CommandBase._strip_arg(log_format)])
-        if log_level is not None:
+        if log_level:
             base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
         CommandBase.__init__(self, base_args)
         self.board = BoardCommand(self._base_args)

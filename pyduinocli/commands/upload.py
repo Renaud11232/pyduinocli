@@ -11,14 +11,14 @@ class UploadCommand(CommandBase):
 
     def __call__(self, sketch=None, fqbn=None, input=None, port=None, verify=None):
         args = []
-        if fqbn is not None:
+        if fqbn:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
-        if input is not None:
+        if input:
             args.extend([flags.INPUT, CommandBase._strip_arg(input)])
-        if port is not None:
+        if port:
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
         if verify is True:
             args.append(flags.VERIFY)
-        if sketch is not None:
+        if sketch:
             args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)

@@ -39,7 +39,7 @@ class CoreCommand(CommandBase):
         return self._exec([commands.UPDATE_INDEX])
 
     def upgrade(self, upgrades=None):
-        if upgrades is None:
+        if not upgrades:
             upgrades = []
         args = [commands.UPGRADE]
         args.extend(CommandBase._strip_args(upgrades))

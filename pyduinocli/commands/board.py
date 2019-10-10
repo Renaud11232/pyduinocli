@@ -13,17 +13,17 @@ class BoardCommand(CommandBase):
 
     def attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
         args = [commands.ATTACH]
-        if port is not None and fqbn is not None:
+        if port and fqbn:
             raise ArduinoError(messages.ERROR_PORT_FQBN_SET)
-        if port is None and fqbn is None:
+        if not port and not fqbn:
             raise ArduinoError(messages.ERROR_PORT_FQBN_NOT_SET)
-        if port is not None:
+        if port:
             args.append(CommandBase._strip_arg(port))
-        if fqbn is not None:
+        if fqbn:
             args.append(CommandBase._strip_arg(fqbn))
-        if sketch_path is not None:
+        if sketch_path:
             args.append(CommandBase._strip_arg(sketch_path))
-        if timeout is not None:
+        if timeout:
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
@@ -33,12 +33,12 @@ class BoardCommand(CommandBase):
 
     def list(self, timeout=None):
         args = [commands.LIST]
-        if timeout is not None:
+        if timeout:
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
     def listall(self, boardname=None):
         args = [commands.LISTALL]
-        if boardname is not None:
+        if boardname:
             args.append(CommandBase._strip_arg(boardname))
         return self._exec(args)
