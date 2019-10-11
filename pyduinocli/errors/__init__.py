@@ -1,1 +1,1 @@
-from arduinoerror import ArduinoError
+from .arduinoerror import ArduinoError
