@@ -16,11 +16,6 @@ To install the library simply do
 ```bash
 pip install pyduinocli
 ```
-#### Not recommended
-To get the latest prerelease you must use the testing python index.
-```bash
-pip install -i https://test.pypi.org/simple/ pyduinocli
-```
 
 ### How to use
 
