@@ -9,7 +9,6 @@ from pyduinocli.commands.lib import LibCommand
 from pyduinocli.commands.sketch import SketchCommand
 from pyduinocli.commands.upload import UploadCommand
 from pyduinocli.commands.version import VersionCommand
-from pyduinocli.constants import messages
 from pyduinocli.constants import flags
 
 
@@ -17,10 +16,8 @@ class ArduinoCliCommand(CommandBase):
 
     __FORMAT_JSON = 'json'
 
-    def __init__(self, cli_path, config_file=None, additional_urls=None, log_file=None, log_format=None,
+    def __init__(self, cli_path="arduino-cli", config_file=None, additional_urls=None, log_file=None, log_format=None,
                  log_level=None):
-        if not cli_path:
-            raise ArduinoError(messages.ERROR_ARDUINO_INSTANCE, messages.ERROR_ARDUINO_PATH)
         base_args = [cli_path, flags.FORMAT, ArduinoCliCommand.__FORMAT_JSON]
         if config_file:
             base_args.extend([flags.CONFIG_FILE, CommandBase._strip_arg(config_file)])

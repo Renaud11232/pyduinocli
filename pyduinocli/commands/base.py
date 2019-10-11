@@ -42,6 +42,8 @@ class CommandBase:
         try:
             p = Popen(command, stdout=PIPE, stderr=PIPE, universal_newlines=True)
             stdout, stderr = p.communicate()
+            stdout = stdout.strip()
+            stderr = stderr.strip()
             decoded_out = self.__parse_output(stdout)
             if p.returncode != 0:
                 if type(decoded_out) is dict:
