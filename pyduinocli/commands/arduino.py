@@ -1,4 +1,3 @@
-from pyduinocli.errors import ArduinoError
 from pyduinocli.commands.base import CommandBase
 from pyduinocli.commands.board import BoardCommand
 from pyduinocli.commands.compile import CompileCommand
