@@ -1,7 +1,6 @@
-import unittest
 import os
 import shutil
-from . import TestBase
+from . import *
 
 
 class TestSketchCommand(TestBase):
