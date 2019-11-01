@@ -10,7 +10,7 @@ class TestConfigCommand(TestBase):
         self.assertIn("sketchbook_path", dump)
 
     def test_init(self):
-        config_path = self._arduino.config.init("test_config.yml").split(": ")[1]
+        config_path = eval(self._arduino.config.init("test_config.yml")).split(": ")[1]
         self.assertTrue(os.path.isfile(config_path))
         os.remove(config_path)
 

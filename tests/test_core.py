@@ -35,6 +35,11 @@ class TestCoreCommand(TestBase):
         self.assertIsInstance(results, list)
         self.assertTrue(any(core["ID"] == "arduino:avr" for core in results))
 
+    def test_search_no_param(self):
+        results = self._arduino.core.search()
+        self.assertIsInstance(results, list)
+        self.assertTrue(any(core["ID"] == "arduino:avr" for core in results))
+
     def test_uninstall(self):
         self._arduino.core.install(["arduino:avr"])
         self._arduino.core.uninstall(["arduino:avr"])

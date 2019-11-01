@@ -14,7 +14,7 @@ class TestLibCommand(TestBase):
 
     def test_install(self):
         installed = self._arduino.lib.list()
-        self.assertFalse(any(lib["library"]["name"] == "FastLED" for lib in installed))
+        self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
         installed = self._arduino.lib.list()
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))
@@ -22,7 +22,7 @@ class TestLibCommand(TestBase):
 
     def test_list(self):
         installed = self._arduino.lib.list()
-        self.assertFalse(any(lib["library"]["name"] == "FastLED" for lib in installed))
+        self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
         installed = self._arduino.lib.list()
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))
@@ -35,11 +35,18 @@ class TestLibCommand(TestBase):
         self.assertIsInstance(libraries, list)
         self.assertTrue(any(lib["name"] == "FastLED" for lib in libraries))
 
+    def test_search_no_param(self):
+        results = self._arduino.lib.search()
+        self.assertIsInstance(results, dict)
+        libraries = results["libraries"]
+        self.assertIsInstance(libraries, list)
+        self.assertTrue(any(lib["name"] == "FastLED" for lib in libraries))
+
     def test_uninstall(self):
         self._arduino.lib.install(["FastLED"])
         self._arduino.lib.uninstall(["FastLED"])
         installed = self._arduino.lib.list()
-        self.assertFalse(any(lib["library"]["name"] == "FastLED" for lib in installed))
+        self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
 
     def test_update_index(self):
         self._arduino.lib.update_index()

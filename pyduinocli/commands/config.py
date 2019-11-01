@@ -13,7 +13,7 @@ class ConfigCommand(CommandBase):
         return self._exec([commands.DUMP])
 
     def init(self, save_as=None):
-        args = [commands.INIT, flags.DEFAULT]
+        args = [commands.INIT]
         if save_as:
             args.extend([flags.SAVE_AS, CommandBase._strip_arg(save_as)])
         return self._exec(args)

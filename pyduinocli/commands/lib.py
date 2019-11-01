@@ -27,11 +27,14 @@ class LibCommand(CommandBase):
             args.append(flags.UPDATABLE)
         return self._exec(args)
 
-    def search(self, name, names=None):
+    def search(self, keywords=None, names=None):
         args = [commands.SEARCH]
         if names is True:
             args.append(flags.NAMES)
-        args.extend(CommandBase._strip_args(name))
+        if keywords is None:
+            keywords = []
+        if keywords:
+            args.extend(CommandBase._strip_args(keywords))
         return self._exec(args)
 
     def uninstall(self, uninstalls):

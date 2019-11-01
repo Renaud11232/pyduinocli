@@ -25,9 +25,12 @@ class CoreCommand(CommandBase):
             args.append(flags.UPDATABLE)
         return self._exec(args)
 
-    def search(self, keywords):
+    def search(self, keywords=None):
         args = [commands.SEARCH]
-        args.extend(CommandBase._strip_args(keywords))
+        if keywords is None:
+            keywords = []
+        if keywords:
+            args.extend(CommandBase._strip_args(keywords))
         return self._exec(args)
 
     def uninstall(self, installs):
