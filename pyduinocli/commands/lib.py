@@ -9,6 +9,9 @@ class LibCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.LIB)
 
+    def deps(self, library):
+        return self._exec([commands.DEPS, CommandBase._strip_arg(library)])
+
     def download(self, downloads):
         args = [commands.DOWNLOAD]
         args.extend(CommandBase._strip_args(downloads))

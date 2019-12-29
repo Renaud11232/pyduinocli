@@ -8,6 +8,10 @@ class TestLibCommand(TestBase):
     def setUpClass(cls):
         cls._arduino.lib.update_index()
 
+    def test_deps(self):
+        # TODO
+        pass
+
     def test_download(self):
         self._arduino.lib.download(["FastLED"])
         warnings.warn("There is no return value to check, just checking it doesn't crash")
