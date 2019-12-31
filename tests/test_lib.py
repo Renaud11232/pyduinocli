@@ -9,8 +9,8 @@ class TestLibCommand(TestBase):
         cls._arduino.lib.update_index()
 
     def test_deps(self):
-        # TODO
-        pass
+        dependecies = self._arduino.lib.deps("FastLED")
+        self.assertTrue(any(dep["name"] == "FastLED" for dep in dependecies["dependencies"]))
 
     def test_download(self):
         self._arduino.lib.download(["FastLED"])
@@ -18,7 +18,7 @@ class TestLibCommand(TestBase):
 
     def test_install(self):
         installed = self._arduino.lib.list()
-        self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
+        self.assertTrue(not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
         installed = self._arduino.lib.list()
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))
@@ -26,7 +26,7 @@ class TestLibCommand(TestBase):
 
     def test_list(self):
         installed = self._arduino.lib.list()
-        self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
+        self.assertTrue(not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
         installed = self._arduino.lib.list()
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))

@@ -2,9 +2,9 @@ dist: xenial
 language: python
 
 install:
-  - wget https://github.com/arduino/arduino-cli/releases/download/0.6.0/arduino-cli_0.6.0_Linux_64bit.tar.gz
-  - tar xzf arduino-cli_0.6.0_Linux_64bit.tar.gz
-  - rm arduino-cli_0.6.0_Linux_64bit.tar.gz
+  - wget https://github.com/arduino/arduino-cli/releases/download/0.7.7/arduino-cli_0.7.1_Linux_64bit.tar.gz
+  - tar xzf arduino-cli_0.7.1_Linux_64bit.tar.gz
+  - rm arduino-cli_0.7.1_Linux_64bit.tar.gz
 
 script: python setup.py test
 

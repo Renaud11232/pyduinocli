@@ -7,7 +7,7 @@ class TestConfigCommand(TestBase):
     def test_dump(self):
         dump = self._arduino.config.dump()
         self.assertIsInstance(dump, dict)
-        self.assertIn("sketchbook_path", dump)
+        self.assertIn("directories", dump)
 
     def test_init(self):
         config_path = eval(self._arduino.config.init("test_config.yml")).split(": ")[1]
