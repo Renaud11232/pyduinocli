@@ -2,7 +2,7 @@ from . import *
 import warnings
 
 
-class TestConfigCommand(TestBase):
+class TestCacheCommand(TestBase):
 
     def test_clean(self):
         self._arduino.cache.clean()
