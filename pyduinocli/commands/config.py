@@ -12,8 +12,8 @@ class ConfigCommand(CommandBase):
     def dump(self):
         return self._exec([commands.DUMP])
 
-    def init(self, save_as=None):
+    def init(self, dest_dir=None):
         args = [commands.INIT]
-        if save_as:
-            args.extend([flags.SAVE_AS, CommandBase._strip_arg(save_as)])
+        if dest_dir:
+            args.extend([flags.DEST_DIR, CommandBase._strip_arg(dest_dir)])
         return self._exec(args)

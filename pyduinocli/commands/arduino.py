@@ -1,5 +1,6 @@
 from pyduinocli.commands.base import CommandBase
 from pyduinocli.commands.board import BoardCommand
+from pyduinocli.commands.cache import CacheCommand
 from pyduinocli.commands.compile import CompileCommand
 from pyduinocli.commands.config import ConfigCommand
 from pyduinocli.commands.core import CoreCommand
@@ -30,6 +31,7 @@ class ArduinoCliCommand(CommandBase):
             base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
         CommandBase.__init__(self, base_args)
         self.board = BoardCommand(self._base_args)
+        self.cache = CacheCommand(self._base_args)
         self.compile = CompileCommand(self._base_args)
         self.config = ConfigCommand(self._base_args)
         self.core = CoreCommand(self._base_args)

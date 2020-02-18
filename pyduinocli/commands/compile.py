@@ -12,7 +12,7 @@ class CompileCommand(CommandBase):
     def __call__(self,
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
-                 warnings=None):
+                 warnings=None, libraries=None):
         args = []
         if build_cache_path:
             args.extend([flags.BUILD_CACHE_PATH, CommandBase._strip_arg(build_cache_path)])
@@ -38,5 +38,8 @@ class CompileCommand(CommandBase):
             args.extend([flags.VID_PID, CommandBase._strip_arg(vid_pid)])
         if warnings:
             args.extend([flags.WARNINGS, CommandBase._strip_arg(warnings)])
+        if libraries:
+            for library in libraries:
+                args.extend([flags.LIBRARIES, CommandBase._strip_arg(library)])
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)
