@@ -5,6 +5,7 @@ from pyduinocli.commands.compile import CompileCommand
 from pyduinocli.commands.config import ConfigCommand
 from pyduinocli.commands.core import CoreCommand
 from pyduinocli.commands.daemon import DaemonCommand
+from pyduinocli.commands.debug import DebugCommand
 from pyduinocli.commands.lib import LibCommand
 from pyduinocli.commands.sketch import SketchCommand
 from pyduinocli.commands.upload import UploadCommand
@@ -36,6 +37,7 @@ class ArduinoCliCommand(CommandBase):
         self.config = ConfigCommand(self._base_args)
         self.core = CoreCommand(self._base_args)
         self.daemon = DaemonCommand(self._base_args)
+        self.debug = DebugCommand(self._base_args)
         self.lib = LibCommand(self._base_args)
         self.sketch = SketchCommand(self._base_args)
         self.upload = UploadCommand(self._base_args)
