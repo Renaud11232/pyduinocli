@@ -9,7 +9,7 @@ class DebugCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DEBUG)
 
-    def __call__(self, fqbn=None, input=None, port=None, sketch=None):
+    def __call__(self, fqbn=None, input=None, port=None, interpreter=None, sketch=None):
         args = []
         if fqbn:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
@@ -17,6 +17,8 @@ class DebugCommand(CommandBase):
             args.extend([flags.INPUT, CommandBase._strip_arg(input)])
         if port:
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
+        if interpreter:
+            args.extend([flags.INTERPRETER, CommandBase._strip_arg(interpreter)])
         if sketch:
             args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)
