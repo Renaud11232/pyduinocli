@@ -1,4 +1,4 @@
-# pyduinocli [![Build Status](https://travis-ci.org/Renaud11232/pyduinocli.svg?branch=master)](https://travis-ci.org/Renaud11232/pyduinocli)
+# pyduinocli [![Build Status](https://travis-ci.org/Renaud11232/pyduinocli.svg?branch=master)](https://travis-ci.org/Renaud11232/pyduinocli) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UD54SHVYDV6NU&source=url)
 
 pyduinocli is a wrapper library around arduino-cli to make the arduino-cli calls easy from a python script.
 
