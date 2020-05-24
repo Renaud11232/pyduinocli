@@ -1,0 +1,6 @@
+pyduinocli.errors.arduinoerror
+------------------------------
+
+.. automodule:: pyduinocli.errors.arduinoerror
+   :members:
+   :special-members:
