@@ -31,14 +31,58 @@ class ArduinoCliCommand(CommandBase):
         if log_level:
             base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
         CommandBase.__init__(self, base_args)
-        self.board = BoardCommand(self._base_args)
-        self.cache = CacheCommand(self._base_args)
-        self.compile = CompileCommand(self._base_args)
-        self.config = ConfigCommand(self._base_args)
-        self.core = CoreCommand(self._base_args)
-        self.daemon = DaemonCommand(self._base_args)
-        self.debug = DebugCommand(self._base_args)
-        self.lib = LibCommand(self._base_args)
-        self.sketch = SketchCommand(self._base_args)
-        self.upload = UploadCommand(self._base_args)
-        self.version = VersionCommand(self._base_args)
+        self.__board = BoardCommand(self._base_args)
+        self.__cache = CacheCommand(self._base_args)
+        self.__compile = CompileCommand(self._base_args)
+        self.__config = ConfigCommand(self._base_args)
+        self.__core = CoreCommand(self._base_args)
+        self.__daemon = DaemonCommand(self._base_args)
+        self.__debug = DebugCommand(self._base_args)
+        self.__lib = LibCommand(self._base_args)
+        self.__sketch = SketchCommand(self._base_args)
+        self.__upload = UploadCommand(self._base_args)
+        self.__version = VersionCommand(self._base_args)
+
+    @property
+    def board(self):
+        return self.__board
+
+    @property
+    def cache(self):
+        return self.__cache
+
+    @property
+    def compile(self):
+        return self.__compile
+
+    @property
+    def config(self):
+        return self.__config
+
+    @property
+    def core(self):
+        return self.__core
+
+    @property
+    def daemon(self):
+        return self.__daemon
+
+    @property
+    def debug(self):
+        return self.__debug
+
+    @property
+    def lib(self):
+        return self.__lib
+
+    @property
+    def sketch(self):
+        return self.__sketch
+
+    @property
+    def upload(self):
+        return self.__upload
+
+    @property
+    def version(self):
+        return self.__version
