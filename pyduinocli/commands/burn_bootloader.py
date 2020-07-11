@@ -3,24 +3,23 @@ from pyduinocli.constants import commands
 from pyduinocli.constants import flags
 
 
-class UploadCommand(CommandBase):
+class BurnBootloaderCommand(CommandBase):
+    """
+    This class wraps the call to the :code:`board` command of :code:`arduino-cli`
+    """
 
     def __init__(self, base_args):
         CommandBase.__init__(self, base_args)
-        self._base_args.append(commands.UPLOAD)
+        self._base_args.append(commands.BURN_BOOTLOADER)
 
-    def __call__(self, sketch=None, fqbn=None, input_dir=None, port=None, verify=None, programmer=None):
+    def __call__(self, fqbn=None, port=None, programmer=None, verify=None):
         args = []
         if fqbn:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
-        if input_dir:
-            args.extend([flags.INPUT_DIR, CommandBase._strip_arg(input_dir)])
         if port:
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
-        if verify is True:
-            args.append(flags.VERIFY)
-        if sketch:
-            args.append(CommandBase._strip_arg(sketch))
         if programmer:
             args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
+        if verify is True:
+            args.append(flags.VERIFY)
         return self._exec(args)

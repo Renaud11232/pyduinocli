@@ -10,6 +10,8 @@ from pyduinocli.commands.lib import LibCommand
 from pyduinocli.commands.sketch import SketchCommand
 from pyduinocli.commands.upload import UploadCommand
 from pyduinocli.commands.version import VersionCommand
+from pyduinocli.commands.burn_bootloader import BurnBootloaderCommand
+from pyduinocli.commands.completion import CompletionCommand
 from pyduinocli.constants import flags
 
 
@@ -61,6 +63,8 @@ class ArduinoCliCommand(CommandBase):
         self.__sketch = SketchCommand(self._base_args)
         self.__upload = UploadCommand(self._base_args)
         self.__version = VersionCommand(self._base_args)
+        self.__burn_bootloader = BurnBootloaderCommand(self._base_args)
+        self.__completion = CompletionCommand(self._base_args)
 
     @property
     def board(self):
@@ -160,3 +164,21 @@ class ArduinoCliCommand(CommandBase):
         :type: :class:`pyduinocli.commands.version.VersionCommand`
         """
         return self.__version
+
+    @property
+    def burn_bootloader(self):
+        """
+        The burn-bootloader command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.burn_bootloader.BurnBootloaderCommand`
+        """
+        return self.__burn_bootloader
+
+    @property
+    def completion(self):
+        """
+        The completion command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.completion.CompletionCommand`
+        """
+        return self.__completion
