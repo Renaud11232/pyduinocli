@@ -14,11 +14,30 @@ from pyduinocli.constants import flags
 
 
 class ArduinoCliCommand(CommandBase):
+    """
+    This is the main class of pyduinocli. This class wraps all calls to :code:`arduino-cli`.
+
+    This is the only class that a user should create instances of.
+    """
 
     __FORMAT_JSON = 'json'
 
     def __init__(self, cli_path="arduino-cli", config_file=None, additional_urls=None, log_file=None, log_format=None,
                  log_level=None):
+        """
+        :param cli_path: The :code:`arduino-cli` command name if available in :code:`$PATH`. Can also be a direct path the the executable
+        :type cli_path: str
+        :param config_file: The path to the :code:`arduino-cli` configuration file to be used
+        :type config_file: str or NoneType
+        :param additional_urls: A list of URLs to custom board definitions files
+        :type additional_urls: list or NoneType
+        :param log_file: A path to a file where logs will be stored
+        :type log_file: str or NoneType
+        :param log_format: The format the logs will use
+        :type log_format: str or NoneType
+        :param log_level: The log level for the log file
+        :type log_level: str or NoneType
+        """
         base_args = [cli_path, flags.FORMAT, ArduinoCliCommand.__FORMAT_JSON]
         if config_file:
             base_args.extend([flags.CONFIG_FILE, CommandBase._strip_arg(config_file)])
@@ -45,44 +64,99 @@ class ArduinoCliCommand(CommandBase):
 
     @property
     def board(self):
+        """
+        The board command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.board.BoardCommand`
+        """
         return self.__board
 
     @property
     def cache(self):
+        """
+        The cache command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.cache.CacheCommand`
+        """
         return self.__cache
 
     @property
     def compile(self):
+        """
+        The compile command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.compile.CompileCommand`
+        """
         return self.__compile
 
     @property
     def config(self):
+        """
+        The config command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.config.ConfigCommand`
+        """
         return self.__config
 
     @property
     def core(self):
+        """
+        The core command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.core.CoreCommand`
+        """
         return self.__core
 
     @property
     def daemon(self):
+        """
+        The daemon command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.daemon.DaemonCommand`
+        """
         return self.__daemon
 
     @property
     def debug(self):
+        """
+        The debug command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.debug.DebugCommand`
+        """
         return self.__debug
 
     @property
     def lib(self):
+        """
+        The lib command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.lib.LibCommand`
+        """
         return self.__lib
 
     @property
     def sketch(self):
+        """
+        The sketch command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.sketch.SketchCommand`
+        """
         return self.__sketch
 
     @property
     def upload(self):
+        """
+        The upload command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.upload.UploadCommand`
+        """
         return self.__upload
 
     @property
     def version(self):
+        """
+        The version command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.version.VersionCommand`
+        """
         return self.__version

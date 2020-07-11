@@ -7,5 +7,4 @@ Modules
 
    pyduinocli.rst
    commands.rst
-   constants.rst
    errors.rst

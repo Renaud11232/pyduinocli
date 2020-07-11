@@ -2,16 +2,28 @@ from pyduinocli.commands.base import CommandBase
 from pyduinocli.constants import commands
 from pyduinocli.constants import messages
 from pyduinocli.constants import flags
-from pyduinocli.errors import ArduinoError
+from pyduinocli.errors.arduinoerror import ArduinoError
 
 
 class BoardCommand(CommandBase):
+    """
+    This class wraps the call to the :code:`board` command of :code:`arduino-cli`
+    """
 
     def __init__(self, base_args):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.BOARD)
 
     def attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
+        """
+        Calls the :code:`board attach` command.
+
+        :param port:
+        :param fqbn:
+        :param sketch_path:
+        :param timeout:
+        :return:
+        """
         args = [commands.ATTACH]
         if port and fqbn:
             raise ArduinoError(messages.ERROR_PORT_FQBN_SET)
@@ -27,8 +39,10 @@ class BoardCommand(CommandBase):
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
-    def details(self, fqbn):
+    def details(self, fqbn, full=None):
         args = [commands.DETAILS, CommandBase._strip_arg(fqbn)]
+        if full is True:
+            args.append(flags.FULL)
         return self._exec(args)
 
     def list(self, timeout=None):

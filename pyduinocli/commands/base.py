@@ -1,7 +1,7 @@
 import re
 import json
 from subprocess import Popen, PIPE
-from pyduinocli.errors import ArduinoError
+from pyduinocli.errors.arduinoerror import ArduinoError
 from pyduinocli.constants import messages
 
 
