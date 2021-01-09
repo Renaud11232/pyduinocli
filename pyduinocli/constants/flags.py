@@ -36,6 +36,6 @@ LIST_PROGRAMMERS = '--list-programmers'
 RUN_POST_INSTALL = '--run-post-install'
 SKIP_POST_INSTALL = '--skip-post-install'
 INCLUDE_BUILD_DIR = '--include-build-dir'
-SHOW_UPDATED = '--show-updated'
+SHOW_OUTDATED = '--show-outdated'
 INPUT_FILE = '--input-file'
 

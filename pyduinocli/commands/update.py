@@ -21,5 +21,5 @@ class UpdateCommand(CommandBase):
         """
         args = []
         if show_outdated is True:
-            args.append(flags.SHOW_UPDATED)
+            args.append(flags.SHOW_OUTDATED)
         return self._exec(args)

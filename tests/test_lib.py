@@ -1,5 +1,6 @@
 from . import *
 import warnings
+import os
 
 
 class TestLibCommand(TestBase):
@@ -59,6 +60,17 @@ class TestLibCommand(TestBase):
     def test_upgrade(self):
         self._arduino.lib.upgrade()
         warnings.warn("There is no return value to check, just checking it doesn't crash")
+
+    def test_examples(self):
+        self._arduino.lib.install(["FastLED"])
+        examples = self._arduino.lib.examples("FastLED")
+        print(examples)
+        self.assertIsInstance(examples, list)
+        for lib in examples:
+            example_list = lib["examples"]
+            for example in example_list:
+                self.assertTrue(os.path.join("FastLED", "examples") in example)
+        self._arduino.lib.uninstall(["FastLED"])
 
 
 if __name__ == '__main__':
