@@ -9,12 +9,14 @@ class UploadCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.UPLOAD)
 
-    def __call__(self, sketch=None, fqbn=None, input_dir=None, port=None, verify=None, programmer=None):
+    def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None):
         args = []
         if fqbn:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
         if input_dir:
             args.extend([flags.INPUT_DIR, CommandBase._strip_arg(input_dir)])
+        if input_file:
+            args.extend([flags.INPUT_FILE, CommandBase._strip_arg(input_file)])
         if port:
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
         if verify is True:

@@ -12,6 +12,9 @@ from pyduinocli.commands.upload import UploadCommand
 from pyduinocli.commands.version import VersionCommand
 from pyduinocli.commands.burn_bootloader import BurnBootloaderCommand
 from pyduinocli.commands.completion import CompletionCommand
+from pyduinocli.commands.outdated import OutdatedCommand
+from pyduinocli.commands.update import UpdateCommand
+from pyduinocli.commands.upgrade import UpgradeCommand
 from pyduinocli.constants import flags
 
 
@@ -65,6 +68,9 @@ class ArduinoCliCommand(CommandBase):
         self.__version = VersionCommand(self._base_args)
         self.__burn_bootloader = BurnBootloaderCommand(self._base_args)
         self.__completion = CompletionCommand(self._base_args)
+        self.__outdated = OutdatedCommand(self._base_args)
+        self.__update = UpdateCommand(self._base_args)
+        self.__upgrade = UpgradeCommand(self._base_args)
 
     @property
     def board(self):
@@ -182,3 +188,30 @@ class ArduinoCliCommand(CommandBase):
         :type: :class:`pyduinocli.commands.completion.CompletionCommand`
         """
         return self.__completion
+
+    @property
+    def outdated(self):
+        """
+        The outdated command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.outdated.OutdatedCommand`
+        """
+        return self.__outdated
+
+    @property
+    def update(self):
+        """
+        The update command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.update.UpdateCommand`
+        """
+        return self.__update
+
+    @property
+    def upgrade(self):
+        """
+        The upgrade command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.upgrade.UpgradeCommand`
+        """
+        return self.__upgrade

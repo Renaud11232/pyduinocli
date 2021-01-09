@@ -39,10 +39,12 @@ class BoardCommand(CommandBase):
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
-    def details(self, fqbn, full=None):
-        args = [commands.DETAILS, CommandBase._strip_arg(fqbn)]
+    def details(self, fqbn, full=None, list_programmers=None):
+        args = [commands.DETAILS, flags.FQBN, CommandBase._strip_arg(fqbn)]
         if full is True:
             args.append(flags.FULL)
+        if list_programmers is True:
+            args.append(flags.LIST_PROGRAMMERS)
         return self._exec(args)
 
     def list(self, timeout=None):

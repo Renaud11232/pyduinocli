@@ -22,12 +22,14 @@ class LibCommand(CommandBase):
         args.extend(CommandBase._strip_args(installs))
         return self._exec(args)
 
-    def list(self, all=None, updatable=None):
+    def list(self, all=None, updatable=None, fqbn=None):
         args = [commands.LIST]
         if all is True:
             args.append(flags.ALL)
         if updatable is True:
             args.append(flags.UPDATABLE)
+        if fqbn is not None:
+            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
         return self._exec(args)
 
     def search(self, keywords=None, names=None):
@@ -54,3 +56,10 @@ class LibCommand(CommandBase):
         args = [commands.UPGRADE]
         args.extend(CommandBase._strip_args(upgrades))
         return self._exec(args)
+
+    def examples(self, library, fqbn=None):
+        args = [commands.EXAMPLES, CommandBase._strip_arg(library)]
+        if fqbn is not None:
+            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
+        return self._exec(args)
+

@@ -14,9 +14,13 @@ class CoreCommand(CommandBase):
         args.extend(CommandBase._strip_args(downloads))
         return self._exec(args)
 
-    def install(self, installs):
+    def install(self, installs, run_post_install=None, skip_post_install=None):
         args = [commands.INSTALL]
         args.extend(CommandBase._strip_args(installs))
+        if run_post_install is True:
+            args.append(flags.RUN_POST_INSTALL)
+        if skip_post_install is True:
+            args.append(flags.SKIP_POST_INSTALL)
         return self._exec(args)
 
     def list(self, updatable=None):
@@ -43,9 +47,13 @@ class CoreCommand(CommandBase):
     def update_index(self):
         return self._exec([commands.UPDATE_INDEX])
 
-    def upgrade(self, upgrades=None):
+    def upgrade(self, upgrades=None, run_post_install=None, skip_post_install=None):
         if not upgrades:
             upgrades = []
         args = [commands.UPGRADE]
         args.extend(CommandBase._strip_args(upgrades))
+        if run_post_install is True:
+            args.append(flags.RUN_POST_INSTALL)
+        if skip_post_install is True:
+            args.append(flags.SKIP_POST_INSTALL)
         return self._exec(args)
