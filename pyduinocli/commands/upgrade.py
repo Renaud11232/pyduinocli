@@ -1,5 +1,6 @@
 from pyduinocli.commands.base import CommandBase
 from pyduinocli.constants import commands
+from pyduinocli.constants import flags
 
 
 class UpgradeCommand(CommandBase):
@@ -11,11 +12,16 @@ class UpgradeCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.UPGRADE)
 
-    def __call__(self):
+    def __call__(self, run_post_install=None, skip_post_install=None):
         """
         Calls the :code:`upgrade` command
 
         :return: Nothing (an empty string)
         :rtype: str or dict
         """
-        return self._exec([])
+        args = []
+        if run_post_install is True:
+            args.append(flags.RUN_POST_INSTALL)
+        if skip_post_install is True:
+            args.append(flags.SKIP_POST_INSTALL)
+        return self._exec(args)

@@ -39,12 +39,14 @@ class BoardCommand(CommandBase):
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
-    def details(self, fqbn, full=None, list_programmers=None):
+    def details(self, fqbn, full=None, list_programmers=None, watch=None):
         args = [commands.DETAILS, flags.FQBN, CommandBase._strip_arg(fqbn)]
         if full is True:
             args.append(flags.FULL)
         if list_programmers is True:
             args.append(flags.LIST_PROGRAMMERS)
+        if watch is True:
+            args.append(flags.WATCH)
         return self._exec(args)
 
     def list(self, timeout=None):
@@ -53,8 +55,10 @@ class BoardCommand(CommandBase):
             args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
         return self._exec(args)
 
-    def listall(self, boardname=None):
+    def listall(self, boardname=None, show_hidden=None):
         args = [commands.LISTALL]
         if boardname:
             args.append(CommandBase._strip_arg(boardname))
+        if show_hidden is True:
+            args.append(flags.SHOW_HIDDEN)
         return self._exec(args)

@@ -8,6 +8,11 @@ pyduinocli.commands.board
 
 .. automodule:: pyduinocli.commands.board
 
+pyduinocli.commands.burn_bootloader
+-----------------------------------
+
+.. automodule:: pyduinocli.commands.burn_bootloader
+
 pyduinocli.commands.cache
 -------------------------
 
@@ -43,10 +48,25 @@ pyduinocli.commands.lib
 
 .. automodule:: pyduinocli.commands.lib
 
+pyduinocli.commands.outdated
+----------------------------
+
+.. automodule:: pyduinocli.commands.outdated
+
 pyduinocli.commands.sketch
 --------------------------
 
 .. automodule:: pyduinocli.commands.sketch
+
+pyduinocli.commands.update
+--------------------------
+
+.. automodule:: pyduinocli.commands.update
+
+pyduinocli.commands.upgrade
+---------------------------
+
+.. automodule:: pyduinocli.commands.upgrade
 
 pyduinocli.commands.upload
 --------------------------

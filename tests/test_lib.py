@@ -64,7 +64,6 @@ class TestLibCommand(TestBase):
     def test_examples(self):
         self._arduino.lib.install(["FastLED"])
         examples = self._arduino.lib.examples("FastLED")
-        print(examples)
         self.assertIsInstance(examples, list)
         for lib in examples:
             example_list = lib["examples"]

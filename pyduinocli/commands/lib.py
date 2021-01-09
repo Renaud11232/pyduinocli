@@ -17,9 +17,14 @@ class LibCommand(CommandBase):
         args.extend(CommandBase._strip_args(downloads))
         return self._exec(args)
 
-    def install(self, installs):
+    def install(self, libraries=None, git_url=None, zip_path=None):
         args = [commands.INSTALL]
-        args.extend(CommandBase._strip_args(installs))
+        if libraries:
+            args.extend(CommandBase._strip_args(libraries))
+        if git_url:
+            args.extend(CommandBase._strip_arg(git_url))
+        if zip_path:
+            args.extend(CommandBase._strip_arg(zip_path))
         return self._exec(args)
 
     def list(self, all=None, updatable=None, fqbn=None):
