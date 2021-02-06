@@ -71,13 +71,16 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: HTMLDocumentation
-          path: docs
+          path: docs/_build/html/
+      - name: Disables jekyll
+        run: |
+          touch docs/_build/html/.nojekyll
       - name: Publish on GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: docs
+          FOLDER: docs/_build/html
           CLEAN: true
   deploy-on-test-pypi:
     name: Deploy on Test PyPI
