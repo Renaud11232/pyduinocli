@@ -1,0 +1,1282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pyduinocli.commands.arduino &mdash; pyduinocli  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyduinocli.errors.arduinoerror" href="errors.html" />
+    <link rel="prev" title="pyduinocli" href="pyduinocli.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pyduinocli
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyduinocli.html">pyduinocli</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pyduinocli.commands.arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.board">pyduinocli.commands.board</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.burn_bootloader">pyduinocli.commands.burn_bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.cache">pyduinocli.commands.cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.compile">pyduinocli.commands.compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.completion">pyduinocli.commands.completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.config">pyduinocli.commands.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.core">pyduinocli.commands.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.daemon">pyduinocli.commands.daemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.debug">pyduinocli.commands.debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.lib">pyduinocli.commands.lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.outdated">pyduinocli.commands.outdated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.sketch">pyduinocli.commands.sketch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.update">pyduinocli.commands.update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.upgrade">pyduinocli.commands.upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.upload">pyduinocli.commands.upload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.version">pyduinocli.commands.version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">pyduinocli.errors.arduinoerror</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyduinocli</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Modules</a> &raquo;</li>
+        
+      <li>pyduinocli.commands.arduino</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/modules/commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pyduinocli.commands.arduino">
+<span id="pyduinocli-commands-arduino"></span><h1>pyduinocli.commands.arduino<a class="headerlink" href="#module-pyduinocli.commands.arduino" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.arduino.</code><code class="sig-name descname">ArduinoCliCommand</code><span class="sig-paren">(</span><em class="sig-param">cli_path='arduino-cli'</em>, <em class="sig-param">config_file=None</em>, <em class="sig-param">additional_urls=None</em>, <em class="sig-param">log_file=None</em>, <em class="sig-param">log_format=None</em>, <em class="sig-param">log_level=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the main class of pyduinocli. This class wraps all calls to <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<p>This is the only class that a user should create instances of.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cli_path</strong> (<em>str</em>) – The <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> command name if available in <code class="code docutils literal notranslate"><span class="pre">$PATH</span></code>. Can also be a direct path the the executable</p></li>
+<li><p><strong>config_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The path to the <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> configuration file to be used</p></li>
+<li><p><strong>additional_urls</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of URLs to custom board definitions files</p></li>
+<li><p><strong>log_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – A path to a file where logs will be stored</p></li>
+<li><p><strong>log_format</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The format the logs will use</p></li>
+<li><p><strong>log_level</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The log level for the log file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.board">
+<em class="property">property </em><code class="sig-name descname">board</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.board" title="Permalink to this definition">¶</a></dt>
+<dd><p>The board command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.board.BoardCommand" title="pyduinocli.commands.board.BoardCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.board.BoardCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.burn_bootloader">
+<em class="property">property </em><code class="sig-name descname">burn_bootloader</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.burn_bootloader" title="Permalink to this definition">¶</a></dt>
+<dd><p>The burn-bootloader command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.burn_bootloader.BurnBootloaderCommand" title="pyduinocli.commands.burn_bootloader.BurnBootloaderCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.burn_bootloader.BurnBootloaderCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.cache">
+<em class="property">property </em><code class="sig-name descname">cache</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cache command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.cache.CacheCommand" title="pyduinocli.commands.cache.CacheCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.cache.CacheCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.compile">
+<em class="property">property </em><code class="sig-name descname">compile</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.compile" title="Permalink to this definition">¶</a></dt>
+<dd><p>The compile command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.compile.CompileCommand" title="pyduinocli.commands.compile.CompileCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.compile.CompileCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.completion">
+<em class="property">property </em><code class="sig-name descname">completion</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.completion" title="Permalink to this definition">¶</a></dt>
+<dd><p>The completion command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.completion.CompletionCommand" title="pyduinocli.commands.completion.CompletionCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.completion.CompletionCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>The config command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.config.ConfigCommand" title="pyduinocli.commands.config.ConfigCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.config.ConfigCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.core">
+<em class="property">property </em><code class="sig-name descname">core</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.core" title="Permalink to this definition">¶</a></dt>
+<dd><p>The core command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.core.CoreCommand" title="pyduinocli.commands.core.CoreCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.core.CoreCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.daemon">
+<em class="property">property </em><code class="sig-name descname">daemon</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.daemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>The daemon command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.daemon.DaemonCommand" title="pyduinocli.commands.daemon.DaemonCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.daemon.DaemonCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.debug">
+<em class="property">property </em><code class="sig-name descname">debug</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>The debug command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.debug.DebugCommand" title="pyduinocli.commands.debug.DebugCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.debug.DebugCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.lib">
+<em class="property">property </em><code class="sig-name descname">lib</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.lib" title="Permalink to this definition">¶</a></dt>
+<dd><p>The lib command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.lib.LibCommand" title="pyduinocli.commands.lib.LibCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.lib.LibCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.outdated">
+<em class="property">property </em><code class="sig-name descname">outdated</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.outdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>The outdated command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.outdated.OutdatedCommand" title="pyduinocli.commands.outdated.OutdatedCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.outdated.OutdatedCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.sketch">
+<em class="property">property </em><code class="sig-name descname">sketch</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.sketch" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sketch command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.sketch.SketchCommand" title="pyduinocli.commands.sketch.SketchCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.sketch.SketchCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.update">
+<em class="property">property </em><code class="sig-name descname">update</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>The update command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.update.UpdateCommand" title="pyduinocli.commands.update.UpdateCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.update.UpdateCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.upgrade">
+<em class="property">property </em><code class="sig-name descname">upgrade</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.upgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>The upgrade command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.upgrade.UpgradeCommand" title="pyduinocli.commands.upgrade.UpgradeCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.upgrade.UpgradeCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.upload">
+<em class="property">property </em><code class="sig-name descname">upload</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>The upload command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.upload.UploadCommand" title="pyduinocli.commands.upload.UploadCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.upload.UploadCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.version">
+<em class="property">property </em><code class="sig-name descname">version</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The version command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.version.VersionCommand" title="pyduinocli.commands.version.VersionCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.version.VersionCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.board">
+<span id="pyduinocli-commands-board"></span><h1>pyduinocli.commands.board<a class="headerlink" href="#module-pyduinocli.commands.board" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.board.BoardCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.board.</code><code class="sig-name descname">BoardCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">board</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
+<dl class="method">
+<dt id="pyduinocli.commands.board.BoardCommand.attach">
+<code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">sketch_path=None</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.attach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">attach</span></code> command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The port of the board to attach</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The fqbn of the board to attach</p></li>
+<li><p><strong>sketch_path</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The path of the sketch to attach to the board</p></li>
+<li><p><strong>timeout</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The connected devices search timeout, raise it if your board doesn’t show up (e.g. to 10s). (default “5s”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.board.BoardCommand.details">
+<code class="sig-name descname">details</code><span class="sig-paren">(</span><em class="sig-param">fqbn</em>, <em class="sig-param">full=None</em>, <em class="sig-param">list_programmers=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.details" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">details</span></code> command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fqbn</strong> (<em>str</em>) – The fqbn of the board</p></li>
+<li><p><strong>full</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show full board details</p></li>
+<li><p><strong>list_programmers</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show list of available programmers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The details for the given board</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.board.BoardCommand.list">
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">watch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">list</span></code> command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The connected devices search timeout, raise it if your board doesn’t show up (e.g. to 10s). (default “0s”)</p></li>
+<li><p><strong>watch</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won’t actually return, use a loop instead</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of found boards</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.board.BoardCommand.listall">
+<code class="sig-name descname">listall</code><span class="sig-paren">(</span><em class="sig-param">boardname=None</em>, <em class="sig-param">show_hidden=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.listall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">listall</span></code> command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boardname</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The name of the board, all board will be returned if left unset (or None)</p></li>
+<li><p><strong>show_hidden</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show also boards marked as ‘hidden’ in the platform</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of all boards</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.burn_bootloader">
+<span id="pyduinocli-commands-burn-bootloader"></span><h1>pyduinocli.commands.burn_bootloader<a class="headerlink" href="#module-pyduinocli.commands.burn_bootloader" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.burn_bootloader.BurnBootloaderCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.burn_bootloader.</code><code class="sig-name descname">BurnBootloaderCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.burn_bootloader.BurnBootloaderCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">burn-bootloader</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
+<dl class="method">
+<dt id="pyduinocli.commands.burn_bootloader.BurnBootloaderCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">verify=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.burn_bootloader.BurnBootloaderCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">burn-bootloader</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The fqbn of the board to burn</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The port to use to burl the bootloader</p></li>
+<li><p><strong>programmer</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The programmer to use for the burning process</p></li>
+<li><p><strong>verify</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Verifies that the bootloader was successfully burnt</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.cache">
+<span id="pyduinocli-commands-cache"></span><h1>pyduinocli.commands.cache<a class="headerlink" href="#module-pyduinocli.commands.cache" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.cache.CacheCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.cache.</code><code class="sig-name descname">CacheCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.cache.CacheCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">cache</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.cache.CacheCommand.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.cache.CacheCommand.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">cache</span> <span class="pre">clean</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The result of the command</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.compile">
+<span id="pyduinocli-commands-compile"></span><h1>pyduinocli.commands.compile<a class="headerlink" href="#module-pyduinocli.commands.compile" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.compile.CompileCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.compile.</code><code class="sig-name descname">CompileCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.compile.CompileCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch</em>, <em class="sig-param">build_cache_path=None</em>, <em class="sig-param">build_path=None</em>, <em class="sig-param">build_properties=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">output_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">preprocess=None</em>, <em class="sig-param">show_properties=None</em>, <em class="sig-param">upload=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">vid_pid=None</em>, <em class="sig-param">warnings=None</em>, <em class="sig-param">libraries=None</em>, <em class="sig-param">optimize_for_debug=None</em>, <em class="sig-param">export_binaries=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">clean=None</em>, <em class="sig-param">only_compilation_database=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sketch</strong> (<em>str</em>) – The sketch to compile, can also be a path to a sketch</p></li>
+<li><p><strong>build_cache_path</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Builds of ‘core.a’ are saved into this path to be cached and reused.</p></li>
+<li><p><strong>build_path</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Path where to save compiled files. If omitted, a directory will be created in the default temporary path of your OS.</p></li>
+<li><p><strong>build_properties</strong> (<em>list</em><em> or </em><em>NoneType</em>) – Override build properties with custom values.</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Fully Qualified Board Name, e.g.: arduino:avr:uno</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Save build artifacts in this directory.</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port, e.g.: COM10 or /dev/ttyACM0</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Print preprocessed code to stdout instead of compiling.</p></li>
+<li><p><strong>show_properties</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Show all build properties used instead of compiling.</p></li>
+<li><p><strong>upload</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Upload the binary after the compilation.</p></li>
+<li><p><strong>verify</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Verify uploaded binary after the upload.</p></li>
+<li><p><strong>vid_pid</strong> (<em>str</em><em> or </em><em>NoneType</em>) – When specified, VID/PID specific build properties are used, if board supports them.</p></li>
+<li><p><strong>warnings</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Optional, can be “none”, “default”, “more” and “all”. Defaults to “none”. Used to tell gcc which warning level to use (-W flag). (default “none”)</p></li>
+<li><p><strong>libraries</strong> (<em>list</em><em> or </em><em>NoneType</em>) – List of custom libraries paths</p></li>
+<li><p><strong>optimize_for_debug</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Optional, optimize compile output for debugging, rather than for release.</p></li>
+<li><p><strong>export_binaries</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – If set built binaries will be exported to the sketch folder.</p></li>
+<li><p><strong>programmer</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Optional, use the specified programmer to upload.</p></li>
+<li><p><strong>clean</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Optional, cleanup the build folder and do not use any cached build.</p></li>
+<li><p><strong>only_compilation_database</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Just produce the compilation database, without actually compiling.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.completion">
+<span id="pyduinocli-commands-completion"></span><h1>pyduinocli.commands.completion<a class="headerlink" href="#module-pyduinocli.commands.completion" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.completion.CompletionCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.completion.</code><code class="sig-name descname">CompletionCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.completion.CompletionCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">completion</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.completion.CompletionCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">shell</em>, <em class="sig-param">no_description=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.completion.CompletionCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">completion</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shell</strong> (<em>str</em>) – The shell name that will use completition</p></li>
+<li><p><strong>no_description</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Disable completion description for shells that support it</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The script that will initialize completion</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.config">
+<span id="pyduinocli-commands-config"></span><h1>pyduinocli.commands.config<a class="headerlink" href="#module-pyduinocli.commands.config" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.config.ConfigCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.config.</code><code class="sig-name descname">ConfigCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">config</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">setting_name</em>, <em class="sig-param">values</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">add</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setting_name</strong> (<em>str</em>) – The name of the setting to add</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – The values to add to the setting</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">setting_name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">delete</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>setting_name</strong> (<em>str</em>) – The name of the setting to delete</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.dump">
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">dump</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The dumped config</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">dest_dir=None</em>, <em class="sig-param">dest_file=None</em>, <em class="sig-param">overwrite=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">init</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest_dir</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The directory where to save the file</p></li>
+<li><p><strong>dest_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – A path where the file will be saved</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Overwrites an existing file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">setting_name</em>, <em class="sig-param">values</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">remove</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setting_name</strong> (<em>str</em>) – The name of the setting from which values will be removed</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – The list of values to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.config.ConfigCommand.set">
+<code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="sig-param">setting_name</em>, <em class="sig-param">values</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.config.ConfigCommand.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">config</span> <span class="pre">set</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setting_name</strong> (<em>str</em>) – The name of the setting to set</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – The list of values to set</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.core">
+<span id="pyduinocli-commands-core"></span><h1>pyduinocli.commands.core<a class="headerlink" href="#module-pyduinocli.commands.core" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.core.CoreCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.core.</code><code class="sig-name descname">CoreCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">core</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.download">
+<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param">downloads</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">download</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>downloads</strong> (<em>list</em>) – A list of cores to download</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.install">
+<code class="sig-name descname">install</code><span class="sig-paren">(</span><em class="sig-param">installs</em>, <em class="sig-param">run_post_install=None</em>, <em class="sig-param">skip_post_install=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.install" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">download</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>installs</strong> (<em>list</em>) – A list of cores to install</p></li>
+<li><p><strong>run_post_install</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Force run of post-install scripts</p></li>
+<li><p><strong>skip_post_install</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Force skip of post-install scripts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.list">
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">updatable=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">list</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>updatable</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows cores that are not up to date</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The installed cores</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">keywords=None</em>, <em class="sig-param">all=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">search</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keywords</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of keywords to use to search, if None, all cores will show up</p></li>
+<li><p><strong>all</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Shows all available core versions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The found cores matching keywords</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.uninstall">
+<code class="sig-name descname">uninstall</code><span class="sig-paren">(</span><em class="sig-param">uninstalls</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.uninstall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">uninstall</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>uninstalls</strong> (<em>list</em>) – A list of cores to uninstall</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.update_index">
+<code class="sig-name descname">update_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.update_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">update-index</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.core.CoreCommand.upgrade">
+<code class="sig-name descname">upgrade</code><span class="sig-paren">(</span><em class="sig-param">upgrades=None</em>, <em class="sig-param">run_post_install=None</em>, <em class="sig-param">skip_post_install=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.upgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">upgrade</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>upgrades</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of cores to upgrade, if None, all cores will be upgraded</p></li>
+<li><p><strong>run_post_install</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Force run of post-install scripts</p></li>
+<li><p><strong>skip_post_install</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Force skip of post-install scripts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.daemon">
+<span id="pyduinocli-commands-daemon"></span><h1>pyduinocli.commands.daemon<a class="headerlink" href="#module-pyduinocli.commands.daemon" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.daemon.DaemonCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.daemon.</code><code class="sig-name descname">DaemonCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.daemon.DaemonCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>daemonize</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Do not terminate daemon process if the parent process dies</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The TCP port the daemon will listen to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing since this will not return and should be run in a separate thread or process</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.debug">
+<span id="pyduinocli-commands-debug"></span><h1>pyduinocli.commands.debug<a class="headerlink" href="#module-pyduinocli.commands.debug" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.debug.DebugCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.debug.</code><code class="sig-name descname">DebugCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.debug.DebugCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">debug</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.
+Warning, While this has been added in pyduinocli, it has not been tested, and won’t probably work since it will start an interactive gdb session and won’t return</p>
+<dl class="method">
+<dt id="pyduinocli.commands.debug.DebugCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">interpreter=None</em>, <em class="sig-param">info=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">sketch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.debug.DebugCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">debug</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Fully Qualified Board Name, e.g.: arduino:avr:uno</p></li>
+<li><p><strong>input_dir</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Directory containing binaries for debug.</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Debug port, e.g.: COM10 or /dev/ttyACM0</p></li>
+<li><p><strong>interpreter</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Debug interpreter e.g.: console, mi, mi1, mi2, mi3 (default “console”)</p></li>
+<li><p><strong>info</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Show metadata about the debug session instead of starting the debugger.</p></li>
+<li><p><strong>programmer</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Programmer to use for debugging</p></li>
+<li><p><strong>sketch</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The sketch to debug</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.lib">
+<span id="pyduinocli-commands-lib"></span><h1>pyduinocli.commands.lib<a class="headerlink" href="#module-pyduinocli.commands.lib" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.lib.LibCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.lib.</code><code class="sig-name descname">LibCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">lib</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.deps">
+<code class="sig-name descname">deps</code><span class="sig-paren">(</span><em class="sig-param">library</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.deps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">deps</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>library</strong> (<em>str</em>) – The name of the library for dependency checking</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The dependencies</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.download">
+<code class="sig-name descname">download</code><span class="sig-paren">(</span><em class="sig-param">downloads</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">download</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>downloads</strong> (<em>list</em>) – A list of libraries to download</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.examples">
+<code class="sig-name descname">examples</code><span class="sig-paren">(</span><em class="sig-param">library</em>, <em class="sig-param">fqbn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.examples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">examples</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>library</strong> (<em>str</em>) – The name of the library</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The board FQBN</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The available examples</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.install">
+<code class="sig-name descname">install</code><span class="sig-paren">(</span><em class="sig-param">libraries=None</em>, <em class="sig-param">git_urls=None</em>, <em class="sig-param">zip_paths=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.install" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">install</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>libraries</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of libraries to install</p></li>
+<li><p><strong>git_urls</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of git repositories containing libraries to install</p></li>
+<li><p><strong>zip_paths</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of paths to zip files to install</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The libraries that were installed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.list">
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">all=None</em>, <em class="sig-param">updatable=None</em>, <em class="sig-param">fqbn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">list</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Includes built-in libraries</p></li>
+<li><p><strong>updatable</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows libraries that are not up to date</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Shows libraries for the specified board</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The installed libraries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">keywords=None</em>, <em class="sig-param">names=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">search</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keywords</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of keywords to use to search, if None, all libraries will show up</p></li>
+<li><p><strong>names</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows libraries names</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The found libraries matching keywords</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.uninstall">
+<code class="sig-name descname">uninstall</code><span class="sig-paren">(</span><em class="sig-param">uninstalls</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.uninstall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">uninstall</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>uninstalls</strong> (<em>list</em>) – A list of libraries to uninstall</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.update_index">
+<code class="sig-name descname">update_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.update_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">update-index</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.lib.LibCommand.upgrade">
+<code class="sig-name descname">upgrade</code><span class="sig-paren">(</span><em class="sig-param">upgrades=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.upgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">upgrade</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>upgrades</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of libraries to upgrade, if None, all libraries will be upgraded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.outdated">
+<span id="pyduinocli-commands-outdated"></span><h1>pyduinocli.commands.outdated<a class="headerlink" href="#module-pyduinocli.commands.outdated" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.outdated.OutdatedCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.outdated.</code><code class="sig-name descname">OutdatedCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.outdated.OutdatedCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">outdated</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.outdated.OutdatedCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.outdated.OutdatedCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">outdated</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of outdated cores and libraries that can be upgraded</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.sketch">
+<span id="pyduinocli-commands-sketch"></span><h1>pyduinocli.commands.sketch<a class="headerlink" href="#module-pyduinocli.commands.sketch" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.sketch.SketchCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.sketch.</code><code class="sig-name descname">SketchCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">sketch</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.sketch.SketchCommand.archive">
+<code class="sig-name descname">archive</code><span class="sig-paren">(</span><em class="sig-param">sketch_path='.'</em>, <em class="sig-param">archive_path=None</em>, <em class="sig-param">include_build_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">sketch</span> <span class="pre">archive</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sketch_path</strong> (<em>str</em>) – The path to the sketch to archive</p></li>
+<li><p><strong>archive_path</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The path of the output archive</p></li>
+<li><p><strong>include_build_dir</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Includes the build directory in the archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyduinocli.commands.sketch.SketchCommand.new">
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">sketch</span> <span class="pre">new</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the sketch to create</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.update">
+<span id="pyduinocli-commands-update"></span><h1>pyduinocli.commands.update<a class="headerlink" href="#module-pyduinocli.commands.update" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.update.UpdateCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.update.</code><code class="sig-name descname">UpdateCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.update.UpdateCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">update</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.update.UpdateCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">show_outdated=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.update.UpdateCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">update</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of outdated cores and libraries that can be upgraded if show_updated flag is True</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.upgrade">
+<span id="pyduinocli-commands-upgrade"></span><h1>pyduinocli.commands.upgrade<a class="headerlink" href="#module-pyduinocli.commands.upgrade" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.upgrade.UpgradeCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.upgrade.</code><code class="sig-name descname">UpgradeCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upgrade.UpgradeCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">upgrade</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.upgrade.UpgradeCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">run_post_install=None</em>, <em class="sig-param">skip_post_install=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upgrade.UpgradeCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">upgrade</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothing (an empty string)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.upload">
+<span id="pyduinocli-commands-upload"></span><h1>pyduinocli.commands.upload<a class="headerlink" href="#module-pyduinocli.commands.upload" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.upload.UploadCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.upload.</code><code class="sig-name descname">UploadCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.upload.UploadCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">input_file=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">programmer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sketch</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The sketch to upload, cap be the full path or just the name</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The fully qualified board name of the target board</p></li>
+<li><p><strong>input_dir</strong> (<em>str</em><em> or </em><em>NoneType</em>) – A path containing the binaries to upload</p></li>
+<li><p><strong>input_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – A path to the binary file to upload</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The upload port e.g.: COM10 or /dev/ttyACM0</p></li>
+<li><p><strong>verify</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Verify the uploaded binary after the upload</p></li>
+<li><p><strong>programmer</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Programmer to use for the upload process</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the compilation process</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.version">
+<span id="pyduinocli-commands-version"></span><h1>pyduinocli.commands.version<a class="headerlink" href="#module-pyduinocli.commands.version" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.version.VersionCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.version.</code><code class="sig-name descname">VersionCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.version.VersionCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">version</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.version.VersionCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.version.VersionCommand.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">version</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The version of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str or dict depending on the version of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="errors.html" class="btn btn-neutral float-right" title="pyduinocli.errors.arduinoerror" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pyduinocli.html" class="btn btn-neutral float-left" title="pyduinocli" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Renaud Gaspard.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
