@@ -23,6 +23,11 @@ pyduinocli.commands.compile
 
 .. automodule:: pyduinocli.commands.compile
 
+pyduinocli.commands.completion
+------------------------------
+
+.. automodule:: pyduinocli.commands.completion
+
 pyduinocli.commands.config
 --------------------------
 
