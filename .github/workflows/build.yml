@@ -26,8 +26,22 @@ jobs:
         with:
           name: dist
           path: dist
+  build-docs:
+    name: Build documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python 3.8
+        uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+      - uses: actions/upload-artifact@v1
+        with:
+          name: HTMLDocumentation
+          path: docs/_build/html/
   unit-test:
     name: Unit Tests
+    needs: build
     strategy:
       matrix:
         python: ["2.7", "3.8"]
@@ -46,6 +60,26 @@ jobs:
       - name: Run tests
         run: |
           python setup.py test
+  deploy-docs:
+    name: Deploy docs to GitHub pages
+    if: github.event_name == 'release'
+    needs:
+      - unit-test
+      - build-docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built documentation
+        uses: actions/download-artifact@v1
+        with:
+          name: HTMLDocumentation
+          path: docs
+      - name: Publish on GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs
+          CLEAN: true
   deploy-on-test-pypi:
     name: Deploy on Test PyPI
     if: github.event_name == 'release'
@@ -76,6 +110,5 @@ jobs:
           path: dist
       - name: Publish to index
         uses: pypa/gh-action-pypi-publish@master
-        continue-on-error: true
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
