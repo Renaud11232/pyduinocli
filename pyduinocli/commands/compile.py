@@ -13,7 +13,7 @@ class CompileCommand(CommandBase):
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output_dir=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
                  warnings=None, libraries=None, optimize_for_debug=None, export_binaries=None, programmer=None,
-                 clean=None):
+                 clean=None, only_compilation_database=None):
         args = []
         if build_cache_path:
             args.extend([flags.BUILD_CACHE_PATH, CommandBase._strip_arg(build_cache_path)])
@@ -51,5 +51,7 @@ class CompileCommand(CommandBase):
             args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
         if clean is True:
             args.append(flags.CLEAN)
+        if only_compilation_database is True:
+            args.append(flags.ONLY_COMPILATION_DATABASE)
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)

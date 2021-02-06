@@ -46,4 +46,4 @@ OVERWRITE = '--overwrite'
 INFO = '--info'
 GIT_URL = '--git-url'
 ZIP_PATH = '--zip-path'
-
+ONLY_COMPILATION_DATABASE = '--only-compilation-database'
