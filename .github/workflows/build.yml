@@ -4,6 +4,7 @@ on:
     types:
       - released
       - prereleased
+  push:
 jobs:
   unit-test:
     name: Unit Tests
