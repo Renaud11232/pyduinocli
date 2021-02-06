@@ -1,0 +1,27 @@
+name: Build
+on:
+  release:
+    types:
+      - released
+      - prereleased
+jobs:
+  unit-test:
+    name: Unit Tests
+    strategy:
+      matrix:
+        python: ["2.7", "3.8"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Download arduino-cli
+        run: |
+          wget https://github.com/arduino/arduino-cli/releases/download/0.15.1/arduino-cli_0.15.1_Linux_64bit.tar.gz
+          tar xzf arduino-cli_0.15.1_Linux_64bit.tar.gz
+          rm arduino-cli_0.15.1_Linux_64bit.tar.gz
+      - name: Run tests
+        run: |
+          python setup.py test
