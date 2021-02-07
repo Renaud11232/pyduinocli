@@ -61,7 +61,7 @@ jobs:
           python setup.py test
   deploy-docs:
     name: Deploy docs to GitHub pages
-    if: github.event_name == 'release'
+    if: github.ref = 'refs/heads/master'
     needs:
       - unit-test
       - build-docs
