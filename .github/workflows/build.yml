@@ -36,7 +36,7 @@ jobs:
           docs-folder: "docs/"
       - uses: actions/upload-artifact@v1
         with:
-          name: HTMLDocumentation
+          name: docs
           path: docs/_build/html/
   unit-test:
     name: Unit Tests
@@ -70,7 +70,7 @@ jobs:
       - name: Download built documentation
         uses: actions/download-artifact@v1
         with:
-          name: HTMLDocumentation
+          name: docs
           path: docs/_build/html/
       - name: Disables jekyll
         run: |
