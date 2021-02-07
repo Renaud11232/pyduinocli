@@ -1,7 +1,7 @@
 Welcome to pyduinocli's documentation!
 ======================================
 
-Intro Text
+Welcome to the pyduinocli documentation page. Here you should be able to find everything you need in order to use pyduinocli from any program.
 
 Contents
 ========
