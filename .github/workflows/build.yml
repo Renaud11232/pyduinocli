@@ -76,12 +76,11 @@ jobs:
         run: |
           touch docs/_build/html/.nojekyll
       - name: Publish on GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@@4.0.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/_build/html
-          CLEAN: true
+          branch: gh-pages
+          folder: docs/_build/html
+          clean: true
   deploy-on-test-pypi:
     name: Deploy on Test PyPI
     if: github.event_name == 'release'
