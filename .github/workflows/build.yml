@@ -53,12 +53,15 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Download arduino-cli
         run: |
-          wget https://github.com/arduino/arduino-cli/releases/download/0.15.1/arduino-cli_0.15.1_Linux_64bit.tar.gz
-          tar xzf arduino-cli_0.15.1_Linux_64bit.tar.gz
-          rm arduino-cli_0.15.1_Linux_64bit.tar.gz
+          wget https://github.com/arduino/arduino-cli/releases/download/0.16.0/arduino-cli_0.16.0_Linux_64bit.tar.gz
+          tar xzf arduino-cli_0.16.0_Linux_64bit.tar.gz
+          rm arduino-cli_0.16.0_Linux_64bit.tar.gz
+      - name: Install test dependencies
+        run: |
+          pip install pytest
       - name: Run tests
         run: |
-          python setup.py test
+          pytest
   deploy-docs:
     name: Deploy docs to GitHub pages
     if: github.ref == 'refs/heads/master'

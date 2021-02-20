@@ -46,18 +46,22 @@ class CoreCommand(CommandBase):
             args.append(flags.SKIP_POST_INSTALL)
         return self._exec(args)
 
-    def list(self, updatable=None):
+    def list(self, updatable=None, all=None):
         """
         Calls the :code:`core list` command
 
         :param updatable: Only shows cores that are not up to date
         :type updatable: bool or NoneType
+        :param all: Shows all installed and non installed cores (also shows manually installed cores)
+        :type all: bool or NoneType
         :return: The installed cores
         :rtype: dict
         """
         args = [commands.LIST]
         if updatable is True:
             args.append(flags.UPDATABLE)
+        if all is True:
+            args.append(flags.ALL)
         return self._exec(args)
 
     def search(self, keywords=None, all=None):

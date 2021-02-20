@@ -8,7 +8,7 @@ def get_long_description():
 
 setuptools.setup(
     name="pyduinocli",
-    version="0.15.1",
+    version="0.16.0",
     author="Renaud Gaspard",
     author_email="gaspardrenaud@hotmail.com",
     description="Wrapper library around arduino-cli",
@@ -18,7 +18,6 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=("tests",)),
     install_requires=[
     ],
-    test_suite="tests",
     classifiers=[
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
