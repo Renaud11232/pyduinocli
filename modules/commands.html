@@ -739,11 +739,14 @@
 
 <dl class="method">
 <dt id="pyduinocli.commands.core.CoreCommand.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">updatable=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">updatable=None</em>, <em class="sig-param">all=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.core.CoreCommand.list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">core</span> <span class="pre">list</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>updatable</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows cores that are not up to date</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>updatable</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows cores that are not up to date</p></li>
+<li><p><strong>all</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Shows all installed and non installed cores (also shows manually installed cores)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The installed cores</p>
