@@ -99,3 +99,21 @@ class BoardCommand(CommandBase):
         if show_hidden is True:
             args.append(flags.SHOW_HIDDEN)
         return self._exec(args)
+
+    def search(self, boardname=None, show_hidden=None):
+        """
+        Calls the :code:`board search` command.
+
+        :param boardname: The name of the board
+        :type boardname: str or NoneType
+        :param show_hidden: Show also boards marked as 'hidden' in the platform
+        :type show_hidden: bool or NoneTYpe
+        :return: The list of all matching boards
+        :rtype: dict
+        """
+        args = [commands.SEARCH]
+        if boardname:
+            args.append(CommandBase._strip_arg(boardname))
+        if show_hidden is True:
+            args.append(flags.SHOW_HIDDEN)
+        return self._exec(args)

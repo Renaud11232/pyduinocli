@@ -20,6 +20,11 @@ class TestBoardCommand(CoreNeedingTest):
         self.assertIsInstance(list, dict)
         self.assertIn("boards", list)
 
+    def test_search(self):
+        boards = self._arduino.board.search()
+        self.assertIsInstance(boards, list)
+        self.assertTrue(all(["name" in board for board in boards]))
+
 
 if __name__ == '__main__':
     unittest.main()
