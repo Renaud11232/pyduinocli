@@ -14,37 +14,37 @@ class TestCoreCommand(TestBase):
 
     def test_install(self):
         installed = self._arduino.core.list()
-        self.assertFalse(any(core["ID"] == "arduino:avr" for core in installed))
+        self.assertFalse(any(core["id"] == "arduino:avr" for core in installed))
         self._arduino.core.install(["arduino:avr"])
         installed = self._arduino.core.list()
-        self.assertTrue(any(core["ID"] == "arduino:avr" for core in installed))
+        self.assertTrue(any(core["id"] == "arduino:avr" for core in installed))
         self._arduino.core.uninstall(["arduino:avr"])
 
     def test_list(self):
         installed = self._arduino.core.list()
         self.assertIsInstance(installed, list)
-        self.assertFalse(any(core["ID"] == "arduino:avr" for core in installed))
+        self.assertFalse(any(core["id"] == "arduino:avr" for core in installed))
         self._arduino.core.install(["arduino:avr"])
         installed = self._arduino.core.list()
         self.assertIsInstance(installed, list)
-        self.assertTrue(any(core["ID"] == "arduino:avr" for core in installed))
+        self.assertTrue(any(core["id"] == "arduino:avr" for core in installed))
         self._arduino.core.uninstall(["arduino:avr"])
 
     def test_search(self):
         results = self._arduino.core.search(["avr"])
         self.assertIsInstance(results, list)
-        self.assertTrue(any(core["ID"] == "arduino:avr" for core in results))
+        self.assertTrue(any(core["id"] == "arduino:avr" for core in results))
 
     def test_search_no_param(self):
         results = self._arduino.core.search()
         self.assertIsInstance(results, list)
-        self.assertTrue(any(core["ID"] == "arduino:avr" for core in results))
+        self.assertTrue(any(core["id"] == "arduino:avr" for core in results))
 
     def test_uninstall(self):
         self._arduino.core.install(["arduino:avr"])
         self._arduino.core.uninstall(["arduino:avr"])
         installed = self._arduino.core.list()
-        self.assertFalse(any(core["ID"] == "arduino:avr" for core in installed))
+        self.assertFalse(any(core["id"] == "arduino:avr" for core in installed))
 
     def test_update_index(self):
         self._arduino.core.update_index()
