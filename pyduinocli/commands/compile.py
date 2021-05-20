@@ -15,8 +15,8 @@ class CompileCommand(CommandBase):
     def __call__(self,
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output_dir=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
-                 warnings=None, libraries=None, optimize_for_debug=None, export_binaries=None, programmer=None,
-                 clean=None, only_compilation_database=None):
+                 warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
+                 programmer=None, clean=None, only_compilation_database=None):
         """
         Calls the :code:`compile` command
 
@@ -46,8 +46,10 @@ class CompileCommand(CommandBase):
         :type vid_pid: str or NoneType
         :param warnings: Optional, can be "none", "default", "more" and "all". Defaults to "none". Used to tell gcc which warning level to use (-W flag). (default "none")
         :type warnings: str or NoneType
-        :param libraries: List of custom libraries paths
+        :param libraries: List of custom libraries dir paths separated by commas. Or can be used multiple times for multiple libraries dir paths.
         :type libraries: list or NoneType
+        :param library: List of paths to libraries root folders. Libraries set this way have top priority in case of conflicts. Can be used multiple times for different libraries.
+        :type library: list or NoneType
         :param optimize_for_debug: Optional, optimize compile output for debugging, rather than for release.
         :type optimize_for_debug: bool or NoneType
         :param export_binaries: If set built binaries will be exported to the sketch folder.
@@ -88,8 +90,11 @@ class CompileCommand(CommandBase):
         if warnings:
             args.extend([flags.WARNINGS, CommandBase._strip_arg(warnings)])
         if libraries:
-            for library in libraries:
-                args.extend([flags.LIBRARIES, CommandBase._strip_arg(library)])
+            for l in libraries:
+                args.extend([flags.LIBRARIES, CommandBase._strip_arg(l)])
+        if library:
+            for l in library:
+                args.extend([flags.LIBRARY, CommandBase._strip_arg(l)])
         if optimize_for_debug is True:
             args.append(flags.OPTIMIZE_FOR_DEBUG)
         if export_binaries is True:
