@@ -31,6 +31,8 @@ class DebugCommand(CommandBase):
         :type programmer: str or NoneType
         :param sketch: The sketch to debug
         :type sketch: str or NoneType
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if fqbn:

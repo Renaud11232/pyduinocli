@@ -20,8 +20,8 @@ class CompletionCommand(CommandBase):
         :type shell: str
         :param no_description: Disable completion description for shells that support it
         :type no_description: bool or NoneTYpe
-        :return: The script that will initialize completion
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if no_description is True:

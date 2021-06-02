@@ -15,7 +15,7 @@ class CacheCommand(CommandBase):
         """
         Calls the :code:`cache clean` command
 
-        :return: The result of the command
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.CLEAN])

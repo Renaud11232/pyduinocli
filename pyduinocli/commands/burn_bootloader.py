@@ -24,8 +24,8 @@ class BurnBootloaderCommand(CommandBase):
         :type programmer: str or NoneTYpe
         :param verify: Verifies that the bootloader was successfully burnt
         :type verify: bool or NoneTYpe
-        :return: The output of the command
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if fqbn:

@@ -15,7 +15,7 @@ class OutdatedCommand(CommandBase):
         """
         Calls the :code:`outdated` command
 
-        :return: The list of outdated cores and libraries that can be upgraded
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([])

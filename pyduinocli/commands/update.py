@@ -16,8 +16,8 @@ class UpdateCommand(CommandBase):
         """
         Calls the :code:`update` command
 
-        :return: The list of outdated cores and libraries that can be upgraded if show_updated flag is True
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if show_outdated is True:

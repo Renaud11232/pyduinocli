@@ -16,8 +16,8 @@ class UpgradeCommand(CommandBase):
         """
         Calls the :code:`upgrade` command
 
-        :return: Nothing (an empty string)
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if run_post_install is True:

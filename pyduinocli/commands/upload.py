@@ -30,8 +30,8 @@ class UploadCommand(CommandBase):
         :type verify: bool or NoneType
         :param programmer: Programmer to use for the upload process
         :type programmer: str or NoneType
-        :return: The output of the compilation process
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if fqbn:

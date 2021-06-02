@@ -16,8 +16,8 @@ class ConfigCommand(CommandBase):
         """
         Calls the :code:`config dump` command
 
-        :return: The dumped config
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.DUMP])
 
@@ -31,8 +31,8 @@ class ConfigCommand(CommandBase):
         :type dest_file: str or NoneType
         :param overwrite: Overwrites an existing file
         :type overwrite: bool or NoneType
-        :return: The created file
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.INIT]
         if dest_dir:
@@ -51,6 +51,8 @@ class ConfigCommand(CommandBase):
         :type setting_name: str
         :param values: The values to add to the setting
         :type values: list
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.ADD, CommandBase._strip_arg(setting_name)]
         args.extend(CommandBase._strip_args(values))
@@ -62,6 +64,8 @@ class ConfigCommand(CommandBase):
 
         :param setting_name: The name of the setting to delete
         :type setting_name: str
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.DELETE, CommandBase._strip_arg(setting_name)])
 
@@ -73,6 +77,8 @@ class ConfigCommand(CommandBase):
         :type setting_name: str
         :param values: The list of values to remove
         :type values: list
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.REMOVE, CommandBase._strip_arg(setting_name)]
         args.extend(CommandBase._strip_args(values))
@@ -86,6 +92,8 @@ class ConfigCommand(CommandBase):
         :type setting_name: str
         :param values: The list of values to set
         :type values: list
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.SET, CommandBase._strip_arg(setting_name)]
         args.extend(CommandBase._strip_args(values))

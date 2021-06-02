@@ -60,8 +60,8 @@ class CompileCommand(CommandBase):
         :type clean: bool or NoneType
         :param only_compilation_database: Just produce the compilation database, without actually compiling.
         :type only_compilation_database: bool or NoneType
-        :return: The output of the command
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = []
         if build_cache_path:

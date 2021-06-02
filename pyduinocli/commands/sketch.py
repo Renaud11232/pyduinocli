@@ -18,8 +18,8 @@ class SketchCommand(CommandBase):
 
         :param name: The name of the sketch to create
         :type name: str
-        :return: The created path
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.NEW, CommandBase._strip_arg(name)])
 
@@ -33,8 +33,8 @@ class SketchCommand(CommandBase):
         :type archive_path: str or NoneType
         :param include_build_dir: Includes the build directory in the archive
         :type include_build_dir: bool or NoneType
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.ARCHIVE, CommandBase._strip_arg(sketch_path)]
         if archive_path is not None:

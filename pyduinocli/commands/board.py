@@ -1,8 +1,6 @@
 from pyduinocli.commands.base import CommandBase
 from pyduinocli.constants import commands
-from pyduinocli.constants import messages
 from pyduinocli.constants import flags
-from pyduinocli.errors.arduinoerror import ArduinoError
 
 
 class BoardCommand(CommandBase):
@@ -26,14 +24,10 @@ class BoardCommand(CommandBase):
         :type sketch_path: str or NoneTYpe
         :param timeout: The connected devices search timeout, raise it if your board doesn't show up (e.g. to 10s). (default "5s")
         :type timeout: str or NoneTYpe
-        :return: The output of the command
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.ATTACH]
-        if port and fqbn:
-            raise ArduinoError(messages.ERROR_PORT_FQBN_SET)
-        if not port and not fqbn:
-            raise ArduinoError(messages.ERROR_PORT_FQBN_NOT_SET)
         if port:
             args.append(CommandBase._strip_arg(port))
         if fqbn:
@@ -54,7 +48,7 @@ class BoardCommand(CommandBase):
         :type full: bool or NoneTYpe
         :param list_programmers: Show list of available programmers
         :type list_programmers: bool or NoneTYpe
-        :return: The details for the given board
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.DETAILS, flags.FQBN, CommandBase._strip_arg(fqbn)]
@@ -72,7 +66,7 @@ class BoardCommand(CommandBase):
         :type timeout: str or NoneType
         :param watch: Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won't actually return, use a loop instead
         :type watch: bool or NoneTYpe
-        :return: The list of found boards
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.LIST]
@@ -90,7 +84,7 @@ class BoardCommand(CommandBase):
         :type boardname: str or NoneType
         :param show_hidden: Show also boards marked as 'hidden' in the platform
         :type show_hidden: bool or NoneTYpe
-        :return: The list of all boards
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.LISTALL]
@@ -108,7 +102,7 @@ class BoardCommand(CommandBase):
         :type boardname: str or NoneType
         :param show_hidden: Show also boards marked as 'hidden' in the platform
         :type show_hidden: bool or NoneTYpe
-        :return: The list of all matching boards
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.SEARCH]

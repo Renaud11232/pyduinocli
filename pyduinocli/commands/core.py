@@ -18,8 +18,8 @@ class CoreCommand(CommandBase):
 
         :param downloads: A list of cores to download
         :type downloads: list
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.DOWNLOAD]
         args.extend(CommandBase._strip_args(downloads))
@@ -35,8 +35,8 @@ class CoreCommand(CommandBase):
         :type run_post_install: bool or NoneType
         :param skip_post_install: Force skip of post-install scripts
         :type skip_post_install: bool or NoneType
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.INSTALL]
         args.extend(CommandBase._strip_args(installs))
@@ -54,7 +54,7 @@ class CoreCommand(CommandBase):
         :type updatable: bool or NoneType
         :param all: Shows all installed and non installed cores (also shows manually installed cores)
         :type all: bool or NoneType
-        :return: The installed cores
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.LIST]
@@ -72,7 +72,7 @@ class CoreCommand(CommandBase):
         :type keywords: list or NoneType
         :param all: Shows all available core versions
         :type all: bool or NoneType
-        :return: The found cores matching keywords
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.SEARCH]
@@ -90,8 +90,8 @@ class CoreCommand(CommandBase):
 
         :param uninstalls: A list of cores to uninstall
         :type uninstalls: list
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.UNINSTALL]
         args.extend(CommandBase._strip_args(uninstalls))
@@ -101,8 +101,8 @@ class CoreCommand(CommandBase):
         """
         Calls the :code:`core update-index` command
 
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.UPDATE_INDEX])
 
@@ -116,8 +116,8 @@ class CoreCommand(CommandBase):
         :type run_post_install: bool or NoneType
         :param skip_post_install: Force skip of post-install scripts
         :type skip_post_install: bool or NoneType
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         if not upgrades:
             upgrades = []

@@ -21,7 +21,7 @@ class TestBoardCommand(CoreNeedingTest):
         self.assertIn("boards", list)
 
     def test_search(self):
-        boards = self._arduino.board.search()
+        boards = self._arduino.board.search()["result"]
         self.assertIsInstance(boards, list)
         self.assertTrue(all(["name" in board for board in boards]))
 

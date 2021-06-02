@@ -18,7 +18,7 @@ class LibCommand(CommandBase):
 
         :param library: The name of the library for dependency checking
         :type library: str
-        :return: The dependencies
+        :return: The output of the related command
         :rtype: dict
         """
         return self._exec([commands.DEPS, CommandBase._strip_arg(library)])
@@ -29,8 +29,8 @@ class LibCommand(CommandBase):
 
         :param downloads: A list of libraries to download
         :type downloads: list
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.DOWNLOAD]
         args.extend(CommandBase._strip_args(downloads))
@@ -46,8 +46,8 @@ class LibCommand(CommandBase):
         :type git_urls: list or NoneType
         :param zip_paths: A list of paths to zip files to install
         :type zip_paths: list or NoneType
-        :return: The libraries that were installed
-        :rtype: str or dict
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.INSTALL]
         if libraries:
@@ -70,7 +70,7 @@ class LibCommand(CommandBase):
         :type updatable: bool or NoneType
         :param fqbn: Shows libraries for the specified board
         :type fqbn: str or NoneType
-        :return: The installed libraries
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.LIST]
@@ -90,7 +90,7 @@ class LibCommand(CommandBase):
         :type keywords: list or NoneType
         :param names: Only shows libraries names
         :type names: bool or NoneType
-        :return: The found libraries matching keywords
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.SEARCH]
@@ -108,8 +108,8 @@ class LibCommand(CommandBase):
 
         :param uninstalls: A list of libraries to uninstall
         :type uninstalls: list
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         args = [commands.UNINSTALL]
         args.extend(CommandBase._strip_args(uninstalls))
@@ -119,8 +119,8 @@ class LibCommand(CommandBase):
         """
         Calls the :code:`lib update-index` command
 
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([commands.UPDATE_INDEX])
 
@@ -130,8 +130,8 @@ class LibCommand(CommandBase):
 
         :param upgrades: A list of libraries to upgrade, if None, all libraries will be upgraded
         :type upgrades: list or NoneType
-        :return: Nothing (an empty string)
-        :rtype: str
+        :return: The output of the related command
+        :rtype: dict
         """
         if not upgrades:
             upgrades = []
@@ -147,7 +147,7 @@ class LibCommand(CommandBase):
         :type library: str
         :param fqbn: The board FQBN
         :type fqbn: str or NoneType
-        :return: The available examples
+        :return: The output of the related command
         :rtype: dict
         """
         args = [commands.EXAMPLES, CommandBase._strip_arg(library)]

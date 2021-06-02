@@ -18,18 +18,18 @@ class TestLibCommand(TestBase):
         warnings.warn("There is no return value to check, just checking it doesn't crash")
 
     def test_install(self):
-        installed = self._arduino.lib.list()
+        installed = self._arduino.lib.list()["result"]
         self.assertTrue(not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
-        installed = self._arduino.lib.list()
+        installed = self._arduino.lib.list()["result"]
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.uninstall(["FastLED"])
 
     def test_list(self):
-        installed = self._arduino.lib.list()
+        installed = self._arduino.lib.list()["result"]
         self.assertTrue(not any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.install(["FastLED"])
-        installed = self._arduino.lib.list()
+        installed = self._arduino.lib.list()["result"]
         self.assertTrue(any(lib["library"]["name"] == "FastLED" for lib in installed))
         self._arduino.lib.uninstall(["FastLED"])
 
@@ -50,7 +50,7 @@ class TestLibCommand(TestBase):
     def test_uninstall(self):
         self._arduino.lib.install(["FastLED"])
         self._arduino.lib.uninstall(["FastLED"])
-        installed = self._arduino.lib.list()
+        installed = self._arduino.lib.list()["result"]
         self.assertTrue(installed == "null" or not any(lib["library"]["name"] == "FastLED" for lib in installed))
 
     def test_update_index(self):
@@ -63,7 +63,7 @@ class TestLibCommand(TestBase):
 
     def test_examples(self):
         self._arduino.lib.install(["FastLED"])
-        examples = self._arduino.lib.examples("FastLED")
+        examples = self._arduino.lib.examples("FastLED")["result"]
         self.assertIsInstance(examples, list)
         for lib in examples:
             example_list = lib["examples"]

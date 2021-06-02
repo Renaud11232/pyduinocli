@@ -15,7 +15,7 @@ class VersionCommand(CommandBase):
         """
         Calls the :code:`version` command
 
-        :return: The version of :code:`arduino-cli`
-        :rtype: str or dict depending on the version of :code:`arduino-cli`
+        :return: The output of the related command
+        :rtype: dict
         """
         return self._exec([])
