@@ -5,7 +5,7 @@ import os
 class TestConfigCommand(TestBase):
 
     def test_dump(self):
-        dump = self._arduino.config.dump()
+        dump = self._arduino.config.dump()["result"]
         self.assertIsInstance(dump, dict)
         self.assertIn("directories", dump)
 

@@ -35,13 +35,9 @@ class CommandBase:
         stderr = stderr.decode("utf-8").strip()
         result = dict(
             __stdout=stdout,
-            __stderr=stderr
+            __stderr=stderr,
+            result=self.__parse_output(stdout)
         )
-        decoded_out = self.__parse_output(stdout)
-        if type(decoded_out) is dict:
-            result.update(decoded_out)
-        else:
-            result["result"] = decoded_out
         if p.returncode != 0:
             raise ArduinoError(result)
         return result

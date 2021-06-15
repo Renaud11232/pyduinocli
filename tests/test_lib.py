@@ -10,7 +10,7 @@ class TestLibCommand(TestBase):
         cls._arduino.lib.update_index()
 
     def test_deps(self):
-        dependecies = self._arduino.lib.deps("FastLED")
+        dependecies = self._arduino.lib.deps("FastLED")["result"]
         self.assertTrue(any(dep["name"] == "FastLED" for dep in dependecies["dependencies"]))
 
     def test_download(self):
@@ -34,14 +34,14 @@ class TestLibCommand(TestBase):
         self._arduino.lib.uninstall(["FastLED"])
 
     def test_search(self):
-        results = self._arduino.lib.search(["FastLED"])
+        results = self._arduino.lib.search(["FastLED"])["result"]
         self.assertIsInstance(results, dict)
         libraries = results["libraries"]
         self.assertIsInstance(libraries, list)
         self.assertTrue(any(lib["name"] == "FastLED" for lib in libraries))
 
     def test_search_no_param(self):
-        results = self._arduino.lib.search()
+        results = self._arduino.lib.search()["result"]
         self.assertIsInstance(results, dict)
         libraries = results["libraries"]
         self.assertIsInstance(libraries, list)

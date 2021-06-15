@@ -8,7 +8,7 @@ class TestBoardCommand(CoreNeedingTest):
         warnings.warn("Cannot test attach, it needs special hardware to be connected.")
 
     def test_details(self):
-        details = self._arduino.board.details("arduino:avr:mega")
+        details = self._arduino.board.details("arduino:avr:mega")["result"]
         self.assertIsInstance(details, dict)
         self.assertIn("config_options", details)
 
@@ -16,7 +16,7 @@ class TestBoardCommand(CoreNeedingTest):
         warnings.warn("Cannot test list, it needs special hardware to be connected.")
 
     def test_listall(self):
-        list = self._arduino.board.listall()
+        list = self._arduino.board.listall()["result"]
         self.assertIsInstance(list, dict)
         self.assertIn("boards", list)
 
