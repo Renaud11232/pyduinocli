@@ -16,7 +16,7 @@ class CompileCommand(CommandBase):
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output_dir=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
                  warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
-                 programmer=None, clean=None, only_compilation_database=None):
+                 programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None):
         """
         Calls the :code:`compile` command
 
@@ -60,6 +60,10 @@ class CompileCommand(CommandBase):
         :type clean: bool or NoneType
         :param only_compilation_database: Just produce the compilation database, without actually compiling.
         :type only_compilation_database: bool or NoneType
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneType
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -105,5 +109,9 @@ class CompileCommand(CommandBase):
             args.append(flags.CLEAN)
         if only_compilation_database is True:
             args.append(flags.ONLY_COMPILATION_DATABASE)
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)

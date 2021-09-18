@@ -28,7 +28,7 @@ class ArduinoCliCommand(CommandBase):
     __FORMAT_JSON = 'json'
 
     def __init__(self, cli_path="arduino-cli", config_file=None, additional_urls=None, log_file=None, log_format=None,
-                 log_level=None):
+                 log_level=None, no_color=None):
         """
         :param cli_path: The :code:`arduino-cli` command name if available in :code:`$PATH`. Can also be a direct path the the executable
         :type cli_path: str
@@ -42,6 +42,8 @@ class ArduinoCliCommand(CommandBase):
         :type log_format: str or NoneType
         :param log_level: The log level for the log file
         :type log_level: str or NoneType
+        :param no_color: Disable colored output
+        :type no_color: bool or NoneType
         """
         base_args = [cli_path, flags.FORMAT, ArduinoCliCommand.__FORMAT_JSON]
         if config_file:
@@ -54,6 +56,8 @@ class ArduinoCliCommand(CommandBase):
             base_args.extend([flags.LOG_FORMAT, CommandBase._strip_arg(log_format)])
         if log_level:
             base_args.extend([flags.LOG_LEVEL, CommandBase._strip_arg(log_level)])
+        if no_color is True:
+            base_args.append(flags.NO_COLOR)
         CommandBase.__init__(self, base_args)
         self.__board = BoardCommand(self._base_args)
         self.__cache = CacheCommand(self._base_args)

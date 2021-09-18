@@ -12,7 +12,8 @@ class UploadCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.UPLOAD)
 
-    def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None):
+    def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None,
+                 discovery_timeout=None, protocol=None):
         """
         Calls the :code:`upload` command
 
@@ -30,6 +31,10 @@ class UploadCommand(CommandBase):
         :type verify: bool or NoneType
         :param programmer: Programmer to use for the upload process
         :type programmer: str or NoneType
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneType
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -48,4 +53,8 @@ class UploadCommand(CommandBase):
             args.append(CommandBase._strip_arg(sketch))
         if programmer:
             args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         return self._exec(args)

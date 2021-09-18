@@ -12,7 +12,7 @@ class BurnBootloaderCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.BURN_BOOTLOADER)
 
-    def __call__(self, fqbn=None, port=None, programmer=None, verify=None):
+    def __call__(self, discovery_timeout=None, fqbn=None, port=None, programmer=None, protocol=None, verify=None):
         """
         Calls the :code:`burn-bootloader` command
 
@@ -24,16 +24,24 @@ class BurnBootloaderCommand(CommandBase):
         :type programmer: str or NoneTYpe
         :param verify: Verifies that the bootloader was successfully burnt
         :type verify: bool or NoneTYpe
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneType
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
         args = []
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if fqbn:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
         if port:
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
         if programmer:
             args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if verify is True:
             args.append(flags.VERIFY)
         return self._exec(args)

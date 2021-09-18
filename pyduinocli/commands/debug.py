@@ -13,7 +13,8 @@ class DebugCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DEBUG)
 
-    def __call__(self, fqbn=None, input_dir=None, port=None, interpreter=None, info=None, programmer=None, sketch=None):
+    def __call__(self, fqbn=None, input_dir=None, port=None, interpreter=None, info=None, programmer=None, sketch=None,
+                 discovery_timeout=None, protocol=None):
         """
         Calls the :code:`debug` command
 
@@ -31,6 +32,10 @@ class DebugCommand(CommandBase):
         :type programmer: str or NoneType
         :param sketch: The sketch to debug
         :type sketch: str or NoneType
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneType
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -49,4 +54,8 @@ class DebugCommand(CommandBase):
             args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
         if sketch:
             args.append(CommandBase._strip_arg(sketch))
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         return self._exec(args)
