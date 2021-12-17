@@ -7,6 +7,7 @@ from pyduinocli.commands.core import CoreCommand
 from pyduinocli.commands.daemon import DaemonCommand
 from pyduinocli.commands.debug import DebugCommand
 from pyduinocli.commands.lib import LibCommand
+from pyduinocli.commands.monitor import MonitorCommand
 from pyduinocli.commands.sketch import SketchCommand
 from pyduinocli.commands.upload import UploadCommand
 from pyduinocli.commands.version import VersionCommand
@@ -30,7 +31,7 @@ class ArduinoCliCommand(CommandBase):
     def __init__(self, cli_path="arduino-cli", config_file=None, additional_urls=None, log_file=None, log_format=None,
                  log_level=None, no_color=None):
         """
-        :param cli_path: The :code:`arduino-cli` command name if available in :code:`$PATH`. Can also be a direct path the the executable
+        :param cli_path: The :code:`arduino-cli` command name if available in :code:`$PATH`. Can also be a direct path to the executable
         :type cli_path: str
         :param config_file: The path to the :code:`arduino-cli` configuration file to be used
         :type config_file: str or NoneType
@@ -75,6 +76,7 @@ class ArduinoCliCommand(CommandBase):
         self.__outdated = OutdatedCommand(self._base_args)
         self.__update = UpdateCommand(self._base_args)
         self.__upgrade = UpgradeCommand(self._base_args)
+        self.__monitor = MonitorCommand(self._base_args)
 
     @property
     def board(self):
@@ -219,3 +221,12 @@ class ArduinoCliCommand(CommandBase):
         :type: :class:`pyduinocli.commands.upgrade.UpgradeCommand`
         """
         return self.__upgrade
+
+    @property
+    def monitor(self):
+        """
+        The monitor command wrapper for this :code:`arduino-cli` wrapper
+
+        :type: :class:`pyduinocli.commands.monitor.MonitorCommand`
+        """
+        return self.__monitor

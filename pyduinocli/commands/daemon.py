@@ -12,13 +12,18 @@ class DaemonCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DAEMON)
 
-    def __call__(self, daemonize=None, port=None):
+    def __call__(self, daemonize=None, port=None, debug=None, debug_filter=None):
         """
         Calls the :code:`daemon` command
 
         :param daemonize: Do not terminate daemon process if the parent process dies
         :type daemonize: bool or NoneType
         :param port: The TCP port the daemon will listen to
+        :type port: str, integer or NoneType
+        :param debug: Enable debug logging of gRPC calls
+        :type debug: bool or NoneType
+        :param debug_filter: Display only the provided gRPC calls
+        :type debug_filter: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -27,4 +32,8 @@ class DaemonCommand(CommandBase):
             args.append(flags.DAEMONIZE)
         if port:
             args.extend([flags.PORT, CommandBase._strip_arg(str(port))])
+        if debug is True:
+            args.append(flags.DEBUG)
+        if debug_filter:
+            args.extend([flags.DEBUG_FILTER, CommandBase._strip_arg(debug_filter)])
         return self._exec(args)

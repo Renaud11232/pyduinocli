@@ -12,30 +12,34 @@ class BoardCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.BOARD)
 
-    def attach(self, port=None, fqbn=None, sketch_path=None, timeout=None):
+    def attach(self, port=None, fqbn=None, sketch_path=None, discovery_timeout=None, protocol=None):
         """
         Calls the :code:`board attach` command.
 
-        :param port: The port of the board to attach
+        :param port: Upload port address, e.g.: COM3 or /dev/ttyACM2
         :type port: str or NoneTYpe
-        :param fqbn: The fqbn of the board to attach
+        :param fqbn: Fully Qualified Board Name, e.g.: arduino:avr:uno
         :type fqbn: str or NoneTYpe
         :param sketch_path: The path of the sketch to attach to the board
         :type sketch_path: str or NoneTYpe
-        :param timeout: The connected devices search timeout, raise it if your board doesn't show up (e.g. to 10s). (default "5s")
-        :type timeout: str or NoneTYpe
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneTYpe
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
         args = [commands.ATTACH]
         if port:
-            args.append(CommandBase._strip_arg(port))
+            args.extend([flags.PORT, CommandBase._strip_arg(port)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if fqbn:
-            args.append(CommandBase._strip_arg(fqbn))
+            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
         if sketch_path:
             args.append(CommandBase._strip_arg(sketch_path))
-        if timeout:
-            args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         return self._exec(args)
 
     def details(self, fqbn, full=None, list_programmers=None):
@@ -58,20 +62,20 @@ class BoardCommand(CommandBase):
             args.append(flags.LIST_PROGRAMMERS)
         return self._exec(args)
 
-    def list(self, timeout=None, watch=None):
+    def list(self, discovery_timeout=None, watch=None):
         """
         Calls the :code:`board list` command.
 
-        :param timeout: The connected devices search timeout, raise it if your board doesn't show up (e.g. to 10s). (default "0s")
-        :type timeout: str or NoneType
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 1s)
+        :type discovery_timeout: str or NoneType
         :param watch: Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won't actually return, use a loop instead
         :type watch: bool or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
         args = [commands.LIST]
-        if timeout:
-            args.extend([flags.TIMEOUT, CommandBase._strip_arg(timeout)])
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if watch is True:
             args.append(flags.WATCH)
         return self._exec(args)
