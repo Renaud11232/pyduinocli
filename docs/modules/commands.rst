@@ -54,7 +54,7 @@ pyduinocli.commands.lib
 .. automodule:: pyduinocli.commands.lib
 
 pyduinocli.commands.monitor
------------------------
+---------------------------
 
 .. automodule:: pyduinocli.commands.monitor
 
