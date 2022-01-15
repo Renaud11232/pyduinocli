@@ -49,6 +49,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.daemon">pyduinocli.commands.daemon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.debug">pyduinocli.commands.debug</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.lib">pyduinocli.commands.lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.monitor">pyduinocli.commands.monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.outdated">pyduinocli.commands.outdated</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.sketch">pyduinocli.commands.sketch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-pyduinocli.commands.update">pyduinocli.commands.update</a></li>
@@ -95,7 +96,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cli_path</strong> (<em>str</em>) – The <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> command name if available in <code class="code docutils literal notranslate"><span class="pre">$PATH</span></code>. Can also be a direct path the the executable</p></li>
+<li><p><strong>cli_path</strong> (<em>str</em>) – The <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> command name if available in <code class="code docutils literal notranslate"><span class="pre">$PATH</span></code>. Can also be a direct path to the executable</p></li>
 <li><p><strong>config_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The path to the <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> configuration file to be used</p></li>
 <li><p><strong>additional_urls</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of URLs to custom board definitions files</p></li>
 <li><p><strong>log_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – A path to a file where logs will be stored</p></li>
@@ -216,6 +217,17 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyduinocli.commands.arduino.ArduinoCliCommand.monitor">
+<em class="property">property </em><code class="sig-name descname">monitor</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.monitor" title="Permalink to this definition"></a></dt>
+<dd><p>The monitor command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyduinocli.commands.monitor.MonitorCommand" title="pyduinocli.commands.monitor.MonitorCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyduinocli.commands.monitor.MonitorCommand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyduinocli.commands.arduino.ArduinoCliCommand.outdated">
 <em class="property">property </em><code class="sig-name descname">outdated</code><a class="headerlink" href="#pyduinocli.commands.arduino.ArduinoCliCommand.outdated" title="Permalink to this definition"></a></dt>
 <dd><p>The outdated command wrapper for this <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code> wrapper</p>
@@ -292,15 +304,16 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">board</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
 <dl class="method">
 <dt id="pyduinocli.commands.board.BoardCommand.attach">
-<code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">sketch_path=None</em>, <em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.attach" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">sketch_path=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.attach" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">attach</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The port of the board to attach</p></li>
-<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The fqbn of the board to attach</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Upload port address, e.g.: COM3 or /dev/ttyACM2</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Fully Qualified Board Name, e.g.: arduino:avr:uno</p></li>
 <li><p><strong>sketch_path</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The path of the sketch to attach to the board</p></li>
-<li><p><strong>timeout</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The connected devices search timeout, raise it if your board doesn’t show up (e.g. to 10s). (default “5s”)</p></li>
+<li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
+<li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Upload port protocol, e.g: serial</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -335,12 +348,12 @@
 
 <dl class="method">
 <dt id="pyduinocli.commands.board.BoardCommand.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em>, <em class="sig-param">watch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.list" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">watch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.list" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">list</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The connected devices search timeout, raise it if your board doesn’t show up (e.g. to 10s). (default “0s”)</p></li>
+<li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 1s)</p></li>
 <li><p><strong>watch</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won’t actually return, use a loop instead</p></li>
 </ul>
 </dd>
@@ -798,13 +811,15 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.daemon.DaemonCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>daemonize</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Do not terminate daemon process if the parent process dies</p></li>
-<li><p><strong>port</strong> – The TCP port the daemon will listen to</p></li>
+<li><p><strong>port</strong> (<em>str</em><em>, </em><em>integer</em><em> or </em><em>NoneType</em>) – The TCP port the daemon will listen to</p></li>
+<li><p><strong>debug</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Enable debug logging of gRPC calls</p></li>
+<li><p><strong>debug_filter</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Display only the provided gRPC calls</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1016,6 +1031,40 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>upgrades</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of libraries to upgrade, if None, all libraries will be upgraded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the related command</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyduinocli.commands.monitor">
+<span id="pyduinocli-commands-monitor"></span><h1>pyduinocli.commands.monitor<a class="headerlink" href="#module-pyduinocli.commands.monitor" title="Permalink to this headline"></a></h1>
+<dl class="class">
+<dt id="pyduinocli.commands.monitor.MonitorCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pyduinocli.commands.monitor.</code><code class="sig-name descname">MonitorCommand</code><span class="sig-paren">(</span><em class="sig-param">base_args</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.monitor.MonitorCommand" title="Permalink to this definition"></a></dt>
+<dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">monitor</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
+<dl class="method">
+<dt id="pyduinocli.commands.monitor.MonitorCommand.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">config=None</em>, <em class="sig-param">describe=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">quiet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.monitor.MonitorCommand.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">monitor</span></code> command</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Configuration of the port.</p></li>
+<li><p><strong>describe</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Show all the settings of the communication port.</p></li>
+<li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Fully Qualified Board Name, e.g.: arduino:avr:uno</p></li>
+<li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port address, e.g.: COM3 or /dev/ttyACM2</p></li>
+<li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>quiet</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Run in silent mode, show only monitor input and output.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The output of the related command</p>
