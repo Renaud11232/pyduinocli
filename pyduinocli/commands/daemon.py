@@ -12,7 +12,7 @@ class DaemonCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DAEMON)
 
-    def __call__(self, daemonize=None, port=None, debug=None, debug_filter=None):
+    def __call__(self, daemonize=None, port=None, debug=None, debug_filter=None, ip=None):
         """
         Calls the :code:`daemon` command
 
@@ -24,6 +24,8 @@ class DaemonCommand(CommandBase):
         :type debug: bool or NoneType
         :param debug_filter: Display only the provided gRPC calls
         :type debug_filter: str or NoneType
+        :param ip: The IP address the daemon will listen to (default "127.0.0.1")
+        :type ip: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
