@@ -811,7 +811,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.daemon.DaemonCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em>, <em class="sig-param">ip=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -820,6 +820,7 @@
 <li><p><strong>port</strong> (<em>str</em><em>, </em><em>integer</em><em> or </em><em>NoneType</em>) – The TCP port the daemon will listen to</p></li>
 <li><p><strong>debug</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Enable debug logging of gRPC calls</p></li>
 <li><p><strong>debug_filter</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Display only the provided gRPC calls</p></li>
+<li><p><strong>ip</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The IP address the daemon will listen to (default “127.0.0.1”)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
