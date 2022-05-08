@@ -304,7 +304,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">board</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
 <dl class="method">
 <dt id="pyduinocli.commands.board.BoardCommand.attach">
-<code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">sketch_path=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.attach" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">attach</code><span class="sig-paren">(</span><em class="sig-param">port=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">sketch_path=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.attach" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">attach</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -314,6 +314,7 @@
 <li><p><strong>sketch_path</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The path of the sketch to attach to the board</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -327,7 +328,7 @@
 
 <dl class="method">
 <dt id="pyduinocli.commands.board.BoardCommand.details">
-<code class="sig-name descname">details</code><span class="sig-paren">(</span><em class="sig-param">fqbn</em>, <em class="sig-param">full=None</em>, <em class="sig-param">list_programmers=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.details" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">details</code><span class="sig-paren">(</span><em class="sig-param">fqbn</em>, <em class="sig-param">full=None</em>, <em class="sig-param">list_programmers=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.details" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">details</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -335,6 +336,7 @@
 <li><p><strong>fqbn</strong> (<em>str</em>) – The fqbn of the board</p></li>
 <li><p><strong>full</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show full board details</p></li>
 <li><p><strong>list_programmers</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show list of available programmers</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -417,7 +419,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">burn-bootloader</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code></p>
 <dl class="method">
 <dt id="pyduinocli.commands.burn_bootloader.BurnBootloaderCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">verify=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.burn_bootloader.BurnBootloaderCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.burn_bootloader.BurnBootloaderCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">burn-bootloader</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -428,6 +430,7 @@
 <li><p><strong>verify</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Verifies that the bootloader was successfully burnt</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -473,7 +476,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.compile.CompileCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch</em>, <em class="sig-param">build_cache_path=None</em>, <em class="sig-param">build_path=None</em>, <em class="sig-param">build_properties=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">output_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">preprocess=None</em>, <em class="sig-param">show_properties=None</em>, <em class="sig-param">upload=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">vid_pid=None</em>, <em class="sig-param">warnings=None</em>, <em class="sig-param">libraries=None</em>, <em class="sig-param">library=None</em>, <em class="sig-param">optimize_for_debug=None</em>, <em class="sig-param">export_binaries=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">clean=None</em>, <em class="sig-param">only_compilation_database=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch</em>, <em class="sig-param">build_cache_path=None</em>, <em class="sig-param">build_path=None</em>, <em class="sig-param">build_properties=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">output_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">preprocess=None</em>, <em class="sig-param">show_properties=None</em>, <em class="sig-param">upload=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">vid_pid=None</em>, <em class="sig-param">warnings=None</em>, <em class="sig-param">libraries=None</em>, <em class="sig-param">library=None</em>, <em class="sig-param">optimize_for_debug=None</em>, <em class="sig-param">export_binaries=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">clean=None</em>, <em class="sig-param">only_compilation_database=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em>, <em class="sig-param">encrypt_key=None</em>, <em class="sig-param">keys_keychain=None</em>, <em class="sig-param">sign_key=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -500,6 +503,10 @@
 <li><p><strong>only_compilation_database</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Just produce the compilation database, without actually compiling.</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
+<li><p><strong>encrypt_key</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The name of the custom encryption key to use to encrypt a binary during the compile process. Used only by the platforms that support it.</p></li>
+<li><p><strong>keys_keychain</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The path of the dir to search for the custom keys to sign and encrypt a binary. Used only by the platforms that support it.</p></li>
+<li><p><strong>sign_key</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The name of the custom signing key to use to sign a binary during the compile process. Used only by the platforms that support it.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -811,7 +818,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.daemon.DaemonCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em>, <em class="sig-param">ip=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em>, <em class="sig-param">ip=None</em>, <em class="sig-param">debug_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -821,6 +828,7 @@
 <li><p><strong>debug</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Enable debug logging of gRPC calls</p></li>
 <li><p><strong>debug_filter</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Display only the provided gRPC calls</p></li>
 <li><p><strong>ip</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The IP address the daemon will listen to (default “127.0.0.1”)</p></li>
+<li><p><strong>debug_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Append debug logging to the specified file</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -844,7 +852,7 @@
 Warning, While this has been added in pyduinocli, it has not been tested, and won’t probably work since it will start an interactive gdb session and won’t return</p>
 <dl class="method">
 <dt id="pyduinocli.commands.debug.DebugCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">interpreter=None</em>, <em class="sig-param">info=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">sketch=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.debug.DebugCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">interpreter=None</em>, <em class="sig-param">info=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">sketch=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.debug.DebugCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">debug</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -858,6 +866,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>sketch</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The sketch to debug</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -914,13 +923,14 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 
 <dl class="method">
 <dt id="pyduinocli.commands.lib.LibCommand.examples">
-<code class="sig-name descname">examples</code><span class="sig-paren">(</span><em class="sig-param">library</em>, <em class="sig-param">fqbn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.examples" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">examples</code><span class="sig-paren">(</span><em class="sig-param">library</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.examples" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">examples</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>library</strong> (<em>str</em>) – The name of the library</p></li>
 <li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The board FQBN</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -955,7 +965,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 
 <dl class="method">
 <dt id="pyduinocli.commands.lib.LibCommand.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">all=None</em>, <em class="sig-param">updatable=None</em>, <em class="sig-param">fqbn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.list" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">all=None</em>, <em class="sig-param">updatable=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.list" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">list</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -963,6 +973,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>all</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Includes built-in libraries</p></li>
 <li><p><strong>updatable</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Only shows libraries that are not up to date</p></li>
 <li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Shows libraries for the specified board</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1053,7 +1064,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">monitor</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.monitor.MonitorCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">config=None</em>, <em class="sig-param">describe=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">quiet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.monitor.MonitorCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">config=None</em>, <em class="sig-param">describe=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">quiet=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.monitor.MonitorCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">monitor</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1065,6 +1076,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port address, e.g.: COM3 or /dev/ttyACM2</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
 <li><p><strong>quiet</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Run in silent mode, show only monitor input and output.</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1203,7 +1215,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.upload.UploadCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">input_file=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">input_file=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1217,6 +1229,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>programmer</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Programmer to use for the upload process</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
