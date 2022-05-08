@@ -14,7 +14,7 @@ class DebugCommand(CommandBase):
         self._base_args.append(commands.DEBUG)
 
     def __call__(self, fqbn=None, input_dir=None, port=None, interpreter=None, info=None, programmer=None, sketch=None,
-                 discovery_timeout=None, protocol=None):
+                 discovery_timeout=None, protocol=None, board_options=None):
         """
         Calls the :code:`debug` command
 
@@ -36,6 +36,8 @@ class DebugCommand(CommandBase):
         :type discovery_timeout: str or NoneType
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -58,4 +60,8 @@ class DebugCommand(CommandBase):
             args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if protocol:
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)

@@ -12,7 +12,7 @@ class DaemonCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DAEMON)
 
-    def __call__(self, daemonize=None, port=None, debug=None, debug_filter=None, ip=None):
+    def __call__(self, daemonize=None, port=None, debug=None, debug_filter=None, ip=None, debug_file=None):
         """
         Calls the :code:`daemon` command
 
@@ -26,6 +26,8 @@ class DaemonCommand(CommandBase):
         :type debug_filter: str or NoneType
         :param ip: The IP address the daemon will listen to (default "127.0.0.1")
         :type ip: str or NoneType
+        :param debug_file: Append debug logging to the specified file
+        :type debug_file: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -38,4 +40,6 @@ class DaemonCommand(CommandBase):
             args.append(flags.DEBUG)
         if debug_filter:
             args.extend([flags.DEBUG_FILTER, CommandBase._strip_arg(debug_filter)])
+        if debug_file:
+            args.extend([flags.DEBUG_FILE, CommandBase._strip_arg(debug_file)])
         return self._exec(args)

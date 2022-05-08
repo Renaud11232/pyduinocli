@@ -12,7 +12,9 @@ class BurnBootloaderCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.BURN_BOOTLOADER)
 
-    def __call__(self, discovery_timeout=None, fqbn=None, port=None, programmer=None, protocol=None, verify=None):
+    def __call__(self,
+                 discovery_timeout=None, fqbn=None, port=None, programmer=None, protocol=None, verify=None,
+                 board_options=None):
         """
         Calls the :code:`burn-bootloader` command
 
@@ -28,6 +30,8 @@ class BurnBootloaderCommand(CommandBase):
         :type discovery_timeout: str or NoneType
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -44,4 +48,8 @@ class BurnBootloaderCommand(CommandBase):
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if verify is True:
             args.append(flags.VERIFY)
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)

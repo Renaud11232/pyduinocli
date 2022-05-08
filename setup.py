@@ -8,7 +8,7 @@ def get_long_description():
 
 setuptools.setup(
     name="pyduinocli",
-    version="0.21.0",
+    version="0.22.0rc1",
     author="Renaud Gaspard",
     author_email="gaspardrenaud@hotmail.com",
     description="Wrapper library around arduino-cli",

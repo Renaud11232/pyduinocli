@@ -60,7 +60,7 @@ class LibCommand(CommandBase):
             args.extend(CommandBase._strip_args(zip_paths))
         return self._exec(args)
 
-    def list(self, all=None, updatable=None, fqbn=None):
+    def list(self, all=None, updatable=None, fqbn=None, board_options=None):
         """
         Calls the :code:`lib list` command
 
@@ -70,6 +70,8 @@ class LibCommand(CommandBase):
         :type updatable: bool or NoneType
         :param fqbn: Shows libraries for the specified board
         :type fqbn: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -80,6 +82,10 @@ class LibCommand(CommandBase):
             args.append(flags.UPDATABLE)
         if fqbn is not None:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
     def search(self, keywords=None, names=None):
@@ -139,7 +145,7 @@ class LibCommand(CommandBase):
         args.extend(CommandBase._strip_args(upgrades))
         return self._exec(args)
 
-    def examples(self, library, fqbn=None):
+    def examples(self, library, fqbn=None, board_options=None):
         """
         Calls the :code:`lib examples` command
 
@@ -147,11 +153,17 @@ class LibCommand(CommandBase):
         :type library: str
         :param fqbn: The board FQBN
         :type fqbn: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
         args = [commands.EXAMPLES, CommandBase._strip_arg(library)]
         if fqbn is not None:
             args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 

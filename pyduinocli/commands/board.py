@@ -12,7 +12,7 @@ class BoardCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.BOARD)
 
-    def attach(self, port=None, fqbn=None, sketch_path=None, discovery_timeout=None, protocol=None):
+    def attach(self, port=None, fqbn=None, sketch_path=None, discovery_timeout=None, protocol=None, board_options=None):
         """
         Calls the :code:`board attach` command.
 
@@ -26,6 +26,8 @@ class BoardCommand(CommandBase):
         :type discovery_timeout: str or NoneTYpe
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneTYpe
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -40,9 +42,13 @@ class BoardCommand(CommandBase):
             args.append(CommandBase._strip_arg(sketch_path))
         if discovery_timeout:
             args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
-    def details(self, fqbn, full=None, list_programmers=None):
+    def details(self, fqbn, full=None, list_programmers=None, board_options=None):
         """
         Calls the :code:`board details` command.
 
@@ -52,6 +58,8 @@ class BoardCommand(CommandBase):
         :type full: bool or NoneTYpe
         :param list_programmers: Show list of available programmers
         :type list_programmers: bool or NoneTYpe
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -60,6 +68,10 @@ class BoardCommand(CommandBase):
             args.append(flags.FULL)
         if list_programmers is True:
             args.append(flags.LIST_PROGRAMMERS)
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
     def list(self, discovery_timeout=None, watch=None):

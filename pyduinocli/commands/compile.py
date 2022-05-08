@@ -16,7 +16,8 @@ class CompileCommand(CommandBase):
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output_dir=None,
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
                  warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
-                 programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None):
+                 programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None,
+                 board_options=None, encrypt_key=None, keys_keychain=None, sign_key=None):
         """
         Calls the :code:`compile` command
 
@@ -64,6 +65,14 @@ class CompileCommand(CommandBase):
         :type discovery_timeout: str or NoneType
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
+        :param encrypt_key: The name of the custom encryption key to use to encrypt a binary during the compile process. Used only by the platforms that support it.
+        :type encrypt_key: str or NoneTYpe
+        :param keys_keychain: The path of the dir to search for the custom keys to sign and encrypt a binary. Used only by the platforms that support it.
+        :type keys_keychain: str or NoneTYpe
+        :param sign_key: The name of the custom signing key to use to sign a binary during the compile process. Used only by the platforms that support it.
+        :type sign_key: str or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -113,5 +122,15 @@ class CompileCommand(CommandBase):
             args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if protocol:
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
+        if encrypt_key:
+            args.extend([flags.ENCRYPT_KEY, CommandBase._strip_arg(encrypt_key)])
+        if keys_keychain:
+            args.extend([flags.KEYS_KEYCHAIN, CommandBase._strip_arg(keys_keychain)])
+        if sign_key:
+            args.extend([flags.SIGN_KEY, CommandBase._strip_arg(sign_key)])
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)

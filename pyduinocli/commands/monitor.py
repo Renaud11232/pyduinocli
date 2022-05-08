@@ -12,7 +12,8 @@ class MonitorCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.MONITOR)
 
-    def __call__(self, config=None, describe=None, discovery_timeout=None, fqbn=None, port=None, protocol=None, quiet=None):
+    def __call__(self, config=None, describe=None, discovery_timeout=None, fqbn=None, port=None, protocol=None,
+                 quiet=None, board_options=None):
         """
         Calls the :code:`monitor` command
 
@@ -30,6 +31,8 @@ class MonitorCommand(CommandBase):
         :type protocol: str or NoneType
         :param quiet: Run in silent mode, show only monitor input and output.
         :type quiet: bool or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -48,4 +51,8 @@ class MonitorCommand(CommandBase):
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if quiet is True:
             args.append(flags.QUIET)
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)

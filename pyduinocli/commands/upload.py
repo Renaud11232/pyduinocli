@@ -13,7 +13,7 @@ class UploadCommand(CommandBase):
         self._base_args.append(commands.UPLOAD)
 
     def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None,
-                 discovery_timeout=None, protocol=None):
+                 discovery_timeout=None, protocol=None, board_options=None):
         """
         Calls the :code:`upload` command
 
@@ -35,6 +35,8 @@ class UploadCommand(CommandBase):
         :type discovery_timeout: str or NoneType
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -57,4 +59,8 @@ class UploadCommand(CommandBase):
             args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if protocol:
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
