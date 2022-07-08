@@ -476,7 +476,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.compile.CompileCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch</em>, <em class="sig-param">build_cache_path=None</em>, <em class="sig-param">build_path=None</em>, <em class="sig-param">build_properties=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">output_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">preprocess=None</em>, <em class="sig-param">show_properties=None</em>, <em class="sig-param">upload=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">vid_pid=None</em>, <em class="sig-param">warnings=None</em>, <em class="sig-param">libraries=None</em>, <em class="sig-param">library=None</em>, <em class="sig-param">optimize_for_debug=None</em>, <em class="sig-param">export_binaries=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">clean=None</em>, <em class="sig-param">only_compilation_database=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em>, <em class="sig-param">encrypt_key=None</em>, <em class="sig-param">keys_keychain=None</em>, <em class="sig-param">sign_key=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch</em>, <em class="sig-param">build_cache_path=None</em>, <em class="sig-param">build_path=None</em>, <em class="sig-param">build_properties=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">output_dir=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">preprocess=None</em>, <em class="sig-param">show_properties=None</em>, <em class="sig-param">upload=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">vid_pid=None</em>, <em class="sig-param">warnings=None</em>, <em class="sig-param">libraries=None</em>, <em class="sig-param">library=None</em>, <em class="sig-param">optimize_for_debug=None</em>, <em class="sig-param">export_binaries=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">clean=None</em>, <em class="sig-param">only_compilation_database=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em>, <em class="sig-param">encrypt_key=None</em>, <em class="sig-param">keys_keychain=None</em>, <em class="sig-param">sign_key=None</em>, <em class="sig-param">dump_profile=None</em>, <em class="sig-param">profile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.compile.CompileCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">compile</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -503,10 +503,12 @@
 <li><p><strong>only_compilation_database</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Just produce the compilation database, without actually compiling.</p></li>
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
-<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
-<li><p><strong>encrypt_key</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The name of the custom encryption key to use to encrypt a binary during the compile process. Used only by the platforms that support it.</p></li>
-<li><p><strong>keys_keychain</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The path of the dir to search for the custom keys to sign and encrypt a binary. Used only by the platforms that support it.</p></li>
-<li><p><strong>sign_key</strong> (<em>str</em><em> or </em><em>NoneTYpe</em>) – The name of the custom signing key to use to sign a binary during the compile process. Used only by the platforms that support it.</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneType</em>) – Board options</p></li>
+<li><p><strong>encrypt_key</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The name of the custom encryption key to use to encrypt a binary during the compile process. Used only by the platforms that support it.</p></li>
+<li><p><strong>keys_keychain</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The path of the dir to search for the custom keys to sign and encrypt a binary. Used only by the platforms that support it.</p></li>
+<li><p><strong>sign_key</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The name of the custom signing key to use to sign a binary during the compile process. Used only by the platforms that support it.</p></li>
+<li><p><strong>dump_profile</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Create and print a profile configuration from the build.</p></li>
+<li><p><strong>profile</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Sketch profile to use</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1215,7 +1217,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.upload.UploadCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">input_file=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">sketch=None</em>, <em class="sig-param">fqbn=None</em>, <em class="sig-param">input_dir=None</em>, <em class="sig-param">input_file=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">verify=None</em>, <em class="sig-param">programmer=None</em>, <em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">protocol=None</em>, <em class="sig-param">board_options=None</em>, <em class="sig-param">profile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.upload.UploadCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">upload</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1230,6 +1232,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)</p></li>
 <li><p><strong>protocol</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port protocol, e.g: serial</p></li>
 <li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
+<li><p><strong>profile</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Sketch profile to use</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
