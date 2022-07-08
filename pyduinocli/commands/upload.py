@@ -13,7 +13,7 @@ class UploadCommand(CommandBase):
         self._base_args.append(commands.UPLOAD)
 
     def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None,
-                 discovery_timeout=None, protocol=None, board_options=None):
+                 discovery_timeout=None, protocol=None, board_options=None, profile=None):
         """
         Calls the :code:`upload` command
 
@@ -37,6 +37,8 @@ class UploadCommand(CommandBase):
         :type protocol: str or NoneType
         :param board_options: Board options
         :type board_options: dict or NoneTYpe
+        :param profile: Sketch profile to use
+        :type profile: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -63,4 +65,6 @@ class UploadCommand(CommandBase):
             for option_name, option_value in board_options.items():
                 option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
                 args.extend([flags.BOARD_OPTIONS, option])
+        if profile:
+            args.extend([flags.PROFILE, CommandBase._strip_arg(profile)])
         return self._exec(args)

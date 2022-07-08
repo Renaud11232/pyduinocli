@@ -17,7 +17,8 @@ class CompileCommand(CommandBase):
                  port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
                  warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
                  programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None,
-                 board_options=None, encrypt_key=None, keys_keychain=None, sign_key=None):
+                 board_options=None, encrypt_key=None, keys_keychain=None, sign_key=None, dump_profile=None,
+                 profile=None):
         """
         Calls the :code:`compile` command
 
@@ -66,13 +67,17 @@ class CompileCommand(CommandBase):
         :param protocol: Upload port protocol, e.g: serial
         :type protocol: str or NoneType
         :param board_options: Board options
-        :type board_options: dict or NoneTYpe
+        :type board_options: dict or NoneType
         :param encrypt_key: The name of the custom encryption key to use to encrypt a binary during the compile process. Used only by the platforms that support it.
-        :type encrypt_key: str or NoneTYpe
+        :type encrypt_key: str or NoneType
         :param keys_keychain: The path of the dir to search for the custom keys to sign and encrypt a binary. Used only by the platforms that support it.
-        :type keys_keychain: str or NoneTYpe
+        :type keys_keychain: str or NoneType
         :param sign_key: The name of the custom signing key to use to sign a binary during the compile process. Used only by the platforms that support it.
-        :type sign_key: str or NoneTYpe
+        :type sign_key: str or NoneType
+        :param dump_profile: Create and print a profile configuration from the build.
+        :type dump_profile: bool or NoneType
+        :param profile: Sketch profile to use
+        :type profile: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -132,5 +137,9 @@ class CompileCommand(CommandBase):
             args.extend([flags.KEYS_KEYCHAIN, CommandBase._strip_arg(keys_keychain)])
         if sign_key:
             args.extend([flags.SIGN_KEY, CommandBase._strip_arg(sign_key)])
+        if dump_profile is True:
+            args.append(flags.DUMP_PROFILE)
+        if profile:
+            args.extend([flags.PROFILE, CommandBase._strip_arg(profile)])
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)
