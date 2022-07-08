@@ -6,8 +6,7 @@ class TestOutdatedCommand(TestBase):
     def test_outdated(self):
         self._arduino.lib.install(["FastLED@3.3.2"])
         outdated = self._arduino.outdated()["result"]
-        self.assertIn("FastLED", outdated)
-        self.assertIn("3.3.2", outdated)
+        self.assertTrue(any([l["library"]["name"] == "FastLED" and l["library"]["version"] == "3.3.2" for l in outdated["Libraries"]]))
         self._arduino.lib.uninstall(["FastLED@3.3.2"])
 
 
