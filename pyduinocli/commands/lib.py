@@ -36,7 +36,7 @@ class LibCommand(CommandBase):
         args.extend(CommandBase._strip_args(downloads))
         return self._exec(args)
 
-    def install(self, libraries=None, git_urls=None, zip_paths=None):
+    def install(self, libraries=None, git_urls=None, zip_paths=None, no_overwrite=None):
         """
         Calls the :code:`lib install` command
 
@@ -46,6 +46,8 @@ class LibCommand(CommandBase):
         :type git_urls: list or NoneType
         :param zip_paths: A list of paths to zip files to install
         :type zip_paths: list or NoneType
+        :param no_overwrite: Do not overwrite already installed libraries.
+        :type no_overwrite: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -58,6 +60,8 @@ class LibCommand(CommandBase):
         if zip_paths:
             args.append(flags.ZIP_PATH)
             args.extend(CommandBase._strip_args(zip_paths))
+        if no_overwrite is True:
+            args.append(flags.NO_OVERWRITE)
         return self._exec(args)
 
     def list(self, all=None, updatable=None, fqbn=None, board_options=None):

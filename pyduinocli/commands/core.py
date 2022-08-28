@@ -25,7 +25,7 @@ class CoreCommand(CommandBase):
         args.extend(CommandBase._strip_args(downloads))
         return self._exec(args)
 
-    def install(self, installs, run_post_install=None, skip_post_install=None):
+    def install(self, installs, run_post_install=None, skip_post_install=None, no_overwrite=None):
         """
         Calls the :code:`core download` command
 
@@ -35,6 +35,8 @@ class CoreCommand(CommandBase):
         :type run_post_install: bool or NoneType
         :param skip_post_install: Force skip of post-install scripts
         :type skip_post_install: bool or NoneType
+        :param no_overwrite: Do not overwrite already installed platforms
+        :type no_overwrite: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -44,6 +46,8 @@ class CoreCommand(CommandBase):
             args.append(flags.RUN_POST_INSTALL)
         if skip_post_install is True:
             args.append(flags.SKIP_POST_INSTALL)
+        if no_overwrite is True:
+            args.append(flags.NO_OVERWRITE)
         return self._exec(args)
 
     def list(self, updatable=None, all=None):
