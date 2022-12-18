@@ -43,7 +43,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        python: ["2.7", "3.9"]
+        python: ["3.9"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
