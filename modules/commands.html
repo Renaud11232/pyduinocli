@@ -25,11 +25,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> pyduinocli
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            pyduinocli
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -74,9 +78,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Modules</a> &raquo;</li>
-      <li>pyduinocli.commands.arduino</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Modules</a></li>
+      <li class="breadcrumb-item active">pyduinocli.commands.arduino</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/commands.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -335,8 +339,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fqbn</strong> (<em>str</em>) – The fqbn of the board</p></li>
 <li><p><strong>full</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show full board details</p></li>
-<li><p><strong>list_programmers</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show list of available programmers</p></li>
-<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneTYpe</em>) – Board options</p></li>
+<li><p><strong>list_programmers</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Show list of available programmers</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneType</em>) – Board options</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -350,13 +354,15 @@
 
 <dl class="method">
 <dt id="pyduinocli.commands.board.BoardCommand.list">
-<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">watch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.list" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">list</code><span class="sig-paren">(</span><em class="sig-param">discovery_timeout=None</em>, <em class="sig-param">watch=None</em>, <em class="sig-param">board_options=None</em>, <em class="sig-param">fqbn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.board.BoardCommand.list" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">board</span> <span class="pre">list</span></code> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>discovery_timeout</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Max time to wait for port discovery, e.g.: 30s, 1m (default 1s)</p></li>
 <li><p><strong>watch</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won’t actually return, use a loop instead</p></li>
+<li><p><strong>fqbn</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Fully Qualified Board Name, e.g.: arduino:avr:uno</p></li>
+<li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneType</em>) – Dict of board options (option_name:value)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -821,7 +827,7 @@
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.daemon.DaemonCommand.__call__">
-<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em>, <em class="sig-param">ip=None</em>, <em class="sig-param">debug_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param">daemonize=None</em>, <em class="sig-param">port=None</em>, <em class="sig-param">debug=None</em>, <em class="sig-param">debug_filter=None</em>, <em class="sig-param">debug_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.daemon.DaemonCommand.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">daemon</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -830,7 +836,6 @@
 <li><p><strong>port</strong> (<em>str</em><em>, </em><em>integer</em><em> or </em><em>NoneType</em>) – The TCP port the daemon will listen to</p></li>
 <li><p><strong>debug</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Enable debug logging of gRPC calls</p></li>
 <li><p><strong>debug_filter</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Display only the provided gRPC calls</p></li>
-<li><p><strong>ip</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The IP address the daemon will listen to (default “127.0.0.1”)</p></li>
 <li><p><strong>debug_file</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Append debug logging to the specified file</p></li>
 </ul>
 </dd>
@@ -1126,7 +1131,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <dd><p>This class wraps the call to the <code class="code docutils literal notranslate"><span class="pre">sketch</span></code> command of <code class="code docutils literal notranslate"><span class="pre">arduino-cli</span></code>.</p>
 <dl class="method">
 <dt id="pyduinocli.commands.sketch.SketchCommand.archive">
-<code class="sig-name descname">archive</code><span class="sig-paren">(</span><em class="sig-param">sketch_path='.'</em>, <em class="sig-param">archive_path=None</em>, <em class="sig-param">include_build_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.archive" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">archive</code><span class="sig-paren">(</span><em class="sig-param">sketch_path='.'</em>, <em class="sig-param">archive_path=None</em>, <em class="sig-param">include_build_dir=None</em>, <em class="sig-param">overwrite=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.archive" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">sketch</span> <span class="pre">archive</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1134,6 +1139,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>sketch_path</strong> (<em>str</em>) – The path to the sketch to archive</p></li>
 <li><p><strong>archive_path</strong> (<em>str</em><em> or </em><em>NoneType</em>) – The path of the output archive</p></li>
 <li><p><strong>include_build_dir</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Includes the build directory in the archive</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Overwrites an already existing archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1147,11 +1153,14 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 
 <dl class="method">
 <dt id="pyduinocli.commands.sketch.SketchCommand.new">
-<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.new" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">overwrite=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.sketch.SketchCommand.new" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">sketch</span> <span class="pre">new</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the sketch to create</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the sketch to create</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Overwrites an existing .ino sketch.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The output of the related command</p>
