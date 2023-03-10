@@ -57,9 +57,9 @@ class BoardCommand(CommandBase):
         :param full: Show full board details
         :type full: bool or NoneTYpe
         :param list_programmers: Show list of available programmers
-        :type list_programmers: bool or NoneTYpe
+        :type list_programmers: bool or NoneType
         :param board_options: Board options
-        :type board_options: dict or NoneTYpe
+        :type board_options: dict or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -74,7 +74,7 @@ class BoardCommand(CommandBase):
                 args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
-    def list(self, discovery_timeout=None, watch=None):
+    def list(self, discovery_timeout=None, watch=None, board_options=None, fqbn=None):
         """
         Calls the :code:`board list` command.
 
@@ -82,6 +82,10 @@ class BoardCommand(CommandBase):
         :type discovery_timeout: str or NoneType
         :param watch: Command keeps running and prints list of connected boards whenever there is a change. Added to pyduinocli for completion but won't actually return, use a loop instead
         :type watch: bool or NoneTYpe
+        :param fqbn: Fully Qualified Board Name, e.g.: arduino:avr:uno
+        :type fqbn: str or NoneType
+        :param board_options: Dict of board options (option_name:value)
+        :type board_options: dict or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -90,6 +94,12 @@ class BoardCommand(CommandBase):
             args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
         if watch is True:
             args.append(flags.WATCH)
+        if fqbn is not None:
+            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
     def listall(self, boardname=None, show_hidden=None):
