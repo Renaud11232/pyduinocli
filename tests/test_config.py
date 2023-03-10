@@ -10,7 +10,8 @@ class TestConfigCommand(TestBase):
         self.assertIn("directories", dump)
 
     def test_init(self):
-        config_path = self._arduino.config.init(".")["result"].split(": ")[1]
+        self._arduino.config.init(".")
+        config_path = "./arduino-cli.yaml"
         self.assertTrue(os.path.isfile(config_path))
         os.remove(config_path)
 
