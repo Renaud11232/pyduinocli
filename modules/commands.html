@@ -952,7 +952,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 
 <dl class="method">
 <dt id="pyduinocli.commands.lib.LibCommand.install">
-<code class="sig-name descname">install</code><span class="sig-paren">(</span><em class="sig-param">libraries=None</em>, <em class="sig-param">git_urls=None</em>, <em class="sig-param">zip_paths=None</em>, <em class="sig-param">no_overwrite=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.install" title="Permalink to this definition"></a></dt>
+<code class="sig-name descname">install</code><span class="sig-paren">(</span><em class="sig-param">libraries=None</em>, <em class="sig-param">git_urls=None</em>, <em class="sig-param">zip_paths=None</em>, <em class="sig-param">no_overwrite=None</em>, <em class="sig-param">install_in_builtin_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyduinocli.commands.lib.LibCommand.install" title="Permalink to this definition"></a></dt>
 <dd><p>Calls the <code class="code docutils literal notranslate"><span class="pre">lib</span> <span class="pre">install</span></code> command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -961,6 +961,7 @@ Warning, While this has been added in pyduinocli, it has not been tested, and wo
 <li><p><strong>git_urls</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of git repositories containing libraries to install</p></li>
 <li><p><strong>zip_paths</strong> (<em>list</em><em> or </em><em>NoneType</em>) – A list of paths to zip files to install</p></li>
 <li><p><strong>no_overwrite</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Do not overwrite already installed libraries.</p></li>
+<li><p><strong>install_in_builtin_dir</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Install libraries in the IDE-Builtin directory</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
