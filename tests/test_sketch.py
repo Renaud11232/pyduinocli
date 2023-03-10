@@ -14,7 +14,7 @@ class TestSketchCommand(TestBase):
 
     def test_archive(self):
         sketch_path = "TestSketch"
-        self._arduino.sketch.new("TestSketch")
+        self._arduino.sketch.new(sketch_path)
         archive_path = sketch_path + ".zip"
         self._arduino.sketch.archive(sketch_path, archive_path=archive_path)
         self.assertTrue(os.path.exists(archive_path))
