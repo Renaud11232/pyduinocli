@@ -96,12 +96,14 @@ class LibCommand(CommandBase):
                 args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
-    def search(self, keywords=None, names=None):
+    def search(self, keywords=None, names=None, omit_releases_details=None):
         """
         Calls the :code:`lib search` command
 
         :param keywords: A list of keywords to use to search, if None, all libraries will show up
         :type keywords: list or NoneType
+        :param omit_releases_details: Omit library details far all versions except the latest (produce a more compact JSON output).
+        :type omit_releases_details: bool or NoneType
         :param names: Only shows libraries names
         :type names: bool or NoneType
         :return: The output of the related command
@@ -110,6 +112,8 @@ class LibCommand(CommandBase):
         args = [commands.SEARCH]
         if names is True:
             args.append(flags.NAMES)
+        if omit_releases_details is True:
+            args.append(flags.OMIT_RELEASES_DETAILS)
         if keywords is None:
             keywords = []
         if keywords:

@@ -14,7 +14,7 @@ class CompileCommand(CommandBase):
 
     def __call__(self,
                  sketch, build_cache_path=None, build_path=None, build_properties=None, fqbn=None, output_dir=None,
-                 port=None, preprocess=None, show_properties=None, upload=None, verify=None, vid_pid=None,
+                 port=None, preprocess=None, show_properties=None, upload=None, verify=None,
                  warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
                  programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None,
                  board_options=None, encrypt_key=None, keys_keychain=None, sign_key=None, dump_profile=None,
@@ -44,8 +44,6 @@ class CompileCommand(CommandBase):
         :type upload: bool or NoneType
         :param verify: Verify uploaded binary after the upload.
         :type verify: bool or NoneType
-        :param vid_pid: When specified, VID/PID specific build properties are used, if board supports them.
-        :type vid_pid: str or NoneType
         :param warnings: Optional, can be "none", "default", "more" and "all". Defaults to "none". Used to tell gcc which warning level to use (-W flag). (default "none")
         :type warnings: str or NoneType
         :param libraries: List of custom libraries dir paths separated by commas. Or can be used multiple times for multiple libraries dir paths.
@@ -103,8 +101,6 @@ class CompileCommand(CommandBase):
             args.append(flags.UPLOAD)
         if verify is True:
             args.append(flags.VERIFY)
-        if vid_pid:
-            args.extend([flags.VID_PID, CommandBase._strip_arg(vid_pid)])
         if warnings:
             args.extend([flags.WARNINGS, CommandBase._strip_arg(warnings)])
         if libraries:
