@@ -341,7 +341,7 @@
 <li><p><strong>full</strong> (<em>bool</em><em> or </em><em>NoneTYpe</em>) – Show full board details</p></li>
 <li><p><strong>list_programmers</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Show list of available programmers</p></li>
 <li><p><strong>board_options</strong> (<em>dict</em><em> or </em><em>NoneType</em>) – Board options</p></li>
-<li><p><strong>show_properties</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Show build properties. The properties are expanded, use show_properties=unexpanded” if you want them exactly as they are defined. (default “disabled”)</p></li>
+<li><p><strong>show_properties</strong> (<em>str</em><em>, </em><em>bool</em><em> or </em><em>NoneType</em>) – Show build properties. The properties are expanded, use show_properties=unexpanded” if you want them exactly as they are defined. (default “disabled”)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -496,7 +496,7 @@
 <li><p><strong>output_dir</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Save build artifacts in this directory.</p></li>
 <li><p><strong>port</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Upload port, e.g.: COM10 or /dev/ttyACM0</p></li>
 <li><p><strong>preprocess</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Print preprocessed code to stdout instead of compiling.</p></li>
-<li><p><strong>show_properties</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Show build properties. The properties are expanded, use show_properties=”unexpanded” if you want them exactly as they are defined. (default “disabled”)</p></li>
+<li><p><strong>show_properties</strong> (<em>str</em><em>, </em><em>bool</em><em> or </em><em>NoneType</em>) – Show build properties. The properties are expanded, use show_properties=”unexpanded” if you want them exactly as they are defined. (default “disabled”)</p></li>
 <li><p><strong>upload</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Upload the binary after the compilation.</p></li>
 <li><p><strong>verify</strong> (<em>bool</em><em> or </em><em>NoneType</em>) – Verify uploaded binary after the upload.</p></li>
 <li><p><strong>warnings</strong> (<em>str</em><em> or </em><em>NoneType</em>) – Optional, can be “none”, “default”, “more” and “all”. Defaults to “none”. Used to tell gcc which warning level to use (-W flag). (default “none”)</p></li>
