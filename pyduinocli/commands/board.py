@@ -61,7 +61,7 @@ class BoardCommand(CommandBase):
         :param board_options: Board options
         :type board_options: dict or NoneType
         :param show_properties: Show build properties. The properties are expanded, use show_properties=unexpanded" if you want them exactly as they are defined. (default "disabled")
-        :type show_properties: str or NoneType
+        :type show_properties: str, bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -74,7 +74,9 @@ class BoardCommand(CommandBase):
             for option_name, option_value in board_options.items():
                 option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
                 args.extend([flags.BOARD_OPTIONS, option])
-        if show_properties:
+        if show_properties is True:
+            args.append(flags.SHOW_PROPERTIES)
+        elif show_properties:
             args.extend([flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)])
         return self._exec(args)
 

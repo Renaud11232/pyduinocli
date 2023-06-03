@@ -39,7 +39,7 @@ class CompileCommand(CommandBase):
         :param preprocess: Print preprocessed code to stdout instead of compiling.
         :type preprocess: bool or NoneType
         :param show_properties: Show build properties. The properties are expanded, use show_properties="unexpanded" if you want them exactly as they are defined. (default "disabled")
-        :type show_properties: str or NoneType
+        :type show_properties: str, bool or NoneType
         :param upload: Upload the binary after the compilation.
         :type upload: bool or NoneType
         :param verify: Verify uploaded binary after the upload.
@@ -95,7 +95,9 @@ class CompileCommand(CommandBase):
             args.extend([flags.PORT, CommandBase._strip_arg(port)])
         if preprocess is True:
             args.append(flags.PREPROCESS)
-        if show_properties:
+        if show_properties is True:
+            args.append(flags.SHOW_PROPERTIES)
+        elif show_properties:
             args.extend([flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)])
         if upload is True:
             args.append(flags.UPLOAD)
