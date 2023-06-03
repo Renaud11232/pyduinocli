@@ -48,7 +48,7 @@ class BoardCommand(CommandBase):
                 args.extend([flags.BOARD_OPTIONS, option])
         return self._exec(args)
 
-    def details(self, fqbn, full=None, list_programmers=None, board_options=None):
+    def details(self, fqbn, full=None, list_programmers=None, board_options=None, show_properties=None):
         """
         Calls the :code:`board details` command.
 
@@ -60,6 +60,8 @@ class BoardCommand(CommandBase):
         :type list_programmers: bool or NoneType
         :param board_options: Board options
         :type board_options: dict or NoneType
+        :param show_properties: Show build properties. The properties are expanded, use show_properties=unexpanded" if you want them exactly as they are defined. (default "disabled")
+        :type show_properties: str or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -72,6 +74,8 @@ class BoardCommand(CommandBase):
             for option_name, option_value in board_options.items():
                 option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
                 args.extend([flags.BOARD_OPTIONS, option])
+        if show_properties:
+            args.extend([flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)])
         return self._exec(args)
 
     def list(self, discovery_timeout=None, watch=None, board_options=None, fqbn=None):
