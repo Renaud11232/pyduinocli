@@ -77,7 +77,7 @@ class BoardCommand(CommandBase):
         if show_properties is True:
             args.append(flags.SHOW_PROPERTIES)
         elif show_properties:
-            args.extend([flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)])
+            args.append("%s=%s" % (flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)))
         return self._exec(args)
 
     def list(self, discovery_timeout=None, watch=None, board_options=None, fqbn=None):

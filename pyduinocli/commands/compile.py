@@ -98,7 +98,7 @@ class CompileCommand(CommandBase):
         if show_properties is True:
             args.append(flags.SHOW_PROPERTIES)
         elif show_properties:
-            args.extend([flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)])
+            args.append("%s=%s" % (flags.SHOW_PROPERTIES, CommandBase._strip_arg(show_properties)))
         if upload is True:
             args.append(flags.UPLOAD)
         if verify is True:
