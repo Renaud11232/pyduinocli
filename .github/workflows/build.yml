@@ -53,7 +53,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Download arduino-cli
         run: |
-          wget https://github.com/arduino/arduino-cli/releases/download/0.33.0/arduino-cli_0.35.3_Linux_64bit.tar.gz
+          wget https://github.com/arduino/arduino-cli/releases/download/0.35.3/arduino-cli_0.35.3_Linux_64bit.tar.gz
           tar xzf arduino-cli_0.35.3_Linux_64bit.tar.gz
           rm arduino-cli_0.35.3_Linux_64bit.tar.gz
       - name: Install test dependencies
