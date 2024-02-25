@@ -13,7 +13,8 @@ class UploadCommand(CommandBase):
         self._base_args.append(commands.UPLOAD)
 
     def __call__(self, sketch=None, fqbn=None, input_dir=None, input_file=None, port=None, verify=None, programmer=None,
-                 discovery_timeout=None, protocol=None, board_options=None, profile=None):
+                 discovery_timeout=None, protocol=None, board_options=None, profile=None, upload_fields=None,
+                 verbose=None):
         """
         Calls the :code:`upload` command
 
@@ -39,6 +40,10 @@ class UploadCommand(CommandBase):
         :type board_options: dict or NoneTYpe
         :param profile: Sketch profile to use
         :type profile: str or NoneType
+        :param verbose: Optional, turns on verbose mode.
+        :type verbose: bool or NoneType
+        :param upload_fields: Sets values for fields required to upload
+        :type upload_fields: dict or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -67,4 +72,10 @@ class UploadCommand(CommandBase):
                 args.extend([flags.BOARD_OPTIONS, option])
         if profile:
             args.extend([flags.PROFILE, CommandBase._strip_arg(profile)])
+        if verbose is True:
+            args.append(flags.VERBOSE)
+        if upload_fields:
+            for key, value in upload_fields.items():
+                field = "%s=%s" % (CommandBase._strip_arg(key), CommandBase._strip_arg(value))
+                args.extend([flags.UPLOAD_FIELD, field])
         return self._exec(args)

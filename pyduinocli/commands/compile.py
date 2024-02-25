@@ -18,7 +18,7 @@ class CompileCommand(CommandBase):
                  warnings=None, libraries=None, library=None, optimize_for_debug=None, export_binaries=None,
                  programmer=None, clean=None, only_compilation_database=None, discovery_timeout=None, protocol=None,
                  board_options=None, encrypt_key=None, keys_keychain=None, sign_key=None, dump_profile=None,
-                 profile=None):
+                 profile=None, verbose=None):
         """
         Calls the :code:`compile` command
 
@@ -76,6 +76,8 @@ class CompileCommand(CommandBase):
         :type dump_profile: bool or NoneType
         :param profile: Sketch profile to use
         :type profile: str or NoneType
+        :param verbose: Optional, turns on verbose mode
+        :type verbose: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -139,5 +141,7 @@ class CompileCommand(CommandBase):
             args.append(flags.DUMP_PROFILE)
         if profile:
             args.extend([flags.PROFILE, CommandBase._strip_arg(profile)])
+        if verbose is True:
+            args.append(flags.VERBOSE)
         args.append(CommandBase._strip_arg(sketch))
         return self._exec(args)

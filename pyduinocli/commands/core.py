@@ -25,7 +25,8 @@ class CoreCommand(CommandBase):
         args.extend(CommandBase._strip_args(downloads))
         return self._exec(args)
 
-    def install(self, installs, run_post_install=None, skip_post_install=None, no_overwrite=None):
+    def install(self, installs, run_post_install=None, skip_post_install=None, no_overwrite=None,
+                run_pre_uninstall=None, skip_pre_uninstall=None):
         """
         Calls the :code:`core download` command
 
@@ -37,6 +38,10 @@ class CoreCommand(CommandBase):
         :type skip_post_install: bool or NoneType
         :param no_overwrite: Do not overwrite already installed platforms
         :type no_overwrite: bool or NoneType
+        :param run_pre_uninstall: Force run of pre-uninstall scripts (if the CLI is not running interactively)
+        :type run_pre_uninstall: bool or NoneType
+        :param skip_pre_uninstall: Force skip of pre-uninstall scripts (if the CLI is running interactively).
+        :type skip_pre_uninstall: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -48,6 +53,10 @@ class CoreCommand(CommandBase):
             args.append(flags.SKIP_POST_INSTALL)
         if no_overwrite is True:
             args.append(flags.NO_OVERWRITE)
+        if run_pre_uninstall is True:
+            args.append(flags.RUN_PRE_UNINSTALL)
+        if skip_pre_uninstall is True:
+            args.append(flags.SKIP_PRE_UNINSTALL)
         return self._exec(args)
 
     def list(self, updatable=None, all=None):
@@ -88,16 +97,33 @@ class CoreCommand(CommandBase):
             args.append(flags.ALL)
         return self._exec(args)
 
-    def uninstall(self, uninstalls):
+    def uninstall(self, uninstalls, run_post_install=None, run_pre_uninstall=None, skip_post_install=None,
+                  skip_pre_uninstall=None):
         """
         Calls the :code:`core uninstall` command
 
         :param uninstalls: A list of cores to uninstall
         :type uninstalls: list
+        :param run_post_install: Force run of post-install scripts (if the CLI is not running interactively).
+        :type run_post_install: bool or NoneType
+        :param run_pre_uninstall: Force run of pre-uninstall scripts (if the CLI is not running interactively).
+        :type run_pre_uninstall: bool or NoneType
+        :param skip_post_install: Force skip of post-install scripts (if the CLI is running interactively).
+        :type skip_post_install: bool or NoneType
+        :param skip_pre_uninstall: Force skip of pre-uninstall scripts (if the CLI is running interactively).
+        :type skip_pre_uninstall: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
         args = [commands.UNINSTALL]
+        if run_post_install is True:
+            args.append(flags.RUN_POST_INSTALL)
+        if run_pre_uninstall is True:
+            args.append(flags.RUN_PRE_UNINSTALL)
+        if skip_post_install is True:
+            args.append(flags.SKIP_POST_INSTALL)
+        if skip_pre_uninstall is True:
+            args.append(flags.SKIP_PRE_UNINSTALL)
         args.extend(CommandBase._strip_args(uninstalls))
         return self._exec(args)
 
@@ -110,7 +136,8 @@ class CoreCommand(CommandBase):
         """
         return self._exec([commands.UPDATE_INDEX])
 
-    def upgrade(self, upgrades=None, run_post_install=None, skip_post_install=None):
+    def upgrade(self, upgrades=None, run_post_install=None, skip_post_install=None, run_pre_uninstall=None,
+                skip_pre_uninstall=None):
         """
         Calls the :code:`core upgrade` command
 
@@ -120,6 +147,10 @@ class CoreCommand(CommandBase):
         :type run_post_install: bool or NoneType
         :param skip_post_install: Force skip of post-install scripts
         :type skip_post_install: bool or NoneType
+        :param run_pre_uninstall: Force run of pre-uninstall scripts (if the CLI is not running interactively).
+        :type run_pre_uninstall: bool or NoneType
+        :param skip_pre_uninstall: Force skip of pre-uninstall scripts (if the CLI is running interactively).
+        :type skip_pre_uninstall: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -131,4 +162,8 @@ class CoreCommand(CommandBase):
             args.append(flags.RUN_POST_INSTALL)
         if skip_post_install is True:
             args.append(flags.SKIP_POST_INSTALL)
+        if run_pre_uninstall is True:
+            args.append(flags.RUN_PRE_UNINSTALL)
+        if skip_pre_uninstall is True:
+            args.append(flags.SKIP_PRE_UNINSTALL)
         return self._exec(args)

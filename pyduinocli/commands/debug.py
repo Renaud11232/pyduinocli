@@ -13,6 +13,30 @@ class DebugCommand(CommandBase):
         CommandBase.__init__(self, base_args)
         self._base_args.append(commands.DEBUG)
 
+    def _exec(self, args, board_options=None, discovery_timeout=None, fqbn=None, info=None, input_dir=None,
+              interpreter=None, port=None, programmer=None, protocol=None):
+        if fqbn:
+            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
+        if input_dir:
+            args.extend([flags.INPUT_DIR, CommandBase._strip_arg(input_dir)])
+        if port:
+            args.extend([flags.PORT, CommandBase._strip_arg(port)])
+        if interpreter:
+            args.extend([flags.INTERPRETER, CommandBase._strip_arg(interpreter)])
+        if info is True:
+            args.append(flags.INFO)
+        if programmer:
+            args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
+        if discovery_timeout:
+            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
+        if protocol:
+            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
+        if board_options:
+            for option_name, option_value in board_options.items():
+                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
+                args.extend([flags.BOARD_OPTIONS, option])
+        return CommandBase._exec(self, args)
+
     def __call__(self, fqbn=None, input_dir=None, port=None, interpreter=None, info=None, programmer=None, sketch=None,
                  discovery_timeout=None, protocol=None, board_options=None):
         """
@@ -42,26 +66,39 @@ class DebugCommand(CommandBase):
         :rtype: dict
         """
         args = []
-        if fqbn:
-            args.extend([flags.FQBN, CommandBase._strip_arg(fqbn)])
-        if input_dir:
-            args.extend([flags.INPUT_DIR, CommandBase._strip_arg(input_dir)])
-        if port:
-            args.extend([flags.PORT, CommandBase._strip_arg(port)])
-        if interpreter:
-            args.extend([flags.INTERPRETER, CommandBase._strip_arg(interpreter)])
-        if info is True:
-            args.append(flags.INFO)
-        if programmer:
-            args.extend([flags.PROGRAMMER, CommandBase._strip_arg(programmer)])
         if sketch:
             args.append(CommandBase._strip_arg(sketch))
-        if discovery_timeout:
-            args.extend([flags.DISCOVERY_TIMEOUT, CommandBase._strip_arg(discovery_timeout)])
-        if protocol:
-            args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
-        if board_options:
-            for option_name, option_value in board_options.items():
-                option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
-                args.extend([flags.BOARD_OPTIONS, option])
-        return self._exec(args)
+        return self._exec(args, fqbn=fqbn, input_dir=input_dir, port=port, interpreter=interpreter, info=info,
+                          programmer=programmer, discovery_timeout=discovery_timeout, protocol=protocol,
+                          board_options=board_options)
+
+    def check(self, fqbn=None, input_dir=None, port=None, interpreter=None, info=None, programmer=None,
+              discovery_timeout=None, protocol=None, board_options=None):
+        """
+        Calls the :code:`debug check` command
+
+        :param fqbn: Fully Qualified Board Name, e.g.: arduino:avr:uno
+        :type fqbn: str or NoneType
+        :param input_dir: Directory containing binaries for debug.
+        :type input_dir: str or NoneType
+        :param port: Debug port, e.g.: COM10 or /dev/ttyACM0
+        :type port: str or NoneType
+        :param interpreter: Debug interpreter e.g.: console, mi, mi1, mi2, mi3 (default "console")
+        :type interpreter: str or NoneType
+        :param info: Show metadata about the debug session instead of starting the debugger.
+        :type info: str or NoneType
+        :param programmer: Programmer to use for debugging
+        :type programmer: str or NoneType
+        :param discovery_timeout: Max time to wait for port discovery, e.g.: 30s, 1m (default 5s)
+        :type discovery_timeout: str or NoneType
+        :param protocol: Upload port protocol, e.g: serial
+        :type protocol: str or NoneType
+        :param board_options: Board options
+        :type board_options: dict or NoneTYpe
+        :return: The output of the related command
+        :rtype: dict
+        """
+        args = [commands.CHECK]
+        return self._exec(args, fqbn=fqbn, input_dir=input_dir, port=port, interpreter=interpreter, info=info,
+                          programmer=programmer, discovery_timeout=discovery_timeout, protocol=protocol,
+                          board_options=board_options)

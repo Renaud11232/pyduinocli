@@ -14,7 +14,7 @@ class BurnBootloaderCommand(CommandBase):
 
     def __call__(self,
                  discovery_timeout=None, fqbn=None, port=None, programmer=None, protocol=None, verify=None,
-                 board_options=None):
+                 board_options=None, verbose=None):
         """
         Calls the :code:`burn-bootloader` command
 
@@ -32,6 +32,8 @@ class BurnBootloaderCommand(CommandBase):
         :type protocol: str or NoneType
         :param board_options: Board options
         :type board_options: dict or NoneTYpe
+        :param verbose: Turns on verbose mode
+        :type verbose: bool or NoneTYpe
         :return: The output of the related command
         :rtype: dict
         """
@@ -48,6 +50,8 @@ class BurnBootloaderCommand(CommandBase):
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if verify is True:
             args.append(flags.VERIFY)
+        if verbose is True:
+            args.append(flags.VERBOSE)
         if board_options:
             for option_name, option_value in board_options.items():
                 option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))

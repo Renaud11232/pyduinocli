@@ -13,7 +13,7 @@ class MonitorCommand(CommandBase):
         self._base_args.append(commands.MONITOR)
 
     def __call__(self, config=None, describe=None, discovery_timeout=None, fqbn=None, port=None, protocol=None,
-                 quiet=None, board_options=None):
+                 quiet=None, board_options=None, raw=None, timestamp=None):
         """
         Calls the :code:`monitor` command
 
@@ -33,6 +33,10 @@ class MonitorCommand(CommandBase):
         :type quiet: bool or NoneType
         :param board_options: Board options
         :type board_options: dict or NoneTYpe
+        :param raw: Set terminal in raw mode (unbuffered).
+        :type raw: bool or NoneType
+        :param timestamp: Timestamp each incoming line.
+        :type timestamp: bool or NoneType
         :return: The output of the related command
         :rtype: dict
         """
@@ -51,6 +55,10 @@ class MonitorCommand(CommandBase):
             args.extend([flags.PROTOCOL, CommandBase._strip_arg(protocol)])
         if quiet is True:
             args.append(flags.QUIET)
+        if raw is True:
+            args.append(flags.RAW)
+        if timestamp is True:
+            args.append(flags.TIMESTAMP)
         if board_options:
             for option_name, option_value in board_options.items():
                 option = "%s=%s" % (CommandBase._strip_arg(option_name), CommandBase._strip_arg(option_value))
