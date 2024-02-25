@@ -105,7 +105,7 @@ jobs:
         continue-on-error: true
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/
   deploy-on-pypi:
     name: Deploy on PyPI
     if: github.event_name == 'release'
